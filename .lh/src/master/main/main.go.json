@@ -1,0 +1,178 @@
+{
+    "sourceFile": "src/master/main/main.go",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 40,
+            "patches": [
+                {
+                    "date": 1629163768907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1629163962329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,5 @@\n package main\n+\n+func main() {\n+\n+}\n"
+                },
+                {
+                    "date": 1629163993115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,10 @@\n package main\n \n func main() {\n+\t// 初始化环境\n \n+\t// 初始化配置\n+\n+\t// 初始化服务器\n+\n }\n"
+                },
+                {
+                    "date": 1629164049783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,4 +7,8 @@\n \n \t// 初始化服务器\n \n }\n+\n+func InitEnv() {\n+\n+}\n"
+                },
+                {
+                    "date": 1629164216366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n package main\n \n+import \"runtime\"\n+\n func main() {\n \t// 初始化环境\n \n \t// 初始化配置\n@@ -9,6 +11,8 @@\n \n }\n \n func InitEnv() {\n+\t// 设置进程数与 cpu 的数量一致\n+\truntime.GOMAXPROCS(runtime.NumCPU())\n \n }\n"
+                },
+                {
+                    "date": 1629164224707,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import \"runtime\"\n \n func main() {\n \t// 初始化环境\n+\tInitEnv()\n \n \t// 初始化配置\n \n \t// 初始化服务器\n@@ -13,6 +14,5 @@\n \n func InitEnv() {\n \t// 设置进程数与 cpu 的数量一致\n \truntime.GOMAXPROCS(runtime.NumCPU())\n-\n }\n"
+                },
+                {
+                    "date": 1629465539978,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,18 @@\n package main\n \n-import \"runtime\"\n+import (\n+\t\"runtime\"\n \n+\t\"github.com/GoCron/src/master\"\n+)\n+\n func main() {\n \t// 初始化环境\n \tInitEnv()\n \n \t// 初始化配置\n+\tmaster.InitServer()\n \n \t// 初始化服务器\n \n }\n"
+                },
+                {
+                    "date": 1629465548979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,11 @@\n \t// 初始化环境\n \tInitEnv()\n \n \t// 初始化配置\n-\tmaster.InitServer()\n \n \t// 初始化服务器\n+\tmaster.InitServer()\n \n }\n \n func InitEnv() {\n"
+                },
+                {
+                    "date": 1629465579738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n \tmaster.InitServer()\n \n }\n \n+// 初始化环境变量\n func InitEnv() {\n \t// 设置进程数与 cpu 的数量一致\n \truntime.GOMAXPROCS(runtime.NumCPU())\n }\n"
+                },
+                {
+                    "date": 1629466079539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,4 +21,8 @@\n func InitEnv() {\n \t// 设置进程数与 cpu 的数量一致\n \truntime.GOMAXPROCS(runtime.NumCPU())\n }\n+\n+func InitConf() {\n+\n+}\n"
+                },
+                {
+                    "date": 1629466103257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,16 +6,21 @@\n \t\"github.com/GoCron/src/master\"\n )\n \n func main() {\n+\tvar (\n+\t\terr error\n+\t)\n \t// 初始化环境\n \tInitEnv()\n \n \t// 初始化配置\n \n \t// 初始化服务器\n-\tmaster.InitServer()\n+\tif err != master.InitServer(); err != nil {\n \n+\t}\n+ERR:\n }\n \n // 初始化环境变量\n func InitEnv() {\n"
+                },
+                {
+                    "date": 1629466111016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n package main\n \n import (\n+\t\"fmt\"\n \t\"runtime\"\n \n \t\"github.com/GoCron/src/master\"\n )\n@@ -19,8 +20,9 @@\n \tif err != master.InitServer(); err != nil {\n \n \t}\n ERR:\n+\tfmt.Println(err)\n }\n \n // 初始化环境变量\n func InitEnv() {\n"
+                },
+                {
+                    "date": 1629466118456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,9 @@\n \t// 初始化配置\n \n \t// 初始化服务器\n \tif err != master.InitServer(); err != nil {\n+\t\tgoto ERR\n \n \t}\n ERR:\n \tfmt.Println(err)\n"
+                },
+                {
+                    "date": 1629466125010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,10 +18,10 @@\n \n \t// 初始化服务器\n \tif err != master.InitServer(); err != nil {\n \t\tgoto ERR\n+\t}\n \n-\t}\n ERR:\n \tfmt.Println(err)\n }\n \n"
+                },
+                {
+                    "date": 1629466134365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \n \t// 初始化配置\n \n \t// 初始化服务器\n-\tif err != master.InitServer(); err != nil {\n+\tif err  master.InitServer(); err != nil {\n \t\tgoto ERR\n \t}\n \n ERR:\n"
+                },
+                {
+                    "date": 1629466140813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,12 +16,14 @@\n \n \t// 初始化配置\n \n \t// 初始化服务器\n-\tif err  master.InitServer(); err != nil {\n+\tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n \t}\n \n+\treturn\n+\n ERR:\n \tfmt.Println(err)\n }\n \n"
+                },
+                {
+                    "date": 1629466155536,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n \t\tgoto ERR\n \t}\n \n \treturn\n-\n ERR:\n \tfmt.Println(err)\n }\n \n@@ -31,8 +30,4 @@\n func InitEnv() {\n \t// 设置进程数与 cpu 的数量一致\n \truntime.GOMAXPROCS(runtime.NumCPU())\n }\n-\n-func InitConf() {\n-\n-}\n"
+                },
+                {
+                    "date": 1629467043656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n \t// 初始化环境\n \tInitEnv()\n \n \t// 初始化配置\n+\tmaster.InitConf()\n \n \t// 初始化服务器\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n"
+                },
+                {
+                    "date": 1629467059865,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,12 @@\n \n \t\"github.com/GoCron/src/master\"\n )\n \n+var (\n+\tconfigPath string\n+)\n+\n func main() {\n \tvar (\n \t\terr error\n \t)\n"
+                },
+                {
+                    "date": 1629467085894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,4 +35,9 @@\n func InitEnv() {\n \t// 设置进程数与 cpu 的数量一致\n \truntime.GOMAXPROCS(runtime.NumCPU())\n }\n+\n+// 初始化命令行参数\n+func InitArgs() {\n+\n+}\n"
+                },
+                {
+                    "date": 1629467379852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n package main\n \n import (\n+\t\"flag\"\n \t\"fmt\"\n \t\"runtime\"\n \n \t\"github.com/GoCron/src/master\"\n@@ -38,6 +39,6 @@\n }\n \n // 初始化命令行参数\n func InitArgs() {\n-\n+\tflag.StringVar()\n }\n"
+                },
+                {
+                    "date": 1629467538643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,6 +39,6 @@\n }\n \n // 初始化命令行参数\n func InitArgs() {\n-\tflag.StringVar()\n+\tflag.StringVar(&configPath, \"config\", \"./\")\n }\n"
+                },
+                {
+                    "date": 1629467546356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,6 +39,6 @@\n }\n \n // 初始化命令行参数\n func InitArgs() {\n-\tflag.StringVar(&configPath, \"config\", \"./\")\n+\tflag.StringVar(&configPath, \"config\", \"./config.json\")\n }\n"
+                },
+                {
+                    "date": 1629467566457,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,6 +39,6 @@\n }\n \n // 初始化命令行参数\n func InitArgs() {\n-\tflag.StringVar(&configPath, \"config\", \"./config.json\")\n+\tflag.StringVar(&configPath, \"config\", \"./config.json\", \"please input config file path\")\n }\n"
+                },
+                {
+                    "date": 1629467574399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,5 +40,6 @@\n \n // 初始化命令行参数\n func InitArgs() {\n \tflag.StringVar(&configPath, \"config\", \"./config.json\", \"please input config file path\")\n+\tflag.Parse()\n }\n"
+                },
+                {
+                    "date": 1629467581487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,7 +39,8 @@\n }\n \n // 初始化命令行参数\n func InitArgs() {\n+\t// 设置并解析参数\n \tflag.StringVar(&configPath, \"config\", \"./config.json\", \"please input config file path\")\n \tflag.Parse()\n }\n"
+                },
+                {
+                    "date": 1629467590520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n \t// 初始化环境\n \tInitEnv()\n \n \t// 初始化配置\n-\tmaster.InitConf()\n+\tmaster.InitConf(configPath)\n \n \t// 初始化服务器\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n"
+                },
+                {
+                    "date": 1629467646492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,11 @@\n \t// 初始化环境\n \tInitEnv()\n \n \t// 初始化配置\n-\tmaster.InitConf(configPath)\n+\tif err = master.InitConf(configPath); err != nil {\n+\t\tgoto ERR\n+\t}\n \n \t// 初始化服务器\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n"
+                },
+                {
+                    "date": 1629467719223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,9 @@\n \t\terr error\n \t)\n \t// 初始化环境\n \tInitEnv()\n+\tfmt.Println(configPath)\n \n \t// 初始化配置\n \tif err = master.InitConf(configPath); err != nil {\n \t\tgoto ERR\n"
+                },
+                {
+                    "date": 1629467811183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,14 +17,14 @@\n \t\terr error\n \t)\n \t// 初始化环境\n \tInitEnv()\n-\tfmt.Println(configPath)\n+\t// fmt.Println(configPath)\n \n-\t// 初始化配置\n-\tif err = master.InitConf(configPath); err != nil {\n-\t\tgoto ERR\n-\t}\n+\t// // 初始化配置\n+\t// if err = master.InitConf(configPath); err != nil {\n+\t// \tgoto ERR\n+\t// }\n \n \t// 初始化服务器\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n"
+                },
+                {
+                    "date": 1629467837486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \t\terr error\n \t)\n \t// 初始化环境\n \tInitEnv()\n-\t// fmt.Println(configPath)\n+\tfmt.Println(configPath)\n \n \t// // 初始化配置\n \t// if err = master.InitConf(configPath); err != nil {\n \t// \tgoto ERR\n"
+                },
+                {
+                    "date": 1629467860666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,12 +19,12 @@\n \t// 初始化环境\n \tInitEnv()\n \tfmt.Println(configPath)\n \n-\t// // 初始化配置\n-\t// if err = master.InitConf(configPath); err != nil {\n-\t// \tgoto ERR\n-\t// }\n+\t// 初始化配置\n+\tif err = master.InitConf(configPath); err != nil {\n+\t\tgoto ERR\n+\t}\n \n \t// 初始化服务器\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n"
+                },
+                {
+                    "date": 1629467876542,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,10 @@\n \t\terr error\n \t)\n \t// 初始化环境\n \tInitEnv()\n+\n+\t// 初始化参数\n \tfmt.Println(configPath)\n \n \t// 初始化配置\n \tif err = master.InitConf(configPath); err != nil {\n"
+                },
+                {
+                    "date": 1629467886834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n \t// 初始化环境\n \tInitEnv()\n \n \t// 初始化参数\n+\tInitArgs()\n \tfmt.Println(configPath)\n \n \t// 初始化配置\n \tif err = master.InitConf(configPath); err != nil {\n"
+                },
+                {
+                    "date": 1629467938221,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,7 +46,7 @@\n \n // 初始化命令行参数\n func InitArgs() {\n \t// 设置并解析参数\n-\tflag.StringVar(&configPath, \"config\", \"./config.json\", \"please input config file path\")\n+\tflag.StringVar(&configPath, \"config\", \"config.json\", \"please input config file path\")\n \tflag.Parse()\n }\n"
+                },
+                {
+                    "date": 1629467950256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,7 +46,7 @@\n \n // 初始化命令行参数\n func InitArgs() {\n \t// 设置并解析参数\n-\tflag.StringVar(&configPath, \"config\", \"config.json\", \"please input config file path\")\n+\tflag.StringVar(&configPath, \"config\", \"/private/var/www/GoCron/src/master/main/main.go\", \"please input config file path\")\n \tflag.Parse()\n }\n"
+                },
+                {
+                    "date": 1629468742897,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,8 @@\n \tInitEnv()\n \n \t// 初始化参数\n \tInitArgs()\n-\tfmt.Println(configPath)\n \n \t// 初始化配置\n \tif err = master.InitConf(configPath); err != nil {\n \t\tgoto ERR\n@@ -46,7 +45,7 @@\n \n // 初始化命令行参数\n func InitArgs() {\n \t// 设置并解析参数\n-\tflag.StringVar(&configPath, \"config\", \"/private/var/www/GoCron/src/master/main/main.go\", \"please input config file path\")\n+\tflag.StringVar(&configPath, \"config\", \"/private/var/www/GoCron/src/master/main/config.json\", \"please input config file path\")\n \tflag.Parse()\n }\n"
+                },
+                {
+                    "date": 1629468938336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import (\n \t\"flag\"\n \t\"fmt\"\n \t\"runtime\"\n+\t\"time\"\n \n \t\"github.com/GoCron/src/master\"\n )\n \n@@ -31,8 +32,10 @@\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n \t}\n \n+\ttime.Sleep(20 * time.Minute)\n+\n \treturn\n ERR:\n \tfmt.Println(err)\n }\n"
+                },
+                {
+                    "date": 1629644189440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,12 @@\n \tif err = master.InitConf(configPath); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tif err = master.InitJobMgr(); err != nil {\n+\t\tgoto ERR\n+\t}\n+\n \t// 初始化服务器\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n \t}\n"
+                },
+                {
+                    "date": 1629646868388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,8 @@\n import (\n \t\"flag\"\n \t\"fmt\"\n \t\"runtime\"\n-\t\"time\"\n \n \t\"github.com/GoCron/src/master\"\n )\n \n@@ -36,10 +35,8 @@\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n \t}\n \n-\ttime.Sleep(20 * time.Minute)\n-\n \treturn\n ERR:\n \tfmt.Println(err)\n }\n"
+                },
+                {
+                    "date": 1629646880005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import (\n \t\"flag\"\n \t\"fmt\"\n \t\"runtime\"\n+\t\"time\"\n \n \t\"github.com/GoCron/src/master\"\n )\n \n@@ -35,8 +36,10 @@\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n \t}\n \n+\ttime.Sleep(20 * time.Minute)\n+\n \treturn\n ERR:\n \tfmt.Println(err)\n }\n"
+                }
+            ],
+            "date": 1629163768907,
+            "name": "Commit-0",
+            "content": "package main\n"
+        }
+    ]
+}

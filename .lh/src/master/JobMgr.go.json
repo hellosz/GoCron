@@ -1,0 +1,446 @@
+{
+    "sourceFile": "src/master/JobMgr.go",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 107,
+            "patches": [
+                {
+                    "date": 1629641234056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1629641268564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-package main\n+package master\n"
+                },
+                {
+                    "date": 1629641298480,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,5 @@\n package master\n+\n+type JobMgr struct {\n+\tclient *clientv3\n+}\n"
+                },
+                {
+                    "date": 1629641306296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,7 @@\n package master\n \n+import \"github.com/coreos/etcd/clientv3\"\n+\n type JobMgr struct {\n-\tclient *clientv3\n+\tclient *clientv3.Client\n }\n"
+                },
+                {
+                    "date": 1629641589690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n package master\n \n-import \"github.com/coreos/etcd/clientv3\"\n+import \"go.etcd.io/etcd/clientv3\"\n \n type JobMgr struct {\n \tclient *clientv3.Client\n }\n"
+                },
+                {
+                    "date": 1629641635969,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,5 +3,6 @@\n import \"go.etcd.io/etcd/clientv3\"\n \n type JobMgr struct {\n \tclient *clientv3.Client\n+\tkv     clientv3.KV\n }\n"
+                },
+                {
+                    "date": 1629641677370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,5 @@\n import \"go.etcd.io/etcd/clientv3\"\n \n type JobMgr struct {\n \tclient *clientv3.Client\n-\tkv     clientv3.KV\n-}\n+\n"
+                },
+                {
+                    "date": 1629641682590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,5 +3,5 @@\n import \"go.etcd.io/etcd/clientv3\"\n \n type JobMgr struct {\n \tclient *clientv3.Client\n-\n+}\n"
+                },
+                {
+                    "date": 1629641970285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,5 +3,6 @@\n import \"go.etcd.io/etcd/clientv3\"\n \n type JobMgr struct {\n \tclient *clientv3.Client\n+\tkv clientv3.``\n }\n"
+                },
+                {
+                    "date": 1629641981431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n import \"go.etcd.io/etcd/clientv3\"\n \n type JobMgr struct {\n \tclient *clientv3.Client\n-\tkv clientv3.``\n+\tkv     clientv3.KV\n }\n"
+                },
+                {
+                    "date": 1629642890927,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,6 @@\n \n type JobMgr struct {\n \tclient *clientv3.Client\n \tkv     clientv3.KV\n+\tlease  clientv3.Lease\n }\n"
+                },
+                {
+                    "date": 1629642914451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n package master\n \n import \"go.etcd.io/etcd/clientv3\"\n \n+// Etcd 任务管理\n type JobMgr struct {\n \tclient *clientv3.Client\n \tkv     clientv3.KV\n \tlease  clientv3.Lease\n"
+                },
+                {
+                    "date": 1629643021774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,4 +7,18 @@\n \tclient *clientv3.Client\n \tkv     clientv3.KV\n \tlease  clientv3.Lease\n }\n+\n+var (\n+\tG_jobMgr *JobMgr\n+)\n+\n+// 初始化任务管理\n+func InitJobMgr() (err error) {\n+\tvar (\n+\t\tclient *clientv3.Client\n+\t\tkv     clientv3.KV\n+\t\tlease  clientv3.Lease\n+\t)\n+\n+}\n"
+                },
+                {
+                    "date": 1629643030821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,7 +18,8 @@\n \tvar (\n \t\tclient *clientv3.Client\n \t\tkv     clientv3.KV\n \t\tlease  clientv3.Lease\n+\t\tauth   clientv3.Auth\n \t)\n \n }\n"
+                },
+                {
+                    "date": 1629643112040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,10 @@\n \tvar (\n \t\tclient *clientv3.Client\n \t\tkv     clientv3.KV\n \t\tlease  clientv3.Lease\n-\t\tauth   clientv3.Auth\n+\t\tconfig clientv3.Config\n \t)\n \n+\tif auth, err = clientv3.()\n+\n }\n"
+                },
+                {
+                    "date": 1629643183428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,7 +21,9 @@\n \t\tlease  clientv3.Lease\n \t\tconfig clientv3.Config\n \t)\n \n-\tif auth, err = clientv3.()\n+\tif config, err = clientv3.Config{\n \n+\t}\n+\n }\n"
+                },
+                {
+                    "date": 1629643197524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,10 @@\n \t\tconfig clientv3.Config\n \t)\n \n \tif config, err = clientv3.Config{\n+\t\tEndpoints: \n \n+\n \t}\n \n }\n"
+                },
+                {
+                    "date": 1629643217503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n \t\tconfig clientv3.Config\n \t)\n \n \tif config, err = clientv3.Config{\n-\t\tEndpoints: \n+\t\tEndpoints: []string{\"8.135.120.218:2379\"} \n \n \n \t}\n \n"
+                },
+                {
+                    "date": 1629643228609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n \t)\n \n \tif config, err = clientv3.Config{\n \t\tEndpoints: []string{\"8.135.120.218:2379\"} \n+\t\tconfig.DialTimeout\n \n \n \t}\n \n"
+                },
+                {
+                    "date": 1629643273223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,10 +22,10 @@\n \t\tconfig clientv3.Config\n \t)\n \n \tif config, err = clientv3.Config{\n-\t\tEndpoints: []string{\"8.135.120.218:2379\"} \n-\t\tconfig.DialTimeout\n+\t\tEndpoints: []string{\"8.135.120.218:2379\"},\n+\t\tDiaTimeout: \n \n \n \t}\n \n"
+                },
+                {
+                    "date": 1629643284376,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,8 @@\n \t)\n \n \tif config, err = clientv3.Config{\n \t\tEndpoints: []string{\"8.135.120.218:2379\"},\n-\t\tDiaTimeout: \n \n \n \t}\n \n"
+                },
+                {
+                    "date": 1629643303763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \t\tlease  clientv3.Lease\n \t\tconfig clientv3.Config\n \t)\n \n-\tif config, err = clientv3.Config{\n+\tif config, err = clientv3.Config; err != nil {\n \t\tEndpoints: []string{\"8.135.120.218:2379\"},\n \n \n \t}\n"
+                },
+                {
+                    "date": 1629643318794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,11 +21,5 @@\n \t\tlease  clientv3.Lease\n \t\tconfig clientv3.Config\n \t)\n \n-\tif config, err = clientv3.Config; err != nil {\n-\t\tEndpoints: []string{\"8.135.120.218:2379\"},\n-\n-\n-\t}\n-\n }\n"
+                },
+                {
+                    "date": 1629643368836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n package master\n \n-import \"go.etcd.io/etcd/clientv3\"\n+import (\n+\t\"time\"\n \n+\t\"go.etcd.io/etcd/clientv3\"\n+)\n+\n // Etcd 任务管理\n type JobMgr struct {\n \tclient *clientv3.Client\n \tkv     clientv3.KV\n@@ -21,5 +25,10 @@\n \t\tlease  clientv3.Lease\n \t\tconfig clientv3.Config\n \t)\n \n+\tconfig = clientv3.Config{\n+\t\tEndpoints: []string{\"8.135.120.218:2379\"}\n+\t\tDialTimeout: 5 * time.Second,\n+\t}\n+\n }\n"
+                },
+                {
+                    "date": 1629643383883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,9 @@\n \t\tlease  clientv3.Lease\n \t\tconfig clientv3.Config\n \t)\n \n+\t// 设置连接配置\n \tconfig = clientv3.Config{\n \t\tEndpoints: []string{\"8.135.120.218:2379\"}\n \t\tDialTimeout: 5 * time.Second,\n \t}\n"
+                },
+                {
+                    "date": 1629643566180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,5 +31,10 @@\n \t\tEndpoints: []string{\"8.135.120.218:2379\"}\n \t\tDialTimeout: 5 * time.Second,\n \t}\n \n+\t// 创建连接\n+\tif client, err = clientv3.New(config); err != nil {\n+\t\treturn\n+\t}\n+\n }\n"
+                },
+                {
+                    "date": 1629643601660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,5 +36,10 @@\n \tif client, err = clientv3.New(config); err != nil {\n \t\treturn\n \t}\n \n+\tkv = clientv3.NewKV(client)\n+\tlease = clientv3.NewLease(client)\n+\n+\t\n+\n }\n"
+                },
+                {
+                    "date": 1629643654001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,7 +39,13 @@\n \n \tkv = clientv3.NewKV(client)\n \tlease = clientv3.NewLease(client)\n \n-\t\n+\t// 设置全局单例\n+\tG_jobMgr = &JobMgr{\n+\t\tclient: client,\n+\t\tkv: kv,\n+\t\tlease: lease,\n+\t}\n \n+\treturn \n }\n"
+                },
+                {
+                    "date": 1629644131128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,10 @@\n \t)\n \n \t// 设置连接配置\n \tconfig = clientv3.Config{\n-\t\tEndpoints: []string{\"8.135.120.218:2379\"}\n-\t\tDialTimeout: 5 * time.Second,\n+\t\tEndpoints: G_config.EtcdEndpoints,\n+\t\tDialTimeout: time.Duration(G_config.EtcdDiaTimeout)\n \t}\n \n \t// 创建连接\n \tif client, err = clientv3.New(config); err != nil {\n"
+                },
+                {
+                    "date": 1629644158472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,10 @@\n \t)\n \n \t// 设置连接配置\n \tconfig = clientv3.Config{\n-\t\tEndpoints: G_config.EtcdEndpoints,\n-\t\tDialTimeout: time.Duration(G_config.EtcdDiaTimeout)\n+\t\tEndpoints:   G_config.EtcdEndpoints,\n+\t\tDialTimeout: time.Duration(G_config.EtcdDiaTimeout) * time.Millisecond,\n \t}\n \n \t// 创建连接\n \tif client, err = clientv3.New(config); err != nil {\n@@ -42,10 +42,10 @@\n \n \t// 设置全局单例\n \tG_jobMgr = &JobMgr{\n \t\tclient: client,\n-\t\tkv: kv,\n-\t\tlease: lease,\n+\t\tkv:     kv,\n+\t\tlease:  lease,\n \t}\n \n-\treturn \n+\treturn\n }\n"
+                },
+                {
+                    "date": 1629646425113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n package master\n \n import (\n+\t\"fmt\"\n \t\"time\"\n \n \t\"go.etcd.io/etcd/clientv3\"\n )\n@@ -30,8 +31,9 @@\n \tconfig = clientv3.Config{\n \t\tEndpoints:   G_config.EtcdEndpoints,\n \t\tDialTimeout: time.Duration(G_config.EtcdDiaTimeout) * time.Millisecond,\n \t}\n+\tfmt.Println(G_config)\n \n \t// 创建连接\n \tif client, err = clientv3.New(config); err != nil {\n \t\treturn\n"
+                },
+                {
+                    "date": 1629646755657,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n package master\n \n import (\n-\t\"fmt\"\n \t\"time\"\n \n \t\"go.etcd.io/etcd/clientv3\"\n )\n@@ -31,9 +30,8 @@\n \tconfig = clientv3.Config{\n \t\tEndpoints:   G_config.EtcdEndpoints,\n \t\tDialTimeout: time.Duration(G_config.EtcdDiaTimeout) * time.Millisecond,\n \t}\n-\tfmt.Println(G_config)\n \n \t// 创建连接\n \tif client, err = clientv3.New(config); err != nil {\n \t\treturn\n"
+                },
+                {
+                    "date": 1629646774417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,9 @@\n \t}\n \n \t// 创建连接\n \tif client, err = clientv3.New(config); err != nil {\n+\t\tfmt.Println(err\")\n \t\treturn\n \t}\n \n \tkv = clientv3.NewKV(client)\n"
+                },
+                {
+                    "date": 1629646809634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,8 @@\n \t}\n \n \t// 创建连接\n \tif client, err = clientv3.New(config); err != nil {\n-\t\tfmt.Println(err\")\n \t\treturn\n \t}\n \n \tkv = clientv3.NewKV(client)\n"
+                },
+                {
+                    "date": 1629646848941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n package master\n \n import (\n+\t\"fmt\"\n \t\"time\"\n \n \t\"go.etcd.io/etcd/clientv3\"\n )\n@@ -33,8 +34,9 @@\n \t}\n \n \t// 创建连接\n \tif client, err = clientv3.New(config); err != nil {\n+\t\tfmt.Println(err)\n \t\treturn\n \t}\n \n \tkv = clientv3.NewKV(client)\n"
+                },
+                {
+                    "date": 1629650574396,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import (\n \t\"fmt\"\n \t\"time\"\n \n+\t\"github.com/GoCron/src/common\"\n \t\"go.etcd.io/etcd/clientv3\"\n )\n \n // Etcd 任务管理\n@@ -50,4 +51,9 @@\n \t}\n \n \treturn\n }\n+\n+// 保存 job 到 etcd 中\n+func (jobMgr *JobMgr) SaveJob(job common.Job) (oldJob *common.Job, err error) {\n+\n+}\n"
+                },
+                {
+                    "date": 1629650612306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,6 +54,10 @@\n }\n \n // 保存 job 到 etcd 中\n func (jobMgr *JobMgr) SaveJob(job common.Job) (oldJob *common.Job, err error) {\n+\tvar (\n+\t\tjobKey   string\n+\t\tjobValue []byte\n+\t)\n \n }\n"
+                },
+                {
+                    "date": 1629650690940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n package master\n \n import (\n+\t\"encoding/json\"\n \t\"fmt\"\n \t\"time\"\n \n \t\"github.com/GoCron/src/common\"\n@@ -59,5 +60,10 @@\n \t\tjobKey   string\n \t\tjobValue []byte\n \t)\n \n+\tjobKey = \"/cron/job/\" + job.Name\n+\tif jobValue, err = json.Marshal(job); err != nil {\n+\t\treturn\n+\t}\n+\n }\n"
+                },
+                {
+                    "date": 1629650773935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,12 +58,16 @@\n func (jobMgr *JobMgr) SaveJob(job common.Job) (oldJob *common.Job, err error) {\n \tvar (\n \t\tjobKey   string\n \t\tjobValue []byte\n+\t\tputResp  clientv3.PutResponse\n \t)\n \n+\t// 获取 key 和 value\n \tjobKey = \"/cron/job/\" + job.Name\n \tif jobValue, err = json.Marshal(job); err != nil {\n \t\treturn\n \t}\n \n+\t// 创建/更新数据\n+\n }\n"
+                },
+                {
+                    "date": 1629650813727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n package master\n \n import (\n+\t\"context\"\n \t\"encoding/json\"\n \t\"fmt\"\n \t\"time\"\n \n@@ -68,6 +69,9 @@\n \t\treturn\n \t}\n \n \t// 创建/更新数据\n+\tif putResp, err = jobMgr.kv.Put(context.TODO(), jobKey, string(jobValue), clientv3.WithPrevKV()); err != nil {\n+\t\treturn\n+\t}\n \n }\n"
+                },
+                {
+                    "date": 1629650838654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n func (jobMgr *JobMgr) SaveJob(job common.Job) (oldJob *common.Job, err error) {\n \tvar (\n \t\tjobKey   string\n \t\tjobValue []byte\n-\t\tputResp  clientv3.PutResponse\n+\t\tputResp  *clientv3.PutResponse\n \t)\n \n \t// 获取 key 和 value\n \tjobKey = \"/cron/job/\" + job.Name\n"
+                },
+                {
+                    "date": 1629650898011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,5 +73,10 @@\n \tif putResp, err = jobMgr.kv.Put(context.TODO(), jobKey, string(jobValue), clientv3.WithPrevKV()); err != nil {\n \t\treturn\n \t}\n \n+\t// 保存成功（如果是更新，则获取历史值）\n+\tif putResp.PrevKv != nil {\n+\n+\t}\n+\n }\n"
+                },
+                {
+                    "date": 1629650937312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,11 +57,12 @@\n \n // 保存 job 到 etcd 中\n func (jobMgr *JobMgr) SaveJob(job common.Job) (oldJob *common.Job, err error) {\n \tvar (\n-\t\tjobKey   string\n-\t\tjobValue []byte\n-\t\tputResp  *clientv3.PutResponse\n+\t\tjobKey       string\n+\t\tjobValue     []byte\n+\t\tputResp      *clientv3.PutResponse\n+\t\toldJobObject *common.Job\n \t)\n \n \t// 获取 key 和 value\n \tjobKey = \"/cron/job/\" + job.Name\n"
+                },
+                {
+                    "date": 1629651013313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,8 +76,12 @@\n \t}\n \n \t// 保存成功（如果是更新，则获取历史值）\n \tif putResp.PrevKv != nil {\n+\t\tif err = json.Unmarshal(putResp.PrevKv.Value, &oldJobObject); err != nil {\n+\t\t\terr = nil\n+\t\t\treturn\n+\t\t}\n \n \t}\n \n }\n"
+                },
+                {
+                    "date": 1629651020953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,8 +80,9 @@\n \t\tif err = json.Unmarshal(putResp.PrevKv.Value, &oldJobObject); err != nil {\n \t\t\terr = nil\n \t\t\treturn\n \t\t}\n-\n \t}\n \n+\treturn\n+\n }\n"
+                },
+                {
+                    "date": 1629651198819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n \treturn\n }\n \n // 保存 job 到 etcd 中\n-func (jobMgr *JobMgr) SaveJob(job common.Job) (oldJob *common.Job, err error) {\n+func (jobMgr *JobMgr) SaveJob(job *common.Job) (oldJob *common.Job, err error) {\n \tvar (\n \t\tjobKey       string\n \t\tjobValue     []byte\n \t\tputResp      *clientv3.PutResponse\n@@ -83,6 +83,5 @@\n \t\t}\n \t}\n \n \treturn\n-\n }\n"
+                },
+                {
+                    "date": 1629682938967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import (\n \t\"context\"\n \t\"encoding/json\"\n \t\"fmt\"\n+\t\"log\"\n \t\"time\"\n \n \t\"github.com/GoCron/src/common\"\n \t\"go.etcd.io/etcd/clientv3\"\n@@ -77,8 +78,9 @@\n \n \t// 保存成功（如果是更新，则获取历史值）\n \tif putResp.PrevKv != nil {\n \t\tif err = json.Unmarshal(putResp.PrevKv.Value, &oldJobObject); err != nil {\n+\t\t\tlog.Println(\"second unmarshal failed\")\n \t\t\terr = nil\n \t\t\treturn\n \t\t}\n \t}\n"
+                },
+                {
+                    "date": 1629683990492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,8 +74,9 @@\n \t// 创建/更新数据\n \tif putResp, err = jobMgr.kv.Put(context.TODO(), jobKey, string(jobValue), clientv3.WithPrevKV()); err != nil {\n \t\treturn\n \t}\n+\tlog.Println(jobKey, jobValue)\n \n \t// 保存成功（如果是更新，则获取历史值）\n \tif putResp.PrevKv != nil {\n \t\tif err = json.Unmarshal(putResp.PrevKv.Value, &oldJobObject); err != nil {\n"
+                },
+                {
+                    "date": 1629684017824,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,8 +66,9 @@\n \t)\n \n \t// 获取 key 和 value\n \tjobKey = \"/cron/job/\" + job.Name\n+\tlog.Println(jobKey, jobValue)\n \tif jobValue, err = json.Marshal(job); err != nil {\n \t\treturn\n \t}\n \n"
+                },
+                {
+                    "date": 1629684051402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,9 +79,9 @@\n \tlog.Println(jobKey, jobValue)\n \n \t// 保存成功（如果是更新，则获取历史值）\n \tif putResp.PrevKv != nil {\n-\t\tif err = json.Unmarshal(putResp.PrevKv.Value, &oldJobObject); err != nil {\n+\t\tif err = json.Unmarshal(putResp.PrevKv.Value, oldJobObject); err != nil {\n \t\t\tlog.Println(\"second unmarshal failed\")\n \t\t\terr = nil\n \t\t\treturn\n \t\t}\n"
+                },
+                {
+                    "date": 1629684064520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,9 +61,9 @@\n \tvar (\n \t\tjobKey       string\n \t\tjobValue     []byte\n \t\tputResp      *clientv3.PutResponse\n-\t\toldJobObject *common.Job\n+\t\toldJobObject common.Job\n \t)\n \n \t// 获取 key 和 value\n \tjobKey = \"/cron/job/\" + job.Name\n"
+                },
+                {
+                    "date": 1629684075349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,9 +79,9 @@\n \tlog.Println(jobKey, jobValue)\n \n \t// 保存成功（如果是更新，则获取历史值）\n \tif putResp.PrevKv != nil {\n-\t\tif err = json.Unmarshal(putResp.PrevKv.Value, oldJobObject); err != nil {\n+\t\tif err = json.Unmarshal(putResp.PrevKv.Value, &oldJobObject); err != nil {\n \t\t\tlog.Println(\"second unmarshal failed\")\n \t\t\terr = nil\n \t\t\treturn\n \t\t}\n"
+                },
+                {
+                    "date": 1629684085803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,6 +86,8 @@\n \t\t\treturn\n \t\t}\n \t}\n \n+\toldJob = &oldJobobject\n+\n \treturn\n }\n"
+                },
+                {
+                    "date": 1629684096095,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,8 +86,8 @@\n \t\t\treturn\n \t\t}\n \t}\n \n-\toldJob = &oldJobobject\n+\toldJob = &oldJobObject\n \n \treturn\n }\n"
+                },
+                {
+                    "date": 1630028085896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,4 +90,12 @@\n \toldJob = &oldJobObject\n \n \treturn\n }\n+\n+// 删除任务\n+func (jobMgr *JobMgr) DeleteJob(key string) (job *common.Job, err error) {\n+\tvar (\n+\t\tdelResp clientv3.DeleteResponse\n+\t\toldJob  common.Job\n+\t)\n+}\n"
+                },
+                {
+                    "date": 1630028170693,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -92,10 +92,17 @@\n \treturn\n }\n \n // 删除任务\n-func (jobMgr *JobMgr) DeleteJob(key string) (job *common.Job, err error) {\n+func (jobMgr *JobMgr) DeleteJob(jobKey string) (job *common.Job, err error) {\n \tvar (\n-\t\tdelResp clientv3.DeleteResponse\n+\t\tdelResp *clientv3.DeleteResponse\n \t\toldJob  common.Job\n \t)\n+\n+\t// 删除 etcd 中的结果\n+\tif delResp, err = G_jobMgr.kv.Delete(context.TODO(), jobKey, clientv3.WithPrevKV()); err != nil {\n+\n+\t}\n+\n+\t// 解析历史数据\n }\n"
+                },
+                {
+                    "date": 1630028197484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,9 +100,9 @@\n \t)\n \n \t// 删除 etcd 中的结果\n \tif delResp, err = G_jobMgr.kv.Delete(context.TODO(), jobKey, clientv3.WithPrevKV()); err != nil {\n-\n+\t\treturn\n \t}\n \n \t// 解析历史数据\n }\n"
+                },
+                {
+                    "date": 1630028400995,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n \t\"log\"\n \t\"time\"\n \n \t\"github.com/GoCron/src/common\"\n+\t\"github.com/coreos/etcd/mvcc/mvccpb\"\n \t\"go.etcd.io/etcd/clientv3\"\n )\n \n // Etcd 任务管理\n@@ -95,8 +96,9 @@\n // 删除任务\n func (jobMgr *JobMgr) DeleteJob(jobKey string) (job *common.Job, err error) {\n \tvar (\n \t\tdelResp *clientv3.DeleteResponse\n+\t\tprevKV  []*mvccpb.KeyValue\n \t\toldJob  common.Job\n \t)\n \n \t// 删除 etcd 中的结果\n@@ -104,5 +106,6 @@\n \t\treturn\n \t}\n \n \t// 解析历史数据\n+\tdelResp.PrevKvs[0].Value\n }\n"
+                },
+                {
+                    "date": 1630028483033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,6 +106,8 @@\n \t\treturn\n \t}\n \n \t// 解析历史数据\n-\tdelResp.PrevKvs[0].Value\n+\tif len(prevKV) > 0 {\n+\t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob)\n+\t}\n }\n"
+                },
+                {
+                    "date": 1630028512335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -107,7 +107,10 @@\n \t}\n \n \t// 解析历史数据\n \tif len(prevKV) > 0 {\n-\t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob)\n+\t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err = nil {\n+\n+\t\t\t\n+\t\t}\n \t}\n }\n"
+                },
+                {
+                    "date": 1630028531675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -107,10 +107,10 @@\n \t}\n \n \t// 解析历史数据\n \tif len(prevKV) > 0 {\n-\t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err = nil {\n-\n-\t\t\t\n+\t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err == nil {\n+\t\t\tjob = &oldJob\n+\t\t\treturn\n \t\t}\n \t}\n }\n"
+                },
+                {
+                    "date": 1630028550354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -108,9 +108,12 @@\n \n \t// 解析历史数据\n \tif len(prevKV) > 0 {\n \t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err == nil {\n+\t\t\terr = nil\n \t\t\tjob = &oldJob\n \t\t\treturn\n \t\t}\n \t}\n+\n+\treturn\n }\n"
+                },
+                {
+                    "date": 1630028565793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -108,11 +108,12 @@\n \n \t// 解析历史数据\n \tif len(prevKV) > 0 {\n \t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err == nil {\n-\t\t\terr = nil\n \t\t\tjob = &oldJob\n \t\t\treturn\n+\t\t} else {\n+\t\t\terr = nil\n \t\t}\n \t}\n \n \treturn\n"
+                },
+                {
+                    "date": 1630028602278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -111,8 +111,9 @@\n \t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err == nil {\n \t\t\tjob = &oldJob\n \t\t\treturn\n \t\t} else {\n+\t\t\t// 抑制因为解析旧的 json 报错导致的程序异常\n \t\t\terr = nil\n \t\t}\n \t}\n \n"
+                },
+                {
+                    "date": 1630028632140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,8 +106,9 @@\n \t\treturn\n \t}\n \n \t// 解析历史数据\n+\tprevKV = delResp.PrevKvs\n \tif len(prevKV) > 0 {\n \t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err == nil {\n \t\t\tjob = &oldJob\n \t\t\treturn\n"
+                },
+                {
+                    "date": 1630028865333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n \t\toldJobObject common.Job\n \t)\n \n \t// 获取 key 和 value\n-\tjobKey = \"/cron/job/\" + job.Name\n+\tjobKey = common.CRON_JOB_DIR + job.Name\n \tlog.Println(jobKey, jobValue)\n \tif jobValue, err = json.Marshal(job); err != nil {\n \t\treturn\n \t}\n"
+                },
+                {
+                    "date": 1630028877032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -93,9 +93,9 @@\n \treturn\n }\n \n // 删除任务\n-func (jobMgr *JobMgr) DeleteJob(jobKey string) (job *common.Job, err error) {\n+func (jobMgr *JobMgr) DeleteJob(name string) (job *common.Job, err error) {\n \tvar (\n \t\tdelResp *clientv3.DeleteResponse\n \t\tprevKV  []*mvccpb.KeyValue\n \t\toldJob  common.Job\n"
+                },
+                {
+                    "date": 1630028883598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,8 +97,9 @@\n func (jobMgr *JobMgr) DeleteJob(name string) (job *common.Job, err error) {\n \tvar (\n \t\tdelResp *clientv3.DeleteResponse\n \t\tprevKV  []*mvccpb.KeyValue\n+\t\tjobKey  string\n \t\toldJob  common.Job\n \t)\n \n \t// 删除 etcd 中的结果\n"
+                },
+                {
+                    "date": 1630028924229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -102,8 +102,9 @@\n \t\toldJob  common.Job\n \t)\n \n \t// 删除 etcd 中的结果\n+\tjobKey = common.CRON_JOB_DIR + \"/\" + name\n \tif delResp, err = G_jobMgr.kv.Delete(context.TODO(), jobKey, clientv3.WithPrevKV()); err != nil {\n \t\treturn\n \t}\n \n"
+                },
+                {
+                    "date": 1630028936541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n \t\toldJobObject common.Job\n \t)\n \n \t// 获取 key 和 value\n-\tjobKey = common.CRON_JOB_DIR + job.Name\n+\tjobKey = common.CRON_JOB_DIR + \"/\" + job.Name\n \tlog.Println(jobKey, jobValue)\n \tif jobValue, err = json.Marshal(job); err != nil {\n \t\treturn\n \t}\n"
+                },
+                {
+                    "date": 1630028949906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,8 @@\n \t)\n \n \t// 获取 key 和 value\n \tjobKey = common.CRON_JOB_DIR + \"/\" + job.Name\n-\tlog.Println(jobKey, jobValue)\n \tif jobValue, err = json.Marshal(job); err != nil {\n \t\treturn\n \t}\n \n"
+                },
+                {
+                    "date": 1630029930428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -120,4 +120,6 @@\n \t}\n \n \treturn\n }\n+\n+func\n"
+                },
+                {
+                    "date": 1630029998589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,5 +121,8 @@\n \n \treturn\n }\n \n-func\n+// 读取任务列表\n+func (jobMgr *JobMgr) ListJobs () (listJobs []*common.Job, err) {\n+\n+}\n"
+                },
+                {
+                    "date": 1630030006427,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -122,7 +122,7 @@\n \treturn\n }\n \n // 读取任务列表\n-func (jobMgr *JobMgr) ListJobs () (listJobs []*common.Job, err) {\n+func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n \n }\n"
+                },
+                {
+                    "date": 1630077355296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,8 +106,12 @@\n \tif delResp, err = G_jobMgr.kv.Delete(context.TODO(), jobKey, clientv3.WithPrevKV()); err != nil {\n \t\treturn\n \t}\n \n+\tif err != nil {\n+\t\tlog.Fatal(err)\n+\t}\n+\tlog.SetOutput(file)\n \t// 解析历史数据\n \tprevKV = delResp.PrevKvs\n \tif len(prevKV) > 0 {\n \t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err == nil {\n"
+                },
+                {
+                    "date": 1630077378267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -127,6 +127,7 @@\n }\n \n // 读取任务列表\n func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n+\t//\n \n }\n"
+                },
+                {
+                    "date": 1630077518849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -127,7 +127,9 @@\n }\n \n // 读取任务列表\n func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n-\t//\n+\tvar (\n+\t\tgetResp clientv3.GetResponse\n+\t)\n \n }\n"
+                },
+                {
+                    "date": 1630077547769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -129,7 +129,8 @@\n // 读取任务列表\n func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n \tvar (\n \t\tgetResp clientv3.GetResponse\n+\t\tjob     common.JOb\n \t)\n \n }\n"
+                },
+                {
+                    "date": 1630077927270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -129,8 +129,15 @@\n // 读取任务列表\n func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n \tvar (\n \t\tgetResp clientv3.GetResponse\n-\t\tjob     common.JOb\n+\t\tjob     common.Job\n+\t\tjobDir string\n \t)\n \n+\tjobDir = common.CRON_JOB_DIR\n+\n+\tif getResp, err = G_jobMgr.kv.Get(com)\n+\n+\n+\n }\n"
+                },
+                {
+                    "date": 1630077943816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -133,10 +133,10 @@\n \t\tjob     common.Job\n \t\tjobDir string\n \t)\n \n+\t// 任务调度的主目录\n \tjobDir = common.CRON_JOB_DIR\n-\n \tif getResp, err = G_jobMgr.kv.Get(com)\n \n \n \n"
+                },
+                {
+                    "date": 1630077968968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -135,9 +135,9 @@\n \t)\n \n \t// 任务调度的主目录\n \tjobDir = common.CRON_JOB_DIR\n-\tif getResp, err = G_jobMgr.kv.Get(com)\n+\tif getResp, err = G_jobMgr.kv.Get(jobDir)\n \n \n \n }\n"
+                },
+                {
+                    "date": 1630078006937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,14 +130,14 @@\n func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n \tvar (\n \t\tgetResp clientv3.GetResponse\n \t\tjob     common.Job\n-\t\tjobDir string\n+\t\tjobDir  string\n \t)\n \n \t// 任务调度的主目录\n \tjobDir = common.CRON_JOB_DIR\n-\tif getResp, err = G_jobMgr.kv.Get(jobDir)\n+\tif getResp, err = G_jobMgr.kv.Get(context.TODO(), jobDir, clientv3.WithPrefix()); err != nil {\n+\t\treturn\n+\t}\n \n-\n-\n }\n"
+                },
+                {
+                    "date": 1630078023647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -128,9 +128,9 @@\n \n // 读取任务列表\n func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n \tvar (\n-\t\tgetResp clientv3.GetResponse\n+\t\tgetResp *clientv3.GetResponse\n \t\tjob     common.Job\n \t\tjobDir  string\n \t)\n \n"
+                },
+                {
+                    "date": 1630078225832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -139,5 +139,7 @@\n \tif getResp, err = G_jobMgr.kv.Get(context.TODO(), jobDir, clientv3.WithPrefix()); err != nil {\n \t\treturn\n \t}\n \n+\tlistJobs = make([]*common.Job, 0)\n+\n }\n"
+                },
+                {
+                    "date": 1630078241333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -139,7 +139,8 @@\n \tif getResp, err = G_jobMgr.kv.Get(context.TODO(), jobDir, clientv3.WithPrefix()); err != nil {\n \t\treturn\n \t}\n \n+\t// 初始化 listJobs\n \tlistJobs = make([]*common.Job, 0)\n \n }\n"
+                },
+                {
+                    "date": 1630078394032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -141,6 +141,8 @@\n \t}\n \n \t// 初始化 listJobs\n \tlistJobs = make([]*common.Job, 0)\n+\tif len(getResp.Kvs) > 0 {\n+\t}\n \n }\n"
+                },
+                {
+                    "date": 1630078487351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,8 +131,9 @@\n \tvar (\n \t\tgetResp *clientv3.GetResponse\n \t\tjob     common.Job\n \t\tjobDir  string\n+\t\tkeyValue *mvccpb.KeyValue\n \t)\n \n \t// 任务调度的主目录\n \tjobDir = common.CRON_JOB_DIR\n@@ -142,7 +143,10 @@\n \n \t// 初始化 listJobs\n \tlistJobs = make([]*common.Job, 0)\n \tif len(getResp.Kvs) > 0 {\n+\t\tfor _,  := range v {\n+\t\t\t\n+\t\t}\n \t}\n \n }\n"
+                },
+                {
+                    "date": 1630078497269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -128,11 +128,11 @@\n \n // 读取任务列表\n func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n \tvar (\n-\t\tgetResp *clientv3.GetResponse\n-\t\tjob     common.Job\n-\t\tjobDir  string\n+\t\tgetResp  *clientv3.GetResponse\n+\t\tjob      common.Job\n+\t\tjobDir   string\n \t\tkeyValue *mvccpb.KeyValue\n \t)\n \n \t// 任务调度的主目录\n@@ -143,10 +143,10 @@\n \n \t// 初始化 listJobs\n \tlistJobs = make([]*common.Job, 0)\n \tif len(getResp.Kvs) > 0 {\n-\t\tfor _,  := range v {\n-\t\t\t\n+\t\tfor _, keyValue := range v {\n+\n \t\t}\n \t}\n \n }\n"
+                },
+                {
+                    "date": 1630078503694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -143,9 +143,9 @@\n \n \t// 初始化 listJobs\n \tlistJobs = make([]*common.Job, 0)\n \tif len(getResp.Kvs) > 0 {\n-\t\tfor _, keyValue := range v {\n+\t\tfor _, keyValue := range getResp.Kvs {\n \n \t\t}\n \t}\n \n"
+                },
+                {
+                    "date": 1630078586987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,8 +144,9 @@\n \t// 初始化 listJobs\n \tlistJobs = make([]*common.Job, 0)\n \tif len(getResp.Kvs) > 0 {\n \t\tfor _, keyValue := range getResp.Kvs {\n+\t\t\tjob = &common.Job{}\n \n \t\t}\n \t}\n \n"
+                },
+                {
+                    "date": 1630078844185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -129,9 +129,9 @@\n // 读取任务列表\n func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n \tvar (\n \t\tgetResp  *clientv3.GetResponse\n-\t\tjob      common.Job\n+\t\tjob      *common.Job\n \t\tjobDir   string\n \t\tkeyValue *mvccpb.KeyValue\n \t)\n \n@@ -145,9 +145,12 @@\n \tlistJobs = make([]*common.Job, 0)\n \tif len(getResp.Kvs) > 0 {\n \t\tfor _, keyValue := range getResp.Kvs {\n \t\t\tjob = &common.Job{}\n+\t\t\tif err = json.Unmarshal(keyValue.Value, job); err != nil {\n \n+\t\t\t}\n+\n \t\t}\n \t}\n \n }\n"
+                },
+                {
+                    "date": 1630078975442,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,9 +145,9 @@\n \tlistJobs = make([]*common.Job, 0)\n \tif len(getResp.Kvs) > 0 {\n \t\tfor _, keyValue := range getResp.Kvs {\n \t\t\tjob = &common.Job{}\n-\t\t\tif err = json.Unmarshal(keyValue.Value, job); err != nil {\n+\t\t\tif err = json.Unmarshal(*keyValue.Value, job); err != nil {\n \n \t\t\t}\n \n \t\t}\n"
+                },
+                {
+                    "date": 1630078981219,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,10 +145,10 @@\n \tlistJobs = make([]*common.Job, 0)\n \tif len(getResp.Kvs) > 0 {\n \t\tfor _, keyValue := range getResp.Kvs {\n \t\t\tjob = &common.Job{}\n-\t\t\tif err = json.Unmarshal(*keyValue.Value, job); err != nil {\n-\n+\t\t\tif err = json.Unmarshal(keyValue.Value, job); err != nil {\n+\t\t\t\treturn\n \t\t\t}\n \n \t\t}\n \t}\n"
+                },
+                {
+                    "date": 1630078996867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -146,9 +146,10 @@\n \tif len(getResp.Kvs) > 0 {\n \t\tfor _, keyValue := range getResp.Kvs {\n \t\t\tjob = &common.Job{}\n \t\t\tif err = json.Unmarshal(keyValue.Value, job); err != nil {\n-\t\t\t\treturn\n+\t\t\t\terr = nil\n+\t\t\t\tcontinue\n \t\t\t}\n \n \t\t}\n \t}\n"
+                },
+                {
+                    "date": 1630079049708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -150,8 +150,10 @@\n \t\t\t\terr = nil\n \t\t\t\tcontinue\n \t\t\t}\n \n+\t\t\tlistJobjs = append(listJobs, job)\n+\n \t\t}\n \t}\n \n }\n"
+                },
+                {
+                    "date": 1630079060134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -150,10 +150,9 @@\n \t\t\t\terr = nil\n \t\t\t\tcontinue\n \t\t\t}\n \n-\t\t\tlistJobjs = append(listJobs, job)\n-\n+\t\t\tlistJobs = append(listJobs, job)\n \t\t}\n \t}\n \n }\n"
+                },
+                {
+                    "date": 1630079074764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -153,6 +153,7 @@\n \n \t\t\tlistJobs = append(listJobs, job)\n \t\t}\n \t}\n+\treturn listJobs\n \n }\n"
+                },
+                {
+                    "date": 1630079093118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -150,10 +150,10 @@\n \t\t\t\terr = nil\n \t\t\t\tcontinue\n \t\t\t}\n \n+\t\t\t// 将数据添加到列表\n \t\t\tlistJobs = append(listJobs, job)\n \t\t}\n \t}\n-\treturn listJobs\n-\n+\treturn\n }\n"
+                },
+                {
+                    "date": 1630079115034,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -128,12 +128,12 @@\n \n // 读取任务列表\n func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n \tvar (\n-\t\tgetResp  *clientv3.GetResponse\n-\t\tjob      *common.Job\n-\t\tjobDir   string\n-\t\tkeyValue *mvccpb.KeyValue\n+\t\tgetResp *clientv3.GetResponse\n+\t\tjob     *common.Job\n+\t\tjobDir  string\n+\t\t// keyValue *mvccpb.KeyValue\n \t)\n \n \t// 任务调度的主目录\n \tjobDir = common.CRON_JOB_DIR\n"
+                },
+                {
+                    "date": 1630079120363,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -143,9 +143,9 @@\n \n \t// 初始化 listJobs\n \tlistJobs = make([]*common.Job, 0)\n \tif len(getResp.Kvs) > 0 {\n-\t\tfor _, keyValue := range getResp.Kvs {\n+\t\tfor _, keyValue = range getResp.Kvs {\n \t\t\tjob = &common.Job{}\n \t\t\tif err = json.Unmarshal(keyValue.Value, job); err != nil {\n \t\t\t\terr = nil\n \t\t\t\tcontinue\n"
+                },
+                {
+                    "date": 1630079136842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -128,12 +128,12 @@\n \n // 读取任务列表\n func (jobMgr *JobMgr) ListJobs() (listJobs []*common.Job, err error) {\n \tvar (\n-\t\tgetResp *clientv3.GetResponse\n-\t\tjob     *common.Job\n-\t\tjobDir  string\n-\t\t// keyValue *mvccpb.KeyValue\n+\t\tgetResp  *clientv3.GetResponse\n+\t\tjob      *common.Job\n+\t\tjobDir   string\n+\t\tkeyValue *mvccpb.KeyValue\n \t)\n \n \t// 任务调度的主目录\n \tjobDir = common.CRON_JOB_DIR\n@@ -145,8 +145,9 @@\n \tlistJobs = make([]*common.Job, 0)\n \tif len(getResp.Kvs) > 0 {\n \t\tfor _, keyValue = range getResp.Kvs {\n \t\t\tjob = &common.Job{}\n+\t\t\t// 解析成对象\n \t\t\tif err = json.Unmarshal(keyValue.Value, job); err != nil {\n \t\t\t\terr = nil\n \t\t\t\tcontinue\n \t\t\t}\n"
+                },
+                {
+                    "date": 1630079205057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -109,9 +109,8 @@\n \n \tif err != nil {\n \t\tlog.Fatal(err)\n \t}\n-\tlog.SetOutput(file)\n \t// 解析历史数据\n \tprevKV = delResp.PrevKvs\n \tif len(prevKV) > 0 {\n \t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err == nil {\n"
+                },
+                {
+                    "date": 1630079221877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,11 +106,8 @@\n \tif delResp, err = G_jobMgr.kv.Delete(context.TODO(), jobKey, clientv3.WithPrevKV()); err != nil {\n \t\treturn\n \t}\n \n-\tif err != nil {\n-\t\tlog.Fatal(err)\n-\t}\n \t// 解析历史数据\n \tprevKV = delResp.PrevKvs\n \tif len(prevKV) > 0 {\n \t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err == nil {\n"
+                },
+                {
+                    "date": 1630232059437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -153,4 +153,28 @@\n \t\t}\n \t}\n \treturn\n }\n+\n+// 强杀任务\n+func (jobMgr *JobMgr) KillJob(name string) (err error) {\n+\tvar (\n+\t\tputResp *clientv3.PutResponse\n+\t\tleaseResp *clientv3.LeaseGrantResponse \n+\t\tleaseId clientv3.LeaseID \n+\t\tjobkey string\n+\t)\n+\n+\tjobKey = common.CRON_KILL_JOB + \"/\" + name\n+\n+\t// 申请 1 秒的租约\n+\tif leaseResp, err = G_jobMgr.client.Grant(context.TODO(), 1); err != nil {\n+\t\treturn\n+\t}\n+\n+\tif putResp, err = G_jobMgr.client.Put(context.TODO(), )\n+\n+\treturn\n+\n+\n+\n+}\n"
+                },
+                {
+                    "date": 1630232134707,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,24 +157,27 @@\n \n // 强杀任务\n func (jobMgr *JobMgr) KillJob(name string) (err error) {\n \tvar (\n-\t\tputResp *clientv3.PutResponse\n-\t\tleaseResp *clientv3.LeaseGrantResponse \n-\t\tleaseId clientv3.LeaseID \n-\t\tjobkey string\n+\t\tputResp   *clientv3.PutResponse\n+\t\tleaseResp *clientv3.LeaseGrantResponse\n+\t\tleaseId   clientv3.LeaseID\n+\t\tjobKey    string\n \t)\n \n+\t// 任务的 key 值\n \tjobKey = common.CRON_KILL_JOB + \"/\" + name\n \n \t// 申请 1 秒的租约\n \tif leaseResp, err = G_jobMgr.client.Grant(context.TODO(), 1); err != nil {\n \t\treturn\n \t}\n \n-\tif putResp, err = G_jobMgr.client.Put(context.TODO(), )\n+\t// 租约 ID\n+\tleaseId = leaseResp.ID\n+\tif putResp, err = G_jobMgr.client.Put(context.TODO(), jobKey, \"\", clientv3.WithLease(leaseId)); err != nil {\n \n+\t}\n+\n \treturn\n \n-\n-\n }\n"
+                },
+                {
+                    "date": 1630232153530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,9 +157,9 @@\n \n // 强杀任务\n func (jobMgr *JobMgr) KillJob(name string) (err error) {\n \tvar (\n-\t\tputResp   *clientv3.PutResponse\n+\t\t// putResp   *clientv3.PutResponse\n \t\tleaseResp *clientv3.LeaseGrantResponse\n \t\tleaseId   clientv3.LeaseID\n \t\tjobKey    string\n \t)\n@@ -173,10 +173,10 @@\n \t}\n \n \t// 租约 ID\n \tleaseId = leaseResp.ID\n-\tif putResp, err = G_jobMgr.client.Put(context.TODO(), jobKey, \"\", clientv3.WithLease(leaseId)); err != nil {\n-\n+\tif _, err = G_jobMgr.client.Put(context.TODO(), jobKey, \"\", clientv3.WithLease(leaseId)); err != nil {\n+\t\treturn\n \t}\n \n \treturn\n \n"
+                },
+                {
+                    "date": 1630232160404,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -178,6 +178,5 @@\n \t\treturn\n \t}\n \n \treturn\n-\n }\n"
+                },
+                {
+                    "date": 1630232181320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -171,9 +171,9 @@\n \tif leaseResp, err = G_jobMgr.client.Grant(context.TODO(), 1); err != nil {\n \t\treturn\n \t}\n \n-\t// 租约 ID\n+\t// 通知进行强杀\n \tleaseId = leaseResp.ID\n \tif _, err = G_jobMgr.client.Put(context.TODO(), jobKey, \"\", clientv3.WithLease(leaseId)); err != nil {\n \t\treturn\n \t}\n"
+                }
+            ],
+            "date": 1629641234056,
+            "name": "Commit-0",
+            "content": "package main\n"
+        }
+    ]
+}

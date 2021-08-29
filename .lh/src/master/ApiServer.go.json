@@ -1,0 +1,646 @@
+{
+    "sourceFile": "src/master/ApiServer.go",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 157,
+            "patches": [
+                {
+                    "date": 1629164339648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1629164348719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,13 @@\n package master\n \n+import \"net/http\"\n \n \n+\n var (\n \tApiServer \n )\n \n type ApiServer struct {\n-\thttpServer * \n+\thttpServer *http.Server\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629164358813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,11 @@\n package master\n \n import \"net/http\"\n \n-\n-\n var (\n-\tApiServer \n+\tApiServer *ApiServer\n )\n \n type ApiServer struct {\n \thttpServer *http.Server\n\\ No newline at end of file\n-}\n+}\n"
+                },
+                {
+                    "date": 1629164372607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n \n import \"net/http\"\n \n var (\n-\tApiServer *ApiServer\n+\tG_apiServer *ApiServer\n )\n \n type ApiServer struct {\n \thttpServer *http.Server\n\\ No newline at end of file\n-}\n+}\n"
+                },
+                {
+                    "date": 1629164391949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,8 @@\n var (\n \tG_apiServer *ApiServer\n )\n \n+// http 服务器\n type ApiServer struct {\n \thttpServer *http.Server\n\\ No newline at end of file\n-}\n+}\n"
+                },
+                {
+                    "date": 1629164496524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,5 +8,16 @@\n \n // http 服务器\n type ApiServer struct {\n \thttpServer *http.Server\n-}\n\\ No newline at end of file\n+}\n+\n+func InitServer() {\n+\t// 初始化路由\n+\n+\t// 注册监听器\n+\n+\t// 设置服务器\n+\n+\t// 开启监听（开启协程）\n+\n+}\n"
+                },
+                {
+                    "date": 1629164523474,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,10 @@\n type ApiServer struct {\n \thttpServer *http.Server\n }\n \n-func InitServer() {\n+func InitServer() (err error) {\n+\tvar ()\n \t// 初始化路由\n \n \t// 注册监听器\n \n"
+                },
+                {
+                    "date": 1629164580418,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,10 @@\n package master\n \n-import \"net/http\"\n+import (\n+\t\"net\"\n+\t\"net/http\"\n+)\n \n var (\n \tG_apiServer *ApiServer\n )\n@@ -11,9 +14,13 @@\n \thttpServer *http.Server\n }\n \n func InitServer() (err error) {\n-\tvar ()\n+\tvar (\n+\t\thttpServer *http.Server\n+\t\tmux        *http.ServeMux\n+\t\tlistener   net.Listener\n+\t)\n \t// 初始化路由\n \n \t// 注册监听器\n \n"
+                },
+                {
+                    "date": 1629461471987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n type ApiServer struct {\n \thttpServer *http.Server\n }\n \n+// 初始化服务器\n func InitServer() (err error) {\n \tvar (\n \t\thttpServer *http.Server\n \t\tmux        *http.ServeMux\n"
+                },
+                {
+                    "date": 1629464152059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,12 @@\n \t\thttpServer *http.Server\n \t\tmux        *http.ServeMux\n \t\tlistener   net.Listener\n \t)\n+\n \t// 初始化路由\n+\tmux = http.NewServeMux()\n+\tmux.HandleFunc(\"/index\")\n \n \t// 注册监听器\n \n \t// 设置服务器\n"
+                },
+                {
+                    "date": 1629464198386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,12 @@\n var (\n \tG_apiServer *ApiServer\n )\n \n+func index(w http.ResponseWriter, r *http.Request) {\n+\tw.Write(strint(\"go cron\"))\n+}\n+\n // http 服务器\n type ApiServer struct {\n \thttpServer *http.Server\n }\n"
+                },
+                {
+                    "date": 1629464203737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \tG_apiServer *ApiServer\n )\n \n func index(w http.ResponseWriter, r *http.Request) {\n-\tw.Write(strint(\"go cron\"))\n+\tw.Write(string(\"go cron\"))\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1629464210585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \tG_apiServer *ApiServer\n )\n \n func index(w http.ResponseWriter, r *http.Request) {\n-\tw.Write(string(\"go cron\"))\n+\tw.Write([]byte(\"go cron\"))\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1629464225571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n var (\n \tG_apiServer *ApiServer\n )\n \n+// 初始化路由\n func index(w http.ResponseWriter, r *http.Request) {\n \tw.Write([]byte(\"go cron\"))\n }\n \n"
+                },
+                {
+                    "date": 1629464664311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n-\tmux.HandleFunc(\"/index\")\n+\tmux.HandleFunc(\"/index\", index)\n \n \t// 注册监听器\n \n \t// 设置服务器\n"
+                },
+                {
+                    "date": 1629465008901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n \tmux = http.NewServeMux()\n \tmux.HandleFunc(\"/index\", index)\n \n \t// 注册监听器\n+\tlistener = http.Li\n \n \t// 设置服务器\n \n \t// 开启监听（开启协程）\n"
+                },
+                {
+                    "date": 1629465031722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n \tmux = http.NewServeMux()\n \tmux.HandleFunc(\"/index\", index)\n \n \t// 注册监听器\n-\tlistener = http.Li\n+\tlistener = \n \n \t// 设置服务器\n \n \t// 开启监听（开启协程）\n"
+                },
+                {
+                    "date": 1629465041955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n \tmux = http.NewServeMux()\n \tmux.HandleFunc(\"/index\", index)\n \n \t// 注册监听器\n-\tlistener = \n+\tlistener = net.Listen()\n \n \t// 设置服务器\n \n \t// 开启监听（开启协程）\n"
+                },
+                {
+                    "date": 1629465083770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n \tmux = http.NewServeMux()\n \tmux.HandleFunc(\"/index\", index)\n \n \t// 注册监听器\n-\tlistener = net.Listen()\n+\tlistener, err = net.Listen(\"tcp\", \":8090\")\n \n \t// 设置服务器\n \n \t// 开启监听（开启协程）\n"
+                },
+                {
+                    "date": 1629465181981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n import (\n \t\"net\"\n \t\"net/http\"\n+\t\"time\"\n )\n \n var (\n \tG_apiServer *ApiServer\n@@ -24,8 +25,9 @@\n \tvar (\n \t\thttpServer *http.Server\n \t\tmux        *http.ServeMux\n \t\tlistener   net.Listener\n+\t\terr        error\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n@@ -34,8 +36,13 @@\n \t// 注册监听器\n \tlistener, err = net.Listen(\"tcp\", \":8090\")\n \n \t// 设置服务器\n+\thttpServer = &http.Server{\n+\t\tReadTimeout:  5 * time.Second,\n+\t\tWriteTimeout: 5 * time.Second,\n+\t\tHandler:      mux,\n+\t}\n \n \t// 开启监听（开启协程）\n \n }\n"
+                },
+                {
+                    "date": 1629465195194,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,7 +42,9 @@\n \t\tWriteTimeout: 5 * time.Second,\n \t\tHandler:      mux,\n \t}\n \n+\thttpServer.Serve(listener)\n+\n \t// 开启监听（开启协程）\n \n }\n"
+                },
+                {
+                    "date": 1629465201795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n \t\tWriteTimeout: 5 * time.Second,\n \t\tHandler:      mux,\n \t}\n \n-\thttpServer.Serve(listener)\n+\terr = httpServer.Serve(listener)\n \n \t// 开启监听（开启协程）\n \n }\n"
+                },
+                {
+                    "date": 1629465231029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,13 @@\n \t\tWriteTimeout: 5 * time.Second,\n \t\tHandler:      mux,\n \t}\n \n-\terr = httpServer.Serve(listener)\n+\tif err = httpServer.Serve(listener); err != nil {\n+\t\treturn err\n+\t}\n \n+\treturn nil\n+\n \t// 开启监听（开启协程）\n \n }\n"
+                },
+                {
+                    "date": 1629465254654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,13 +42,6 @@\n \t\tWriteTimeout: 5 * time.Second,\n \t\tHandler:      mux,\n \t}\n \n-\tif err = httpServer.Serve(listener); err != nil {\n-\t\treturn err\n-\t}\n-\n-\treturn nil\n-\n-\t// 开启监听（开启协程）\n-\n+\tgo httpServer.Serve(listener)\n }\n"
+                },
+                {
+                    "date": 1629465279619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,11 @@\n \tmux = http.NewServeMux()\n \tmux.HandleFunc(\"/index\", index)\n \n \t// 注册监听器\n-\tlistener, err = net.Listen(\"tcp\", \":8090\")\n+\tif listener, err = net.Listen(\"tcp\", \":8090\"); err != nil {\n+\t\treturn err\n+\t}\n \n \t// 设置服务器\n \thttpServer = &http.Server{\n \t\tReadTimeout:  5 * time.Second,\n"
+                },
+                {
+                    "date": 1629465288839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,5 +45,7 @@\n \t\tHandler:      mux,\n \t}\n \n \tgo httpServer.Serve(listener)\n+\n+\treturn nil\n }\n"
+                },
+                {
+                    "date": 1629465300582,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,8 +44,9 @@\n \t\tWriteTimeout: 5 * time.Second,\n \t\tHandler:      mux,\n \t}\n \n+\t// 开启协程监听请求\n \tgo httpServer.Serve(listener)\n \n \treturn nil\n }\n"
+                },
+                {
+                    "date": 1629465306260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,8 @@\n \tvar (\n \t\thttpServer *http.Server\n \t\tmux        *http.ServeMux\n \t\tlistener   net.Listener\n-\t\terr        error\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n"
+                },
+                {
+                    "date": 1629465783344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n \t\treturn err\n \t}\n \n \t// 设置服务器\n-\thttpServer = &http.Server{\n+\tserver = &http.Server{\n \t\tReadTimeout:  5 * time.Second,\n \t\tWriteTimeout: 5 * time.Second,\n \t\tHandler:      mux,\n \t}\n"
+                },
+                {
+                    "date": 1629465790776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,11 +22,11 @@\n \n // 初始化服务器\n func InitServer() (err error) {\n \tvar (\n-\t\thttpServer *http.Server\n-\t\tmux        *http.ServeMux\n-\t\tlistener   net.Listener\n+\t\tserver   *http.Server\n+\t\tmux      *http.ServeMux\n+\t\tlistener net.Listener\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n"
+                },
+                {
+                    "date": 1629465831293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,8 +43,12 @@\n \t\tWriteTimeout: 5 * time.Second,\n \t\tHandler:      mux,\n \t}\n \n+\thttpServer = &ApiServer{\n+\t\thttpServer: server,\n+\t}\n+\n \t// 开启协程监听请求\n \tgo httpServer.Serve(listener)\n \n \treturn nil\n"
+                },
+                {
+                    "date": 1629465889298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,11 +22,11 @@\n \n // 初始化服务器\n func InitServer() (err error) {\n \tvar (\n-\t\tserver   *http.Server\n-\t\tmux      *http.ServeMux\n-\t\tlistener net.Listener\n+\t\thttpServer *http.Server\n+\t\tmux        *http.ServeMux\n+\t\tlistener   net.Listener\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n@@ -43,12 +43,8 @@\n \t\tWriteTimeout: 5 * time.Second,\n \t\tHandler:      mux,\n \t}\n \n-\thttpServer = &ApiServer{\n-\t\thttpServer: server,\n-\t}\n-\n \t// 开启协程监听请求\n \tgo httpServer.Serve(listener)\n \n \treturn nil\n"
+                },
+                {
+                    "date": 1629465915012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,8 +44,11 @@\n \t\tHandler:      mux,\n \t}\n \n \t// 开启协程监听请求\n+\tG_apiServer = &ApiServer{\n+\t\thttpServer: server,\n+\t}\n \tgo httpServer.Serve(listener)\n \n \treturn nil\n }\n"
+                },
+                {
+                    "date": 1629465928300,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,17 +37,17 @@\n \t\treturn err\n \t}\n \n \t// 设置服务器\n-\tserver = &http.Server{\n+\thttpServer = &http.Server{\n \t\tReadTimeout:  5 * time.Second,\n \t\tWriteTimeout: 5 * time.Second,\n \t\tHandler:      mux,\n \t}\n \n \t// 开启协程监听请求\n \tG_apiServer = &ApiServer{\n-\t\thttpServer: server,\n+\t\thttpServer: httpServer,\n \t}\n \tgo httpServer.Serve(listener)\n \n \treturn nil\n"
+                },
+                {
+                    "date": 1629646573244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n import (\n \t\"net\"\n \t\"net/http\"\n+\t\"strconv\"\n \t\"time\"\n )\n \n var (\n@@ -32,16 +33,16 @@\n \tmux = http.NewServeMux()\n \tmux.HandleFunc(\"/index\", index)\n \n \t// 注册监听器\n-\tif listener, err = net.Listen(\"tcp\", \":8090\"); err != nil {\n+\tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n \t}\n \n \t// 设置服务器\n \thttpServer = &http.Server{\n-\t\tReadTimeout:  5 * time.Second,\n-\t\tWriteTimeout: 5 * time.Second,\n+\t\tReadTimeout:  time.Duration(G_config.ApiReadTimeout) * time.Millisecond,\n+\t\tWriteTimeout: time.Duration(G_config.ApiWriteTimeout) * time.Millisecond,\n \t\tHandler:      mux,\n \t}\n \n \t// 开启协程监听请求\n"
+                },
+                {
+                    "date": 1629650100507,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n-\tmux.HandleFunc(\"/index\", index)\n+\tmux.HandleFunc(\"/index\", save)\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
+                },
+                {
+                    "date": 1629650309534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,20 @@\n \tG_apiServer *ApiServer\n )\n \n // 初始化路由\n-func index(w http.ResponseWriter, r *http.Request) {\n+func save(w http.ResponseWriter, r *http.Request) {\n+\tvar (\n+\t\terr error\n+\t)\n+\t// 解析参数\n+\tif err = r.ParseForm(); err != nil {\n+\t\tgoto ERR\n+\t}\n+\n+\t// 初始化 Job\n+\n+\t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n }\n \n // http 服务器\n"
+                },
+                {
+                    "date": 1629650316216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,10 @@\n \n \t// 初始化 Job\n \n \t// 保存到 etcd 中\n+ERR:\n+\n \tw.Write([]byte(\"go cron\"))\n }\n \n // http 服务器\n"
+                },
+                {
+                    "date": 1629650322329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,11 +23,10 @@\n \n \t// 初始化 Job\n \n \t// 保存到 etcd 中\n+\tw.Write([]byte(\"go cron\"))\n ERR:\n-\n-\tw.Write([]byte(\"go cron\"))\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1629650345136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,9 @@\n \n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n ERR:\n+\tw.WriteHeader(http.StatusInternalServerError)\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1629650368564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,9 @@\n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n ERR:\n \tw.WriteHeader(http.StatusInternalServerError)\n+\tw.Write([]byte(err.Error()))\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1629650430575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,10 @@\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n+\n+\t\"github.com/GoCron/src/common\"\n )\n \n var (\n \tG_apiServer *ApiServer\n@@ -13,19 +15,23 @@\n \n // 初始化路由\n func save(w http.ResponseWriter, r *http.Request) {\n \tvar (\n-\t\terr error\n+\t\terr     error\n+\t\tjobForm string\n+\t\tjob     *common.Job\n \t)\n \t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n \n \t// 初始化 Job\n+\tjobForm = r.PostForm.Get(\"job\")\n \n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n+\n ERR:\n \tw.WriteHeader(http.StatusInternalServerError)\n \tw.Write([]byte(err.Error()))\n }\n"
+                },
+                {
+                    "date": 1629650479357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n package master\n \n import (\n+\t\"encoding/json\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -26,8 +27,11 @@\n \t}\n \n \t// 初始化 Job\n \tjobForm = r.PostForm.Get(\"job\")\n+\tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n+\t\tgoto ERR\n+\t}\n \n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n \n"
+                },
+                {
+                    "date": 1629651175125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,10 @@\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tG_jobMgr.SaveJob(job)\n+\n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n \n ERR:\n"
+                },
+                {
+                    "date": 1629651229050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,12 @@\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n \n-\tG_jobMgr.SaveJob(job)\n+\t// 保存数据到 etcd 中\n+\tif oldJob, err = G_jobMgr.SaveJob(job); err != nil {\n+\t\tgoto ERR\n+\t}\n \n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n \n"
+                },
+                {
+                    "date": 1629651234415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n package master\n \n import (\n \t\"encoding/json\"\n+\t\"fmt\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -36,8 +37,10 @@\n \tif oldJob, err = G_jobMgr.SaveJob(job); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tfmt.Println(oldJob)\n+\n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n \n ERR:\n"
+                },
+                {
+                    "date": 1629651239853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n \tif oldJob, err = G_jobMgr.SaveJob(job); err != nil {\n \t\tgoto ERR\n \t}\n \n-\tfmt.Println(oldJob)\n+\tfmt.Println(*oldJob)\n \n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n \n"
+                },
+                {
+                    "date": 1629651252763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,9 @@\n \tvar (\n \t\terr     error\n \t\tjobForm string\n \t\tjob     *common.Job\n+\t\toldJob  *common.Job\n \t)\n \t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n@@ -37,9 +38,9 @@\n \tif oldJob, err = G_jobMgr.SaveJob(job); err != nil {\n \t\tgoto ERR\n \t}\n \n-\tfmt.Println(*oldJob)\n+\tfmt.Println(oldJob)\n \n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n \n"
+                },
+                {
+                    "date": 1629651353883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,9 @@\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n-\tmux.HandleFunc(\"/index\", save)\n+\tmux.HandleFunc(\"/save\", save)\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
+                },
+                {
+                    "date": 1629651618920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,9 @@\n \t}\n \n \t// 初始化 Job\n \tjobForm = r.PostForm.Get(\"job\")\n+\tfmt.Println(string(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n \n"
+                },
+                {
+                    "date": 1629651625428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n \t}\n \n \t// 初始化 Job\n \tjobForm = r.PostForm.Get(\"job\")\n-\tfmt.Println(string(jobForm)\n+\tfmt.Println(string(jobForm))\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n \n"
+                },
+                {
+                    "date": 1629651678534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n \t\tjobForm string\n \t\tjob     *common.Job\n \t\toldJob  *common.Job\n \t)\n+\tfmt.Println(\"1\")\n \t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n"
+                },
+                {
+                    "date": 1629681079530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n import (\n \t\"encoding/json\"\n \t\"fmt\"\n+\t\"log\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -32,8 +33,9 @@\n \t// 初始化 Job\n \tjobForm = r.PostForm.Get(\"job\")\n \tfmt.Println(string(jobForm))\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n+\t\tlog.Println(\"unmarshal error\")\n \t\tgoto ERR\n \t}\n \n \t// 保存数据到 etcd 中\n"
+                },
+                {
+                    "date": 1629681112808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,8 +34,9 @@\n \tjobForm = r.PostForm.Get(\"job\")\n \tfmt.Println(string(jobForm))\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tlog.Println(\"unmarshal error\")\n+\t\tlog.Panicln(err)\n \t\tgoto ERR\n \t}\n \n \t// 保存数据到 etcd 中\n"
+                },
+                {
+                    "date": 1629681138254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n \tjobForm = r.PostForm.Get(\"job\")\n \tfmt.Println(string(jobForm))\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tlog.Println(\"unmarshal error\")\n-\t\tlog.Panicln(err)\n+\t\tlog.Println(err)\n \t\tgoto ERR\n \t}\n \n \t// 保存数据到 etcd 中\n"
+                },
+                {
+                    "date": 1629681881391,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n \t}\n \n \t// 初始化 Job\n \tjobForm = r.PostForm.Get(\"job\")\n+\tjobFomr = r.Form.Get(\"job\")\n \tfmt.Println(string(jobForm))\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tlog.Println(\"unmarshal error\")\n \t\tlog.Println(err)\n"
+                },
+                {
+                    "date": 1629681887179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,10 +30,10 @@\n \t\tgoto ERR\n \t}\n \n \t// 初始化 Job\n-\tjobForm = r.PostForm.Get(\"job\")\n-\tjobFomr = r.Form.Get(\"job\")\n+\t// jobForm = r.PostForm.Get(\"job\")\n+\tjobForm = r.Form.Get(\"job\")\n \tfmt.Println(string(jobForm))\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tlog.Println(\"unmarshal error\")\n \t\tlog.Println(err)\n"
+                },
+                {
+                    "date": 1629681933144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,10 +44,8 @@\n \tif oldJob, err = G_jobMgr.SaveJob(job); err != nil {\n \t\tgoto ERR\n \t}\n \n-\tfmt.Println(oldJob)\n-\n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n \n ERR:\n"
+                },
+                {
+                    "date": 1629681944431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n \n import (\n \t\"encoding/json\"\n \t\"fmt\"\n-\t\"log\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -34,10 +33,8 @@\n \t// jobForm = r.PostForm.Get(\"job\")\n \tjobForm = r.Form.Get(\"job\")\n \tfmt.Println(string(jobForm))\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n-\t\tlog.Println(\"unmarshal error\")\n-\t\tlog.Println(err)\n \t\tgoto ERR\n \t}\n \n \t// 保存数据到 etcd 中\n"
+                },
+                {
+                    "date": 1629681961344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n \n \t// 初始化 Job\n \t// jobForm = r.PostForm.Get(\"job\")\n \tjobForm = r.Form.Get(\"job\")\n-\tfmt.Println(string(jobForm))\n+\tfmt.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n \n"
+                },
+                {
+                    "date": 1629681981660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n import (\n \t\"encoding/json\"\n \t\"fmt\"\n+\t\"log\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -31,18 +32,22 @@\n \n \t// 初始化 Job\n \t// jobForm = r.PostForm.Get(\"job\")\n \tjobForm = r.Form.Get(\"job\")\n-\tfmt.Println(jobForm)\n+\tfmt.Println(string(jobForm))\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n+\t\tlog.Println(\"unmarshal error\")\n+\t\tlog.Println(err)\n \t\tgoto ERR\n \t}\n \n \t// 保存数据到 etcd 中\n \tif oldJob, err = G_jobMgr.SaveJob(job); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tfmt.Println(oldJob)\n+\n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n \n ERR:\n"
+                },
+                {
+                    "date": 1629681989470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n \n import (\n \t\"encoding/json\"\n \t\"fmt\"\n-\t\"log\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -32,12 +31,10 @@\n \n \t// 初始化 Job\n \t// jobForm = r.PostForm.Get(\"job\")\n \tjobForm = r.Form.Get(\"job\")\n-\tfmt.Println(string(jobForm))\n+\tfmt.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n-\t\tlog.Println(\"unmarshal error\")\n-\t\tlog.Println(err)\n \t\tgoto ERR\n \t}\n \n \t// 保存数据到 etcd 中\n"
+                },
+                {
+                    "date": 1629682102087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,8 @@\n \t\tjobForm string\n \t\tjob     *common.Job\n \t\toldJob  *common.Job\n \t)\n-\tfmt.Println(\"1\")\n \t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n"
+                },
+                {
+                    "date": 1629682235842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n \t\tjobForm string\n \t\tjob     *common.Job\n \t\toldJob  *common.Job\n \t)\n+\n \t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n"
+                },
+                {
+                    "date": 1629682338293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n import (\n \t\"encoding/json\"\n \t\"fmt\"\n+\t\"log\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -31,9 +32,9 @@\n \n \t// 初始化 Job\n \t// jobForm = r.PostForm.Get(\"job\")\n \tjobForm = r.Form.Get(\"job\")\n-\tfmt.Println(jobForm)\n+\tlog.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n \n"
+                },
+                {
+                    "date": 1629682399601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,10 +30,9 @@\n \t\tgoto ERR\n \t}\n \n \t// 初始化 Job\n-\t// jobForm = r.PostForm.Get(\"job\")\n-\tjobForm = r.Form.Get(\"job\")\n+\tjobForm = r.PostForm.Get(\"job\")\n \tlog.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n"
+                },
+                {
+                    "date": 1629682614973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\tgoto ERR\n \t}\n \n \t// 初始化 Job\n-\tjobForm = r.PostForm.Get(\"job\")\n+\tjobForm = r.PostFormValue('job')\n \tlog.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n"
+                },
+                {
+                    "date": 1629682642647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\tgoto ERR\n \t}\n \n \t// 初始化 Job\n-\tjobForm = r.PostFormValue('job')\n+\tjobForm = r.PostFormValue(\"job\")\n \tlog.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n"
+                },
+                {
+                    "date": 1629682650725,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,11 +25,11 @@\n \t\toldJob  *common.Job\n \t)\n \n \t// 解析参数\n-\tif err = r.ParseForm(); err != nil {\n-\t\tgoto ERR\n-\t}\n+\t// if err = r.ParseForm(); err != nil {\n+\t// \tgoto ERR\n+\t// }\n \n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job\")\n \tlog.Println(jobForm)\n"
+                },
+                {
+                    "date": 1629682916634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,9 @@\n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job\")\n \tlog.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n+\t\tlog.Println(\"first unmarshal failed\")\n \t\tgoto ERR\n \t}\n \n \t// 保存数据到 etcd 中\n"
+                },
+                {
+                    "date": 1629683232464,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n \n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job\")\n \tlog.Println(jobForm)\n-\tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n+\tif err = json.Unmarshal([]byte(jobForm), job); err != nil {\n \t\tlog.Println(\"first unmarshal failed\")\n \t\tgoto ERR\n \t}\n \n"
+                },
+                {
+                    "date": 1629683302704,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n func save(w http.ResponseWriter, r *http.Request) {\n \tvar (\n \t\terr     error\n \t\tjobForm string\n-\t\tjob     *common.Job\n+\t\tjob     common.Job\n \t\toldJob  *common.Job\n \t)\n \n \t// 解析参数\n"
+                },
+                {
+                    "date": 1629683310978,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,15 +32,15 @@\n \n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job\")\n \tlog.Println(jobForm)\n-\tif err = json.Unmarshal([]byte(jobForm), job); err != nil {\n+\tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tlog.Println(\"first unmarshal failed\")\n \t\tgoto ERR\n \t}\n \n \t// 保存数据到 etcd 中\n-\tif oldJob, err = G_jobMgr.SaveJob(job); err != nil {\n+\tif oldJob, err = G_jobMgr.SaveJob(&job); err != nil {\n \t\tgoto ERR\n \t}\n \n \tfmt.Println(oldJob)\n"
+                },
+                {
+                    "date": 1629683907758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,8 @@\n \t// 保存到 etcd 中\n \tw.Write([]byte(\"go cron\"))\n \n ERR:\n-\tw.WriteHeader(http.StatusInternalServerError)\n \tw.Write([]byte(err.Error()))\n }\n \n // http 服务器\n"
+                },
+                {
+                    "date": 1629694795226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,9 @@\n \t}\n \n \t// 保存数据到 etcd 中\n \tif oldJob, err = G_jobMgr.SaveJob(&job); err != nil {\n+\t\tlog.Printf(\"保存数据失败\")\n \t\tgoto ERR\n \t}\n \n \tfmt.Println(oldJob)\n"
+                },
+                {
+                    "date": 1629694894827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,12 +44,10 @@\n \t\tgoto ERR\n \t}\n \n \tfmt.Println(oldJob)\n+\treturn\n \n-\t// 保存到 etcd 中\n-\tw.Write([]byte(\"go cron\"))\n-\n ERR:\n \tw.Write([]byte(err.Error()))\n }\n \n"
+                },
+                {
+                    "date": 1629730727151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,15 +33,13 @@\n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job\")\n \tlog.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n-\t\tlog.Println(\"first unmarshal failed\")\n \t\tgoto ERR\n \t}\n \n \t// 保存数据到 etcd 中\n \tif oldJob, err = G_jobMgr.SaveJob(&job); err != nil {\n-\t\tlog.Printf(\"保存数据失败\")\n \t\tgoto ERR\n \t}\n \n \tfmt.Println(oldJob)\n"
+                },
+                {
+                    "date": 1629730743597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n \t\terr     error\n \t\tjobForm string\n \t\tjob     common.Job\n \t\toldJob  *common.Job\n+\t\tresp    []byte\n \t)\n \n \t// 解析参数\n \t// if err = r.ParseForm(); err != nil {\n"
+                },
+                {
+                    "date": 1629730818105,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,8 +42,10 @@\n \tif oldJob, err = G_jobMgr.SaveJob(&job); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tif resp, err = common.BuildReponse(0, \"success\", &oldJob)\n+\n \tfmt.Println(oldJob)\n \treturn\n \n ERR:\n"
+                },
+                {
+                    "date": 1629730844837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n package master\n \n import (\n \t\"encoding/json\"\n-\t\"fmt\"\n \t\"log\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n@@ -42,11 +41,12 @@\n \tif oldJob, err = G_jobMgr.SaveJob(&job); err != nil {\n \t\tgoto ERR\n \t}\n \n-\tif resp, err = common.BuildReponse(0, \"success\", &oldJob)\n+\tif resp, err = common.BuildReponse(0, \"success\", &oldJob); err != nil {\n+\t\tgoto ERR\n+\t}\n \n-\tfmt.Println(oldJob)\n \treturn\n \n ERR:\n \tw.Write([]byte(err.Error()))\n"
+                },
+                {
+                    "date": 1629730857976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,8 +45,10 @@\n \tif resp, err = common.BuildReponse(0, \"success\", &oldJob); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tw.Write(resp)\n+\n \treturn\n \n ERR:\n \tw.Write([]byte(err.Error()))\n"
+                },
+                {
+                    "date": 1629730899882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,8 +45,9 @@\n \tif resp, err = common.BuildReponse(0, \"success\", &oldJob); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n \n \treturn\n \n"
+                },
+                {
+                    "date": 1629730999743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,11 @@\n \n \treturn\n \n ERR:\n-\tw.Write([]byte(err.Error()))\n+\tw.Header().Add(\"content-type\", \"application/json\")\n+\tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n+\tw.Write()\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1629731007320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,11 +51,11 @@\n \n \treturn\n \n ERR:\n+\tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n-\tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n-\tw.Write()\n+\tw.Write(resp)\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1629731012465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,8 @@\n \t}\n \n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n-\n \treturn\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n"
+                },
+                {
+                    "date": 1630026642075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,11 @@\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n-\tmux.HandleFunc(\"/save\", save)\n+\tmux.HandleFunc(\"/job/save\", save)\n+\tmux.HandleFunc(\"/job/delete\", save)\n+\tmux.HandleFunc(\"/job/list\", save)\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
+                },
+                {
+                    "date": 1630026663251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,11 +70,11 @@\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n-\tmux.HandleFunc(\"/job/save\", save)\n-\tmux.HandleFunc(\"/job/delete\", save)\n-\tmux.HandleFunc(\"/job/list\", save)\n+\tmux.HandleFunc(\"/job/save\", saveJob)\n+\tmux.HandleFunc(\"/job/delete\", deleteJob)\n+\tmux.HandleFunc(\"/job/list\", listJOb)\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
+                },
+                {
+                    "date": 1630026670866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \tG_apiServer *ApiServer\n )\n \n // 初始化路由\n-func save(w http.ResponseWriter, r *http.Request) {\n+func saveJob(w http.ResponseWriter, r *http.Request) {\n \tvar (\n \t\terr     error\n \t\tjobForm string\n \t\tjob     common.Job\n@@ -72,9 +72,9 @@\n \t// 初始化路由\n \tmux = http.NewServeMux()\n \tmux.HandleFunc(\"/job/save\", saveJob)\n \tmux.HandleFunc(\"/job/delete\", deleteJob)\n-\tmux.HandleFunc(\"/job/list\", listJOb)\n+\tmux.HandleFunc(\"/job/list\", listJob)\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
+                },
+                {
+                    "date": 1630026957406,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,8 +55,17 @@\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n }\n \n+// 删除任务\n+func deleteJob(w http.ResponseWriter, r *http.Request) {\n+\tvar (\n+\t\terr    error\n+\t\toldJob *common.Job\n+\t)\n+\n+}\n+\n // http 服务器\n type ApiServer struct {\n \thttpServer *http.Server\n }\n"
+                },
+                {
+                    "date": 1630027044692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,10 +60,17 @@\n func deleteJob(w http.ResponseWriter, r *http.Request) {\n \tvar (\n \t\terr    error\n \t\toldJob *common.Job\n+\t\tjobKey string\n \t)\n \n+\t// 解析参数\n+\tif err = r.ParseForm(); err != nil {\n+\t\tgoto ERR\n+\t}\n+\n+ERR:\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1630027102214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,8 +69,12 @@\n \t\tgoto ERR\n \t}\n \n ERR:\n+\tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n+\tw.Header().Add(\"content-type\", \"application/json\")\n+\tw.Write([]byte(resp))\n+\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1630027115786,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,9 +71,9 @@\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n-\tw.Write([]byte(resp))\n+\tw.Write(resp)\n \n }\n \n // http 服务器\n"
+                },
+                {
+                    "date": 1630027133304,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,8 +60,9 @@\n func deleteJob(w http.ResponseWriter, r *http.Request) {\n \tvar (\n \t\terr    error\n \t\toldJob *common.Job\n+\t\tresp   []bute\n \t\tjobKey string\n \t)\n \n \t// 解析参数\n"
+                },
+                {
+                    "date": 1630027213253,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,17 +60,19 @@\n func deleteJob(w http.ResponseWriter, r *http.Request) {\n \tvar (\n \t\terr    error\n \t\toldJob *common.Job\n-\t\tresp   []bute\n+\t\tresp   []byte\n \t\tjobKey string\n \t)\n \n-\t// 解析参数\n-\tif err = r.ParseForm(); err != nil {\n-\t\tgoto ERR\n-\t}\n+\t// // 解析参数\n+\t// if err = r.ParseForm(); err != nil {\n+\t// \tgoto ERR\n+\t// }\n \n+\tif jobKey = r.PostFormValue(\"\")\n+\n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n"
+                },
+                {
+                    "date": 1630027219259,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n \t// if err = r.ParseForm(); err != nil {\n \t// \tgoto ERR\n \t// }\n \n-\tif jobKey = r.PostFormValue(\"\")\n+\tif jobKey = r.PostFormValue(\"name\")\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n"
+                },
+                {
+                    "date": 1630027227783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n \t// if err = r.ParseForm(); err != nil {\n \t// \tgoto ERR\n \t// }\n \n-\tif jobKey = r.PostFormValue(\"name\")\n+\tjobKey = r.PostFormValue(\"name\")\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n"
+                },
+                {
+                    "date": 1630027246739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,8 +70,9 @@\n \t// \tgoto ERR\n \t// }\n \n \tjobKey = r.PostFormValue(\"name\")\n+\tlog.Println(jobKey)\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n"
+                },
+                {
+                    "date": 1630027252786,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,12 +64,12 @@\n \t\tresp   []byte\n \t\tjobKey string\n \t)\n \n-\t// // 解析参数\n-\t// if err = r.ParseForm(); err != nil {\n-\t// \tgoto ERR\n-\t// }\n+\t// 解析参数\n+\tif err = r.ParseForm(); err != nil {\n+\t\tgoto ERR\n+\t}\n \n \tjobKey = r.PostFormValue(\"name\")\n \tlog.Println(jobKey)\n \n"
+                },
+                {
+                    "date": 1630027261880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,22 +64,22 @@\n \t\tresp   []byte\n \t\tjobKey string\n \t)\n \n-\t// 解析参数\n-\tif err = r.ParseForm(); err != nil {\n-\t\tgoto ERR\n-\t}\n+\t// // 解析参数\n+\t// if err = r.ParseForm(); err != nil {\n+\t// \tgoto ERR\n+\t// }\n \n \tjobKey = r.PostFormValue(\"name\")\n \tlog.Println(jobKey)\n \n-ERR:\n-\tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n-\tw.Header().Add(\"content-type\", \"application/json\")\n-\tw.Write(resp)\n+// ERR:\n+// \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n+// \tw.Header().Add(\"content-type\", \"application/json\")\n+// \tw.Write(resp)\n \n-}\n+// }\n \n // http 服务器\n type ApiServer struct {\n \thttpServer *http.Server\n"
+                },
+                {
+                    "date": 1630027267940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,11 +58,11 @@\n \n // 删除任务\n func deleteJob(w http.ResponseWriter, r *http.Request) {\n \tvar (\n-\t\terr    error\n-\t\toldJob *common.Job\n-\t\tresp   []byte\n+\t\t// err    error\n+\t\t// oldJob *common.Job\n+\t\t// resp   []byte\n \t\tjobKey string\n \t)\n \n \t// // 解析参数\n@@ -72,14 +72,14 @@\n \n \tjobKey = r.PostFormValue(\"name\")\n \tlog.Println(jobKey)\n \n-// ERR:\n-// \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n-// \tw.Header().Add(\"content-type\", \"application/json\")\n-// \tw.Write(resp)\n+\t// ERR:\n+\t// \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n+\t// \tw.Header().Add(\"content-type\", \"application/json\")\n+\t// \tw.Write(resp)\n \n-// }\n+}\n \n // http 服务器\n type ApiServer struct {\n \thttpServer *http.Server\n"
+                },
+                {
+                    "date": 1630027283688,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n \t// 初始化路由\n \tmux = http.NewServeMux()\n \tmux.HandleFunc(\"/job/save\", saveJob)\n \tmux.HandleFunc(\"/job/delete\", deleteJob)\n-\tmux.HandleFunc(\"/job/list\", listJob)\n+\tmux.HandleFunc(\"/job/list\", listJobs)\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
+                },
+                {
+                    "date": 1630027300110,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,8 +79,13 @@\n \t// \tw.Write(resp)\n \n }\n \n+// 列出所有的任务\n+func listJobs(w http.ResponseWriter, r *http.Request) {\n+\n+}\n+\n // http 服务器\n type ApiServer struct {\n \thttpServer *http.Server\n }\n"
+                },
+                {
+                    "date": 1630027339378,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,19 +65,19 @@\n \t\tjobKey string\n \t)\n \n \t// // 解析参数\n-\t// if err = r.ParseForm(); err != nil {\n-\t// \tgoto ERR\n-\t// }\n+\tif err = r.ParseForm(); err != nil {\n+\t\tgoto ERR\n+\t}\n \n \tjobKey = r.PostFormValue(\"name\")\n \tlog.Println(jobKey)\n \n-\t// ERR:\n-\t// \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n-\t// \tw.Header().Add(\"content-type\", \"application/json\")\n-\t// \tw.Write(resp)\n+ERR:\n+\tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n+\tw.Header().Add(\"content-type\", \"application/json\")\n+\tw.Write(resp)\n \n }\n \n // 列出所有的任务\n"
+                },
+                {
+                    "date": 1630027473331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,11 +58,11 @@\n \n // 删除任务\n func deleteJob(w http.ResponseWriter, r *http.Request) {\n \tvar (\n-\t\t// err    error\n+\t\terr error\n \t\t// oldJob *common.Job\n-\t\t// resp   []byte\n+\t\tresp   []byte\n \t\tjobKey string\n \t)\n \n \t// // 解析参数\n@@ -71,8 +71,9 @@\n \t}\n \n \tjobKey = r.PostFormValue(\"name\")\n \tlog.Println(jobKey)\n+\treturn\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n"
+                },
+                {
+                    "date": 1630027546186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n \n-\tjobKey = r.PostFormValue(\"name\")\n+\tjobKey = r.PostForm.Get(\"name\")\n \tlog.Println(jobKey)\n \treturn\n \n ERR:\n"
+                },
+                {
+                    "date": 1630027589497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n \n-\tjobKey = r.PostForm.Get(\"name\")\n+\tjobKey = r.PostForm\n \tlog.Println(jobKey)\n \treturn\n \n ERR:\n"
+                },
+                {
+                    "date": 1630027612736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,10 +69,10 @@\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n \n-\tjobKey = r.PostForm\n \tlog.Println(jobKey)\n+\tlog.Println(r.ParseForm())\n \treturn\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n"
+                },
+                {
+                    "date": 1630027619777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,9 @@\n \t\tgoto ERR\n \t}\n \n \tlog.Println(jobKey)\n-\tlog.Println(r.ParseForm())\n+\tlog.Println(r.PostForm)\n \treturn\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n"
+                },
+                {
+                    "date": 1630027686453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,9 @@\n \t\tgoto ERR\n \t}\n \n \tlog.Println(jobKey)\n-\tlog.Println(r.PostForm)\n+\tlog.Println(r.PostForm.Get(\"name\"))\n \treturn\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n"
+                },
+                {
+                    "date": 1630027795400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,8 +69,10 @@\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tjobKey = r.PostForm.Get(\"name\")\n+\n \tlog.Println(jobKey)\n \tlog.Println(r.PostForm.Get(\"name\"))\n \treturn\n \n"
+                },
+                {
+                    "date": 1630027801783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,13 +68,10 @@\n \t// // 解析参数\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n-\n \tjobKey = r.PostForm.Get(\"name\")\n \n-\tlog.Println(jobKey)\n-\tlog.Println(r.PostForm.Get(\"name\"))\n \treturn\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n"
+                },
+                {
+                    "date": 1630027832442,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,14 +64,16 @@\n \t\tresp   []byte\n \t\tjobKey string\n \t)\n \n-\t// // 解析参数\n+\t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n \tjobKey = r.PostForm.Get(\"name\")\n \n+\t// 删除\n+\n \treturn\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n"
+                },
+                {
+                    "date": 1630027873266,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,9 @@\n \t\tgoto ERR\n \t}\n \tjobKey = r.PostForm.Get(\"name\")\n \n-\t// 删除\n+\t// 删除 etcd 中的任务，并且返回历史的结果\n \n \treturn\n \n ERR:\n"
+                },
+                {
+                    "date": 1630027897151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,8 +62,9 @@\n \t\terr error\n \t\t// oldJob *common.Job\n \t\tresp   []byte\n \t\tjobKey string\n+\t\toldJob common.Job\n \t)\n \n \t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n"
+                },
+                {
+                    "date": 1630027954488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n \t\terr error\n \t\t// oldJob *common.Job\n \t\tresp   []byte\n \t\tjobKey string\n-\t\toldJob common.Job\n+\t\toldJob *common.Job\n \t)\n \n \t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n@@ -72,8 +72,9 @@\n \t}\n \tjobKey = r.PostForm.Get(\"name\")\n \n \t// 删除 etcd 中的任务，并且返回历史的结果\n+\tif oldJob, err = G_jobMgr.\n \n \treturn\n \n ERR:\n"
+                },
+                {
+                    "date": 1630028724720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,9 @@\n \t}\n \tjobKey = r.PostForm.Get(\"name\")\n \n \t// 删除 etcd 中的任务，并且返回历史的结果\n-\tif oldJob, err = G_jobMgr.\n+\tif oldJob, err = G_jobMgr.DeleteJob(jobKey)\n \n \treturn\n \n ERR:\n"
+                },
+                {
+                    "date": 1630028736153,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,11 @@\n \t}\n \tjobKey = r.PostForm.Get(\"name\")\n \n \t// 删除 etcd 中的任务，并且返回历史的结果\n-\tif oldJob, err = G_jobMgr.DeleteJob(jobKey)\n+\tif oldJob, err = G_jobMgr.DeleteJob(jobKey); err != nil {\n+\t\tgoto ERR\n+\t}\n \n \treturn\n \n ERR:\n"
+                },
+                {
+                    "date": 1630028790920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,8 +76,11 @@\n \tif oldJob, err = G_jobMgr.DeleteJob(jobKey); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tresp, _ = common.BuildReponse(0, \"success\", oldJob)\n+\tw.Header().Add(\"content-type\", \"application/json\")\n+\tw.Write(resp)\n \treturn\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n"
+                },
+                {
+                    "date": 1630028970425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,10 +58,10 @@\n \n // 删除任务\n func deleteJob(w http.ResponseWriter, r *http.Request) {\n \tvar (\n-\t\terr error\n-\t\t// oldJob *common.Job\n+\t\terr    error\n+\t\toldJob *common.Job\n \t\tresp   []byte\n \t\tjobKey string\n \t\toldJob *common.Job\n \t)\n"
+                },
+                {
+                    "date": 1630028979366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,8 @@\n // 删除任务\n func deleteJob(w http.ResponseWriter, r *http.Request) {\n \tvar (\n \t\terr    error\n-\t\toldJob *common.Job\n \t\tresp   []byte\n \t\tjobKey string\n \t\toldJob *common.Job\n \t)\n"
+                },
+                {
+                    "date": 1630029044733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n \t\"strconv\"\n \t\"time\"\n \n \t\"github.com/GoCron/src/common\"\n+\t\"go.etcd.io/etcd/clientv3\"\n )\n \n var (\n \tG_apiServer *ApiServer\n@@ -89,8 +90,13 @@\n }\n \n // 列出所有的任务\n func listJobs(w http.ResponseWriter, r *http.Request) {\n+\tvar (\n+\t\terr     error\n+\t\tjobList []*common.Job\n+\t\tgetResp *clientv3.GetResponse\n+\t)\n \n }\n \n // http 服务器\n"
+                },
+                {
+                    "date": 1630029110163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,8 @@\n \t\"strconv\"\n \t\"time\"\n \n \t\"github.com/GoCron/src/common\"\n-\t\"go.etcd.io/etcd/clientv3\"\n )\n \n var (\n \tG_apiServer *ApiServer\n@@ -93,9 +92,8 @@\n func listJobs(w http.ResponseWriter, r *http.Request) {\n \tvar (\n \t\terr     error\n \t\tjobList []*common.Job\n-\t\tgetResp *clientv3.GetResponse\n \t)\n \n }\n \n"
+                },
+                {
+                    "date": 1630029708414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,8 +94,9 @@\n \t\terr     error\n \t\tjobList []*common.Job\n \t)\n \n+\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1630029818050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,9 +94,8 @@\n \t\terr     error\n \t\tjobList []*common.Job\n \t)\n \n-\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1630079260540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,8 +94,10 @@\n \t\terr     error\n \t\tjobList []*common.Job\n \t)\n \n+\tif jobList, err = G_jobMgr.ListJobs()\n+\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1630079274626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,10 +94,12 @@\n \t\terr     error\n \t\tjobList []*common.Job\n \t)\n \n-\tif jobList, err = G_jobMgr.ListJobs()\n-\n+\tif jobList, err = G_jobMgr.ListJobs(); err != nil {\n+\t\tgoto ERR\n+\t}\n+ERR:\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1630079309273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -92,14 +92,18 @@\n func listJobs(w http.ResponseWriter, r *http.Request) {\n \tvar (\n \t\terr     error\n \t\tjobList []*common.Job\n+\t\tresp    []byte\n \t)\n \n \tif jobList, err = G_jobMgr.ListJobs(); err != nil {\n \t\tgoto ERR\n \t}\n+\n ERR:\n+\tresp\n+\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1630079457074,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,9 +100,9 @@\n \t\tgoto ERR\n \t}\n \n ERR:\n-\tresp\n+\tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \n }\n \n // http 服务器\n"
+                },
+                {
+                    "date": 1630079491486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,8 +101,10 @@\n \t}\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n+\tw.Header().Add(\"content-type\", \"application\")\n+\tw.Write(resp)\n \n }\n \n // http 服务器\n"
+                },
+                {
+                    "date": 1630079529351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,8 +99,12 @@\n \tif jobList, err = G_jobMgr.ListJobs(); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tresp, _ = common.BuildReponse(0, \"success\", jobList)\n+\tw.Header().Add(\"content-type\", \"application\")\n+\tw.Write()\n+\n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application\")\n \tw.Write(resp)\n"
+                },
+                {
+                    "date": 1630079535845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,10 +101,10 @@\n \t}\n \n \tresp, _ = common.BuildReponse(0, \"success\", jobList)\n \tw.Header().Add(\"content-type\", \"application\")\n-\tw.Write()\n-\n+\tw.Write(resp)\n+\treturn\n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application\")\n \tw.Write(resp)\n"
+                },
+                {
+                    "date": 1630079542624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,16 +95,18 @@\n \t\tjobList []*common.Job\n \t\tresp    []byte\n \t)\n \n+\t// 获取列表任务\n \tif jobList, err = G_jobMgr.ListJobs(); err != nil {\n \t\tgoto ERR\n \t}\n \n \tresp, _ = common.BuildReponse(0, \"success\", jobList)\n \tw.Header().Add(\"content-type\", \"application\")\n \tw.Write(resp)\n \treturn\n+\n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application\")\n \tw.Write(resp)\n"
+                },
+                {
+                    "date": 1630079551475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,8 +100,9 @@\n \tif jobList, err = G_jobMgr.ListJobs(); err != nil {\n \t\tgoto ERR\n \t}\n \n+\t// 返回结果\n \tresp, _ = common.BuildReponse(0, \"success\", jobList)\n \tw.Header().Add(\"content-type\", \"application\")\n \tw.Write(resp)\n \treturn\n"
+                },
+                {
+                    "date": 1630079602020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,11 +25,11 @@\n \t\tresp    []byte\n \t)\n \n \t// 解析参数\n-\t// if err = r.ParseForm(); err != nil {\n-\t// \tgoto ERR\n-\t// }\n+\tif err = r.ParseForm(); err != nil {\n+\t\tgoto ERR\n+\t}\n \n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job\")\n \tlog.Println(jobForm)\n"
+                },
+                {
+                    "date": 1630079613115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n package master\n \n import (\n \t\"encoding/json\"\n-\t\"log\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -31,9 +30,8 @@\n \t}\n \n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job\")\n-\tlog.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n \n"
+                },
+                {
+                    "date": 1630079700204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n \t\tgoto ERR\n \t}\n \n \t// 初始化 Job\n-\tjobForm = r.PostFormValue(\"job\")\n+\tjobForm = r.PostFormValue(\"job3\")\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n \n"
+                },
+                {
+                    "date": 1630079798312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,11 +24,11 @@\n \t\tresp    []byte\n \t)\n \n \t// 解析参数\n-\tif err = r.ParseForm(); err != nil {\n-\t\tgoto ERR\n-\t}\n+\t// if err = r.ParseForm(); err != nil {\n+\t// \tgoto ERR\n+\t// }\n \n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job3\")\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n"
+                },
+                {
+                    "date": 1630080287973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,11 +24,11 @@\n \t\tresp    []byte\n \t)\n \n \t// 解析参数\n-\t// if err = r.ParseForm(); err != nil {\n-\t// \tgoto ERR\n-\t// }\n+\tif err = r.ParseForm(); err != nil {\n+\t\tgoto ERR\n+\t}\n \n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job3\")\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n"
+                },
+                {
+                    "date": 1630080323646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n package master\n \n import (\n \t\"encoding/json\"\n+\t\"fmt\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -30,8 +31,9 @@\n \t}\n \n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job3\")\n+\tfmt.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n \n"
+                },
+                {
+                    "date": 1630080360637,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,9 @@\n \t)\n \n \t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n+\t\tfmt.Println(\"1\")\n \t\tgoto ERR\n \t}\n \n \t// 初始化 Job\n"
+                },
+                {
+                    "date": 1630082096241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -103,15 +103,15 @@\n \t}\n \n \t// 返回结果\n \tresp, _ = common.BuildReponse(0, \"success\", jobList)\n-\tw.Header().Add(\"content-type\", \"application\")\n+\tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n \treturn\n \n ERR:\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n-\tw.Header().Add(\"content-type\", \"application\")\n+\tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n \n }\n \n"
+                },
+                {
+                    "date": 1630082245484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n \t\tgoto ERR\n \t}\n \n \t// 初始化 Job\n-\tjobForm = r.PostFormValue(\"job3\")\n+\tjobForm = r.PostFormValue(\"job\")\n \tfmt.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n"
+                },
+                {
+                    "date": 1630082279717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,8 @@\n \t)\n \n \t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n-\t\tfmt.Println(\"1\")\n \t\tgoto ERR\n \t}\n \n \t// 初始化 Job\n"
+                },
+                {
+                    "date": 1630231347388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n package master\n \n import (\n \t\"encoding/json\"\n-\t\"fmt\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -31,9 +30,8 @@\n \t}\n \n \t// 初始化 Job\n \tjobForm = r.PostFormValue(\"job\")\n-\tfmt.Println(jobForm)\n \tif err = json.Unmarshal([]byte(jobForm), &job); err != nil {\n \t\tgoto ERR\n \t}\n \n@@ -131,8 +129,9 @@\n \tmux = http.NewServeMux()\n \tmux.HandleFunc(\"/job/save\", saveJob)\n \tmux.HandleFunc(\"/job/delete\", deleteJob)\n \tmux.HandleFunc(\"/job/list\", listJobs)\n+\tmux.HandleFunc(\"/job/kill\", killJob)\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
+                },
+                {
+                    "date": 1630231382071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -111,8 +111,13 @@\n \tw.Write(resp)\n \n }\n \n+// 强杀任务\n+func killJob(w http.ResponseWriter, r *http.Request) {\n+\n+}\n+\n // http 服务器\n type ApiServer struct {\n \thttpServer *http.Server\n }\n"
+                },
+                {
+                    "date": 1630231443146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -113,8 +113,9 @@\n }\n \n // 强杀任务\n func killJob(w http.ResponseWriter, r *http.Request) {\n+\tvar ()\n \n }\n \n // http 服务器\n"
+                },
+                {
+                    "date": 1630231477078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -113,9 +113,12 @@\n }\n \n // 强杀任务\n func killJob(w http.ResponseWriter, r *http.Request) {\n-\tvar ()\n+\tvar (\n+\t\terr     error\n+\t\tjobName string\n+\t)\n \n }\n \n // http 服务器\n"
+                },
+                {
+                    "date": 1630231504902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -118,8 +118,14 @@\n \t\terr     error\n \t\tjobName string\n \t)\n \n+\tif err = r.ParseForm(); err != nil {\n+\t\tgoto ERR\n+\n+\t}\n+\n+ERR:\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1630231511805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -123,8 +123,9 @@\n \t\tgoto ERR\n \n \t}\n \n+\treturn\n ERR:\n }\n \n // http 服务器\n"
+                },
+                {
+                    "date": 1630231521963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -120,9 +120,8 @@\n \t)\n \n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n-\n \t}\n \n \treturn\n ERR:\n"
+                },
+                {
+                    "date": 1630231540894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -122,8 +122,10 @@\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tjobName = r.PostForm.Get(\"name\")\n+\n \treturn\n ERR:\n }\n \n"
+                },
+                {
+                    "date": 1630232295092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -118,14 +118,19 @@\n \t\terr     error\n \t\tjobName string\n \t)\n \n+\t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n \t\tgoto ERR\n \t}\n-\n \tjobName = r.PostForm.Get(\"name\")\n \n+\t// 通知进行任务强杀\n+\tif err = G_jobMgr.KillJob(jobName); err != nil {\n+\t\tgoto ERR\n+\t}\n+\n \treturn\n ERR:\n }\n \n"
+                },
+                {
+                    "date": 1630232340640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,8 +116,9 @@\n func killJob(w http.ResponseWriter, r *http.Request) {\n \tvar (\n \t\terr     error\n \t\tjobName string\n+\t\tresp    []byte\n \t)\n \n \t// 解析参数\n \tif err = r.ParseForm(); err != nil {\n@@ -129,8 +130,11 @@\n \tif err = G_jobMgr.KillJob(jobName); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tw.Header().Add(\"content-type\", \"application/json\")\n+\tw.Write()\n+\n \treturn\n ERR:\n }\n \n"
+                },
+                {
+                    "date": 1630232364020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,8 +130,9 @@\n \tif err = G_jobMgr.KillJob(jobName); err != nil {\n \t\tgoto ERR\n \t}\n \n+\tresp, _ = common.BuildReponse(0, \"success\", nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write()\n \n \treturn\n"
+                },
+                {
+                    "date": 1630232370555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -132,9 +132,9 @@\n \t}\n \n \tresp, _ = common.BuildReponse(0, \"success\", nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n-\tw.Write()\n+\tw.Write(resp)\n \n \treturn\n ERR:\n }\n"
+                },
+                {
+                    "date": 1630232375800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -133,11 +133,13 @@\n \n \tresp, _ = common.BuildReponse(0, \"success\", nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n-\n \treturn\n ERR:\n+\tresp, _ = common.BuildReponse(0, \"success\", nil)\n+\tw.Header().Add(\"content-type\", \"application/json\")\n+\tw.Write(resp)\n }\n \n // http 服务器\n type ApiServer struct {\n"
+                },
+                {
+                    "date": 1630232392856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -135,9 +135,9 @@\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n \treturn\n ERR:\n-\tresp, _ = common.BuildReponse(0, \"success\", nil)\n+\tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n }\n \n"
+                },
+                {
+                    "date": 1630232426116,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,13 +130,15 @@\n \tif err = G_jobMgr.KillJob(jobName); err != nil {\n \t\tgoto ERR\n \t}\n \n+\t// 返回成功响应\n \tresp, _ = common.BuildReponse(0, \"success\", nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n \treturn\n ERR:\n+\t// 返回失败原因\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n }\n"
+                }
+            ],
+            "date": 1629164339648,
+            "name": "Commit-0",
+            "content": "package master\n\n\n\nvar (\n\tApiServer \n)\n\ntype ApiServer struct {\n\thttpServer * \n}"
+        }
+    ]
+}

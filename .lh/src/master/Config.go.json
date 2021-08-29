@@ -1,0 +1,162 @@
+{
+    "sourceFile": "src/master/Config.go",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 36,
+            "patches": [
+                {
+                    "date": 1629466173810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1629466182568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-package mater\n+package master\n"
+                },
+                {
+                    "date": 1629466427913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,5 @@\n package master\n+\n+func InitConf() {\n+\n+}\n"
+                },
+                {
+                    "date": 1629466478860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,11 @@\n package master\n \n+type Config struct {\n+\tApiPort         int `json:\"api_port,omitempty\"`\n+\tApiReadTimeout  int `json:\"api_read_timeout,omitempty\"`\n+\tApiWriteTimeout int `json:\"api_write_timeout,omitempty\"`\n+}\n+\n func InitConf() {\n \n }\n"
+                },
+                {
+                    "date": 1629466497522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,8 @@\n \tApiReadTimeout  int `json:\"api_read_timeout,omitempty\"`\n \tApiWriteTimeout int `json:\"api_write_timeout,omitempty\"`\n }\n \n+// 初始化项目代码\n func InitConf() {\n \n }\n"
+                },
+                {
+                    "date": 1629466539324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,7 @@\n \tApiWriteTimeout int `json:\"api_write_timeout,omitempty\"`\n }\n \n // 初始化项目代码\n-func InitConf() {\n+func InitConf(filepath string) {\n \n }\n"
+                },
+                {
+                    "date": 1629466550311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,12 @@\n \tApiReadTimeout  int `json:\"api_read_timeout,omitempty\"`\n \tApiWriteTimeout int `json:\"api_write_timeout,omitempty\"`\n }\n \n+var (\n+\tG_config *Confgi\n+)\n+\n // 初始化项目代码\n func InitConf(filepath string) {\n \n }\n"
+                },
+                {
+                    "date": 1629466708912,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,32 @@\n package master\n \n+import (\n+\t\"fmt\"\n+\t\"io/ioutil\"\n+)\n+\n type Config struct {\n \tApiPort         int `json:\"api_port,omitempty\"`\n \tApiReadTimeout  int `json:\"api_read_timeout,omitempty\"`\n \tApiWriteTimeout int `json:\"api_write_timeout,omitempty\"`\n }\n \n var (\n-\tG_config *Confgi\n+\t// 全局单例配置\n+\tG_config Config\n )\n \n // 初始化项目代码\n func InitConf(filepath string) {\n+\tvar (\n+\t\tdata []byte\n+\t\terr  error\n+\t)\n \n+\tif data, err = ioutil.ReadFile(filepath); err != nil {\n+\t\tfmt.Println(err)\n+\t\treturn\n+\n+\t}\n+\n }\n"
+                },
+                {
+                    "date": 1629466777113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n package master\n \n import (\n+\t\"encoding/json\"\n \t\"fmt\"\n \t\"io/ioutil\"\n )\n \n@@ -25,8 +26,10 @@\n \n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n \t\tfmt.Println(err)\n \t\treturn\n-\n \t}\n \n+\t// 解析参数\n+\tjson.Unmarshal(data, &G_config)\n+\n }\n"
+                },
+                {
+                    "date": 1629466793745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,7 +29,10 @@\n \t\treturn\n \t}\n \n \t// 解析参数\n-\tjson.Unmarshal(data, &G_config)\n+\tif err = json.Unmarshal(data, &G_config); err != nil {\n+\t\tfmt.Println(err\")\n+\t\treturn \n+\t}\n \n }\n"
+                },
+                {
+                    "date": 1629466802395,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,16 +23,17 @@\n \t\tdata []byte\n \t\terr  error\n \t)\n \n+\t// 读取文件配置\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n \t\tfmt.Println(err)\n \t\treturn\n \t}\n \n \t// 解析参数\n \tif err = json.Unmarshal(data, &G_config); err != nil {\n-\t\tfmt.Println(err\")\n-\t\treturn \n+\t\tfmt.Println(err)\n+\t\treturn\n \t}\n \n }\n"
+                },
+                {
+                    "date": 1629466910982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n }\n \n var (\n \t// 全局单例配置\n-\tG_config Config\n+\tG_config *Config\n )\n \n // 初始化项目代码\n func InitConf(filepath string) {\n"
+                },
+                {
+                    "date": 1629466937758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \tG_config *Config\n )\n \n // 初始化项目代码\n-func InitConf(filepath string) {\n+func InitConf(filepath string) (err error) {\n \tvar (\n \t\tdata []byte\n \t\terr  error\n \t)\n"
+                },
+                {
+                    "date": 1629466947157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \tG_config *Config\n )\n \n // 初始化项目代码\n-func InitConf(filepath string) (err error) {\n+func InitConf(filepath string) error {\n \tvar (\n \t\tdata []byte\n \t\terr  error\n \t)\n"
+                },
+                {
+                    "date": 1629466960075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n package master\n \n import (\n \t\"encoding/json\"\n-\t\"fmt\"\n \t\"io/ioutil\"\n )\n \n type Config struct {\n@@ -25,15 +24,13 @@\n \t)\n \n \t// 读取文件配置\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n-\t\tfmt.Println(err)\n-\t\treturn\n+\t\treturn err\n \t}\n \n \t// 解析参数\n \tif err = json.Unmarshal(data, &G_config); err != nil {\n-\t\tfmt.Println(err)\n \t\treturn\n \t}\n \n }\n"
+                },
+                {
+                    "date": 1629466968761,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,8 @@\n \t}\n \n \t// 解析参数\n \tif err = json.Unmarshal(data, &G_config); err != nil {\n-\t\treturn\n+\t\treturn err\n \t}\n \n }\n"
+                },
+                {
+                    "date": 1629466998489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,10 +18,11 @@\n \n // 初始化项目代码\n func InitConf(filepath string) error {\n \tvar (\n-\t\tdata []byte\n-\t\terr  error\n+\t\tdata   []byte\n+\t\tconfig Config\n+\t\terr    error\n \t)\n \n \t// 读取文件配置\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n"
+                },
+                {
+                    "date": 1629467009251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n \t\treturn err\n \t}\n \n \t// 解析参数\n-\tif err = json.Unmarshal(data, &G_config); err != nil {\n+\tif err = json.Unmarshal(data, G_config); err != nil {\n \t\treturn err\n \t}\n \n }\n"
+                },
+                {
+                    "date": 1629467016183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,11 +18,10 @@\n \n // 初始化项目代码\n func InitConf(filepath string) error {\n \tvar (\n-\t\tdata   []byte\n-\t\tconfig Config\n-\t\terr    error\n+\t\tdata []byte\n+\t\terr  error\n \t)\n \n \t// 读取文件配置\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n@@ -32,6 +31,5 @@\n \t// 解析参数\n \tif err = json.Unmarshal(data, G_config); err != nil {\n \t\treturn err\n \t}\n-\n }\n"
+                },
+                {
+                    "date": 1629467616294,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,5 +31,7 @@\n \t// 解析参数\n \tif err = json.Unmarshal(data, G_config); err != nil {\n \t\treturn err\n \t}\n+\n+\treturn nil\n }\n"
+                },
+                {
+                    "date": 1629467685929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n \t\terr  error\n \t)\n \n \t// 读取文件配置\n+\tfmt.Println(filepath\")\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n \t\treturn err\n \t}\n \n"
+                },
+                {
+                    "date": 1629467989692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n package master\n \n import (\n \t\"encoding/json\"\n+\t\"fmt\"\n \t\"io/ioutil\"\n )\n \n type Config struct {\n@@ -23,9 +24,9 @@\n \t\terr  error\n \t)\n \n \t// 读取文件配置\n-\tfmt.Println(filepath\")\n+\tfmt.Println(filepath)\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n \t\treturn err\n \t}\n \n"
+                },
+                {
+                    "date": 1629468010864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,9 @@\n \n \t// 读取文件配置\n \tfmt.Println(filepath)\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n+\t\tfmt.Println(err\")\n \t\treturn err\n \t}\n \n \t// 解析参数\n"
+                },
+                {
+                    "date": 1629468016484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n \t// 读取文件配置\n \tfmt.Println(filepath)\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n-\t\tfmt.Println(err\")\n+\t\tfmt.Println(err)\n \t\treturn err\n \t}\n \n \t// 解析参数\n"
+                },
+                {
+                    "date": 1629468136252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,11 +29,13 @@\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n \t\tfmt.Println(err)\n \t\treturn err\n \t}\n+\tfmt.Println(string(data))\n \n \t// 解析参数\n \tif err = json.Unmarshal(data, G_config); err != nil {\n+\t\tfmt.Println(err)\n \t\treturn err\n \t}\n \n \treturn nil\n"
+                },
+                {
+                    "date": 1629468759387,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,11 +29,11 @@\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n \t\tfmt.Println(err)\n \t\treturn err\n \t}\n-\tfmt.Println(string(data))\n \n \t// 解析参数\n+\tconfig = Config{}\n \tif err = json.Unmarshal(data, G_config); err != nil {\n \t\tfmt.Println(err)\n \t\treturn err\n \t}\n"
+                },
+                {
+                    "date": 1629468769202,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,8 @@\n \t\treturn err\n \t}\n \n \t// 解析参数\n-\tconfig = Config{}\n \tif err = json.Unmarshal(data, G_config); err != nil {\n \t\tfmt.Println(err)\n \t\treturn err\n \t}\n"
+                },
+                {
+                    "date": 1629468784439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,11 @@\n \n // 初始化项目代码\n func InitConf(filepath string) error {\n \tvar (\n-\t\tdata []byte\n-\t\terr  error\n+\t\tdata   []byte\n+\t\tconfig Config\n+\t\terr    error\n \t)\n \n \t// 读取文件配置\n \tfmt.Println(filepath)\n"
+                },
+                {
+                    "date": 1629468801926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,8 +32,9 @@\n \t\treturn err\n \t}\n \n \t// 解析参数\n+\tconfig = Config{}\n \tif err = json.Unmarshal(data, G_config); err != nil {\n \t\tfmt.Println(err)\n \t\treturn err\n \t}\n"
+                },
+                {
+                    "date": 1629468813536,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n \t}\n \n \t// 解析参数\n \tconfig = Config{}\n-\tif err = json.Unmarshal(data, G_config); err != nil {\n+\tif err = json.Unmarshal(data, &config); err != nil {\n \t\tfmt.Println(err)\n \t\treturn err\n \t}\n \n"
+                },
+                {
+                    "date": 1629468827755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,6 +38,8 @@\n \t\tfmt.Println(err)\n \t\treturn err\n \t}\n \n+\tG_Config = config\n+\n \treturn nil\n }\n"
+                },
+                {
+                    "date": 1629468837428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,8 +38,7 @@\n \t\tfmt.Println(err)\n \t\treturn err\n \t}\n \n-\tG_Config = config\n-\n+\tG_config = &config\n \treturn nil\n }\n"
+                },
+                {
+                    "date": 1629468891858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,7 +38,8 @@\n \t\tfmt.Println(err)\n \t\treturn err\n \t}\n \n+\t// 赋值单利变量\n \tG_config = &config\n \treturn nil\n }\n"
+                },
+                {
+                    "date": 1629644079605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,10 @@\n type Config struct {\n \tApiPort         int `json:\"api_port,omitempty\"`\n \tApiReadTimeout  int `json:\"api_read_timeout,omitempty\"`\n \tApiWriteTimeout int `json:\"api_write_timeout,omitempty\"`\n+\tEtcdEndpoints   []string\n+\tEtcdDiaTimeout  int\n }\n \n var (\n \t// 全局单例配置\n"
+                },
+                {
+                    "date": 1629644087855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,13 +6,13 @@\n \t\"io/ioutil\"\n )\n \n type Config struct {\n-\tApiPort         int `json:\"api_port,omitempty\"`\n-\tApiReadTimeout  int `json:\"api_read_timeout,omitempty\"`\n-\tApiWriteTimeout int `json:\"api_write_timeout,omitempty\"`\n-\tEtcdEndpoints   []string\n-\tEtcdDiaTimeout  int\n+\tApiPort         int      `json:\"api_port,omitempty\"`\n+\tApiReadTimeout  int      `json:\"api_read_timeout,omitempty\"`\n+\tApiWriteTimeout int      `json:\"api_write_timeout,omitempty\"`\n+\tEtcdEndpoints   []string `json:\"etcd_endpoints,omitempty\"`\n+\tEtcdDiaTimeout  int      `json:\"etcd_dia_timeout,omitempty\"`\n }\n \n var (\n \t// 全局单例配置\n"
+                },
+                {
+                    "date": 1629682025759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,16 +29,14 @@\n \n \t// 读取文件配置\n \tfmt.Println(filepath)\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n-\t\tfmt.Println(err)\n \t\treturn err\n \t}\n \n \t// 解析参数\n \tconfig = Config{}\n \tif err = json.Unmarshal(data, &config); err != nil {\n-\t\tfmt.Println(err)\n \t\treturn err\n \t}\n \n \t// 赋值单利变量\n"
+                },
+                {
+                    "date": 1629682065203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n package master\n \n import (\n \t\"encoding/json\"\n-\t\"fmt\"\n \t\"io/ioutil\"\n )\n \n type Config struct {\n@@ -27,9 +26,8 @@\n \t\terr    error\n \t)\n \n \t// 读取文件配置\n-\tfmt.Println(filepath)\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n \t\treturn err\n \t}\n \n"
+                }
+            ],
+            "date": 1629466173810,
+            "name": "Commit-0",
+            "content": "package mater\n"
+        }
+    ]
+}
