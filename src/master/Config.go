@@ -11,6 +11,7 @@ type Config struct {
 	ApiWriteTimeout int      `json:"api_write_timeout,omitempty"`
 	EtcdEndpoints   []string `json:"etcd_endpoints,omitempty"`
 	EtcdDiaTimeout  int      `json:"etcd_dia_timeout,omitempty"`
+	Webroot         string   `json:"webroot,omitempty"`
 }
 
 var (

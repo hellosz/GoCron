@@ -154,6 +154,7 @@ func InitServer() (err error) {
 		httpServer *http.Server
 		mux        *http.ServeMux
 		listener   net.Listener
+		publicDir  http.Dir
 	)
 
 	// 初始化路由
@@ -162,6 +163,10 @@ func InitServer() (err error) {
 	mux.HandleFunc("/job/delete", deleteJob)
 	mux.HandleFunc("/job/list", listJobs)
 	mux.HandleFunc("/job/kill", killJob)
+
+	// 访问静态资源
+	publicDir = http.Dir(G_config.Webroot)
+	mux.Handle("/", http.FileServer(publicDir))
 
 	// 注册监听器
 	if listener, err = net.Listen("tcp", ":"+strconv.Itoa(G_config.ApiPort)); err != nil {

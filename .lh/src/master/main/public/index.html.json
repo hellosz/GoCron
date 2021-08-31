@@ -1,0 +1,558 @@
+{
+    "sourceFile": "src/master/main/public/index.html",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 135,
+            "patches": [
+                {
+                    "date": 1630233390250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1630233403559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,8 @@\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>Golang</title>\n </head>\n <body>\n+    高性能 Golang 任务调度\n     \n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630240321423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,6 @@\n     <title>Golang</title>\n </head>\n <body>\n     高性能 Golang 任务调度\n-    \n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630247296249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,6 @@\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>Golang</title>\n </head>\n <body>\n-    高性能 Golang 任务调度\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630247305545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n <head>\n     <meta charset=\"UTF-8\">\n     <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n-    <title>Golang</title>\n+    <title>高性能 Crontab</title>\n </head>\n <body>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630247318769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,7 @@\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n </head>\n <body>\n+    1\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630247367568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,6 @@\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n </head>\n <body>\n-    1\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630247374647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,9 @@\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n </head>\n <body>\n+    <script>\n+\n+    </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630247804213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n </head>\n <body>\n+    1\n     <script>\n \n     </script>\n </body>\n"
+                },
+                {
+                    "date": 1630247847244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n     <title>高性能 Crontab</title>\n </head>\n <body>\n     1\n+    html\n     <script>\n \n     </script>\n </body>\n"
+                },
+                {
+                    "date": 1630247931968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n     <meta charset=\"UTF-8\">\n     <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n+    <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n </head>\n <body>\n     1\n     html\n"
+                },
+                {
+                    "date": 1630247953634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n     <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n     <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n+    <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n     1\n     html\n"
+                },
+                {
+                    "date": 1630247965360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,8 @@\n     <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n-    1\n-    html\n     <script>\n \n     </script>\n </body>\n"
+                },
+                {
+                    "date": 1630247972144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n     <script>\n+        1jjdd\n \n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630247978956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,10 @@\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n     <script>\n-        1jjdd\n+        1\n+        html\n \n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630247985175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n     <meta charset=\"UTF-8\">\n     <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n-    <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n-    <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script>\n+    <!-- <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n+    <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script> -->\n </head>\n <body>\n     <script>\n         1\n"
+                },
+                {
+                    "date": 1630248044337,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,11 @@\n     <meta charset=\"UTF-8\">\n     <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n-    <!-- <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n-    <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script> -->\n+    <script src=\"https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n+    <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n+    <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n     <script>\n         1\n"
+                },
+                {
+                    "date": 1630248049449,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,11 @@\n     <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n+    1\n+    2\n     <script>\n-        1\n-        html\n \n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630248057635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,10 @@\n     <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n-    1\n-    2\n     <script>\n+        <!-- 代码-->\n \n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630248064062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n     <script>\n-        <!-- 代码-->\n+        // 代码 \n \n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630248236642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,12 +5,14 @@\n     <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n-    <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n-    <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0/js/bootstrap.min.js\"></script>\n+    <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n+    <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n+    <!-- 头部 -->\n+\n     <script>\n         // 代码 \n \n     </script>\n"
+                },
+                {
+                    "date": 1630248322950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,11 @@\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n     <!-- 头部 -->\n+    <div class=\"container-fluid\">\n+        header\n+    </div>\n \n     <script>\n         // 代码 \n \n"
+                },
+                {
+                    "date": 1630248361209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,13 @@\n </head>\n <body>\n     <!-- 头部 -->\n     <div class=\"container-fluid\">\n-        header\n+        <div class=\"col-md-12\">\n+            <div class=\"row\">\n+                高性能crontab\n+            </div>\n+        </div>\n     </div>\n \n     <script>\n         // 代码 \n"
+                },
+                {
+                    "date": 1630249196842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,11 +11,10 @@\n </head>\n <body>\n     <!-- 头部 -->\n     <div class=\"container-fluid\">\n-        <div class=\"col-md-12\">\n-            <div class=\"row\">\n-                高性能crontab\n+        <div class=\"row\">\n+            <div class=\"col-md-12\">\n             </div>\n         </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1630249224612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,11 @@\n     <!-- 头部 -->\n     <div class=\"container-fluid\">\n         <div class=\"row\">\n             <div class=\"col-md-12\">\n+                <div class=\"page-header\">\n+                    管理后台<small>高性能Crontab</small>\n+                </div>\n             </div>\n         </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1630249236208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n     <div class=\"container-fluid\">\n         <div class=\"row\">\n             <div class=\"col-md-12\">\n                 <div class=\"page-header\">\n-                    管理后台<small>高性能Crontab</small>\n+                    管理后台<small>高性能Crontab任务</small>\n                 </div>\n             </div>\n         </div>\n     </div>\n"
+                },
+                {
+                    "date": 1630249278991,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,8 @@\n     <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n-    <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n-    <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js\"></script>\n </head>\n <body>\n     <!-- 头部 -->\n     <div class=\"container-fluid\">\n"
+                },
+                {
+                    "date": 1630249327722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,10 @@\n     <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n     <title>高性能 Crontab</title>\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n+    <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css\" rel=\"stylesheet\">\n+    <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js\"></script>\n </head>\n <body>\n     <!-- 头部 -->\n     <div class=\"container-fluid\">\n"
+                },
+                {
+                    "date": 1630249373207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,11 @@\n     <div class=\"container-fluid\">\n         <div class=\"row\">\n             <div class=\"col-md-12\">\n                 <div class=\"page-header\">\n-                    管理后台<small>高性能Crontab任务</small>\n+                    <h1>\n+                        管理后台<small>高性能Crontab任务</small>\n+                    </h1>\n                 </div>\n             </div>\n         </div>\n     </div>\n"
+                },
+                {
+                    "date": 1630249521189,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,10 @@\n     <link href=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css\" rel=\"stylesheet\">\n     <script src=\"https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js\"></script>\n </head>\n <body>\n-    <!-- 头部 -->\n     <div class=\"container-fluid\">\n+        <!-- 头部 -->\n         <div class=\"row\">\n             <div class=\"col-md-12\">\n                 <div class=\"page-header\">\n                     <h1>\n@@ -20,10 +20,20 @@\n                     </h1>\n                 </div>\n             </div>\n         </div>\n+        <!-- 操作按钮 -->\n+        <div class=\"row\">\n+            <div class=\"col-md-12\">\n+                <button type=\"button\" class=\"btn btn-primary\">\n+                    新建任务\n+                </button>\n+            </div>\n+        </div>\n     </div>\n \n+\n+\n     <script>\n         // 代码 \n \n     </script>\n"
+                },
+                {
+                    "date": 1630250234586,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,44 @@\n                     新建任务\n                 </button>\n             </div>\n         </div>\n+\n+        <!-- 任务列表 -->\n+        <div class=\"row\">\n+            <div class=\"col-md-12\">\n+                <div class=\"panel\">\n+                    <div class=\"panel-body\">\n+                        <table class=\"table table-striped\">\n+                            <thead>\n+                                <tr>\n+                                    <th>任务名称</th>\n+                                    <th>Command命令</th>\n+                                    <th>Cron表达式</th>\n+                                    <th>操作</th>\n+                                </tr>\n+                            </thead>\n+                            <tbody>\n+                                <tr>\n+                                    <td>job1</td>\n+                                    <td>echo hello</td>\n+                                    <td>* * * * * *</td>\n+                                    <td>\n+                                        <div class=\"tool-bar\">\n+                                            <button class=\"btn btn-info\">编辑</button>\n+                                            <button class=\"btn btn-danger\">删除</button>\n+                                            <button class=\"btn btn-warning\">强杀</button>\n+                                        </div>\n+                                    </td>\n+                                </tr>\n+                            </tbody>\n+\n+                        </table>\n+                    </div>\n+                </div>\n+            </div>\n+\n+        </div>\n     </div>\n \n \n \n"
+                },
+                {
+                    "date": 1630250289124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,8 @@\n                                         </div>\n                                     </td>\n                                 </tr>\n                             </tbody>\n-\n                         </table>\n                     </div>\n                 </div>\n             </div>\n"
+                },
+                {
+                    "date": 1630250324988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,8 +69,11 @@\n \n \n     <script>\n         // 代码 \n+        $(document).function() {\n \n+        }\n+\n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630250391498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,13 +67,12 @@\n     </div>\n \n \n \n+         <!-- 代码  -->\n     <script>\n-        // 代码 \n-        $(document).function() {\n+        $(document).ready(function (){\n \n-        }\n-\n+        })\n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630250397938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,12 +67,12 @@\n     </div>\n \n \n \n-         <!-- 代码  -->\n-    <script>\n-        $(document).ready(function (){\n+        <!-- 代码  -->\n+        <script>\n+            $(document).ready(function () {\n \n-        })\n-    </script>\n+            })\n+        </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630250408592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,12 +67,13 @@\n     </div>\n \n \n \n-        <!-- 代码  -->\n-        <script>\n-            $(document).ready(function () {\n+    <!-- 代码  -->\n+    <script>\n+        $(document).ready(function () {\n+            // 监听时间\n \n-            })\n-        </script>\n+        })\n+    </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630250482328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,11 +50,11 @@\n                                     <td>echo hello</td>\n                                     <td>* * * * * *</td>\n                                     <td>\n                                         <div class=\"tool-bar\">\n-                                            <button class=\"btn btn-info\">编辑</button>\n-                                            <button class=\"btn btn-danger\">删除</button>\n-                                            <button class=\"btn btn-warning\">强杀</button>\n+                                            <button class=\"btn btn-info edit-job\">编辑</button>\n+                                            <button class=\"btn btn-danger delete-job\">删除</button>\n+                                            <button class=\"btn btn-warning kill-job\">强杀</button>\n                                         </div>\n                                     </td>\n                                 </tr>\n                             </tbody>\n@@ -70,9 +70,9 @@\n \n     <!-- 代码  -->\n     <script>\n         $(document).ready(function () {\n-            // 监听时间\n+            // 监听事件\n \n         })\n     </script>\n </body>\n"
+                },
+                {
+                    "date": 1630250496883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         </div>\n         <!-- 操作按钮 -->\n         <div class=\"row\">\n             <div class=\"col-md-12\">\n-                <button type=\"button\" class=\"btn btn-primary\">\n+                <button type=\"button\" class=\"btn btn-primary new-job\">\n                     新建任务\n                 </button>\n             </div>\n         </div>\n"
+                },
+                {
+                    "date": 1630250519872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n         <div class=\"row\">\n             <div class=\"col-md-12\">\n                 <div class=\"panel\">\n                     <div class=\"panel-body\">\n-                        <table class=\"table table-striped\">\n+                        <table class=\"table table-striped\" id=\"jobTable\">\n                             <thead>\n                                 <tr>\n                                     <th>任务名称</th>\n                                     <th>Command命令</th>\n"
+                },
+                {
+                    "date": 1630252320580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,9 +71,12 @@\n     <!-- 代码  -->\n     <script>\n         $(document).ready(function () {\n             // 监听事件\n+            $(\"#jobTable\").on(\"click\", function (event) {\n \n+            });\n+\n         })\n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630252396199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,9 +71,9 @@\n     <!-- 代码  -->\n     <script>\n         $(document).ready(function () {\n             // 监听事件\n-            $(\"#jobTable\").on(\"click\", function (event) {\n+            $(\"#jobTable\").on(\"click\", \".edit-job\",function (event) {\n \n             });\n \n         })\n"
+                },
+                {
+                    "date": 1630252401896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,8 +72,9 @@\n     <script>\n         $(document).ready(function () {\n             // 监听事件\n             $(\"#jobTable\").on(\"click\", \".edit-job\",function (event) {\n+                alert(\"edit\")\n \n             });\n \n         })\n"
+                },
+                {
+                    "date": 1630252449008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,11 +72,16 @@\n     <script>\n         $(document).ready(function () {\n             // 监听事件\n             $(\"#jobTable\").on(\"click\", \".edit-job\",function (event) {\n-                alert(\"edit\")\n-\n+                alert(\"edit\");\n             });\n+            $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n+                alert(\"delete\");\n+            });\n+            $(\"#jobTable\").on(\"click\", \".kill-job\",function (event) {\n+                alert(\"kill\");\n+            });\n \n         })\n     </script>\n </body>\n"
+                },
+                {
+                    "date": 1630252480257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,8 +80,11 @@\n             });\n             $(\"#jobTable\").on(\"click\", \".kill-job\",function (event) {\n                 alert(\"kill\");\n             });\n+            $(\".new-job\").on(\"click\",function (event) {\n+                alert(\"new\");\n+            });\n \n         })\n     </script>\n </body>\n"
+                },
+                {
+                    "date": 1630334386121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,8 +84,13 @@\n             $(\".new-job\").on(\"click\",function (event) {\n                 alert(\"new\");\n             });\n \n+            // 列表刷新 \n+            fucntion freshList() {\n+\n+            }\n+\n         })\n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630334399509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,9 +87,9 @@\n \n             // 列表刷新 \n             fucntion freshList() {\n \n-            }\n+            };\n \n         })\n     </script>\n </body>\n"
+                },
+                {
+                    "date": 1630334407179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,9 +85,9 @@\n                 alert(\"new\");\n             });\n \n             // 列表刷新 \n-            fucntion freshList() {\n+            function freshList() {\n \n             };\n \n         })\n"
+                },
+                {
+                    "date": 1630334451321,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,11 +86,19 @@\n             });\n \n             // 列表刷新 \n             function freshList() {\n+                // 清空列表\n \n-            };\n+                // 发送请求\n+                $.ajax({\n \n+                })\n+\n+                // 结果渲染\n+\n+            }\n+\n         })\n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630334533248,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,11 +90,16 @@\n                 // 清空列表\n \n                 // 发送请求\n                 $.ajax({\n+                    type: \"get\",\n+                    url: \"/job/list\",\n+                    dataType: \"json\",\n+                    success: function (response) {\n+                        \n+                    }\n+                });\n \n-                })\n-\n                 // 结果渲染\n \n             }\n \n"
+                },
+                {
+                    "date": 1630334584766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,14 +94,19 @@\n                     type: \"get\",\n                     url: \"/job/list\",\n                     dataType: \"json\",\n                     success: function (response) {\n+                        if (response.status == -1) {\n+                            return\n+                        }\n+\n+                        // 结果渲染\n+                        var list = resposne.data\n+\n                         \n                     }\n                 });\n \n-                // 结果渲染\n-\n             }\n \n         })\n     </script>\n"
+                },
+                {
+                    "date": 1630334644730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,10 +100,11 @@\n                         }\n \n                         // 结果渲染\n                         var list = resposne.data\n-\n-                        \n+                        for (var index = 0; index < list.length; index++) {\n+                            \n+                        }\n                     }\n                 });\n \n             }\n"
+                },
+                {
+                    "date": 1630334667251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,8 +101,9 @@\n \n                         // 结果渲染\n                         var list = resposne.data\n                         for (var index = 0; index < list.length; index++) {\n+                            var \n                             \n                         }\n                     }\n                 });\n"
+                },
+                {
+                    "date": 1630334695069,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,9 +101,9 @@\n \n                         // 结果渲染\n                         var list = resposne.data\n                         for (var index = 0; index < list.length; index++) {\n-                            var \n+                            var rowDom = $(\"<tr>\") \n                             \n                         }\n                     }\n                 });\n"
+                },
+                {
+                    "date": 1630334709082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,9 +101,10 @@\n \n                         // 结果渲染\n                         var list = resposne.data\n                         for (var index = 0; index < list.length; index++) {\n-                            var rowDom = $(\"<tr>\") \n+                            var rowDom = $(\"<tr>\");\n+\n                             \n                         }\n                     }\n                 });\n"
+                },
+                {
+                    "date": 1630334777622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -102,8 +102,9 @@\n                         // 结果渲染\n                         var list = resposne.data\n                         for (var index = 0; index < list.length; index++) {\n                             var rowDom = $(\"<tr>\");\n+                            rowDom.append()\n \n                             \n                         }\n                     }\n"
+                },
+                {
+                    "date": 1630337194102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,8 +95,9 @@\n                     url: \"/job/list\",\n                     dataType: \"json\",\n                     success: function (response) {\n                         if (response.status == -1) {\n+                            // 请求失败，静默处理\n                             return\n                         }\n \n                         // 结果渲染\n"
+                },
+                {
+                    "date": 1630339258515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -102,13 +102,14 @@\n \n                         // 结果渲染\n                         var list = resposne.data\n                         for (var index = 0; index < list.length; index++) {\n+                            data = list[index]\n                             var rowDom = $(\"<tr>\");\n-                            rowDom.append()\n+                            rowDom.append($(\"<td>\").html())\n+                        }\n \n-                            \n-                        }\n+\n                     }\n                 });\n \n             }\n"
+                },
+                {
+                    "date": 1630339280298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,11 @@\n                         var list = resposne.data\n                         for (var index = 0; index < list.length; index++) {\n                             data = list[index]\n                             var rowDom = $(\"<tr>\");\n-                            rowDom.append($(\"<td>\").html())\n+                            rowDom.append($(\"<td>\").html(data.name));\n+                            rowDom.append($(\"<td>\").html(data.command));\n+                            rowDom.append($(\"<td>\").html(data.cron_exp));\n                         }\n \n \n                     }\n"
+                },
+                {
+                    "date": 1630339396930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -107,8 +107,12 @@\n                             var rowDom = $(\"<tr>\");\n                             rowDom.append($(\"<td>\").html(data.name));\n                             rowDom.append($(\"<td>\").html(data.command));\n                             rowDom.append($(\"<td>\").html(data.cron_exp));\n+                            var toolBar = $(\"td\");\n+                            toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n+                            toolBar.append(\"<button class=\\\"btn btn-delete delete-job\\\">删除</button>\");\n+                            toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n                         }\n \n \n                     }\n"
+                },
+                {
+                    "date": 1630339523880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -111,8 +111,11 @@\n                             var toolBar = $(\"td\");\n                             toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-delete delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n+                            rowDom.append(toolBar);\n+\n+                            $(\"#jobTable tbody\").append($rowDom);\n                         }\n \n \n                     }\n"
+                },
+                {
+                    "date": 1630339559505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,8 +87,9 @@\n \n             // 列表刷新 \n             function freshList() {\n                 // 清空列表\n+                $(\"#jobTable tobody\").empty();\n \n                 // 发送请求\n                 $.ajax({\n                     type: \"get\",\n@@ -113,9 +114,9 @@\n                             toolBar.append(\"<button class=\\\"btn btn-delete delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n                             rowDom.append(toolBar);\n \n-                            $(\"#jobTable tbody\").append($rowDom);\n+                            $(\"#jobTable tbody\").append($rowDom)\n                         }\n \n \n                     }\n"
+                },
+                {
+                    "date": 1630339577942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -121,8 +121,10 @@\n \n                     }\n                 });\n \n+                // 初始化列表\n+                freshList();\n             }\n \n         })\n     </script>\n"
+                },
+                {
+                    "date": 1630339588883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n                                     <th>操作</th>\n                                 </tr>\n                             </thead>\n                             <tbody>\n-                                <tr>\n+                                <!-- <tr>\n                                     <td>job1</td>\n                                     <td>echo hello</td>\n                                     <td>* * * * * *</td>\n                                     <td>\n@@ -55,9 +55,9 @@\n                                             <button class=\"btn btn-danger delete-job\">删除</button>\n                                             <button class=\"btn btn-warning kill-job\">强杀</button>\n                                         </div>\n                                     </td>\n-                                </tr>\n+                                </tr> -->\n                             </tbody>\n                         </table>\n                     </div>\n                 </div>\n"
+                },
+                {
+                    "date": 1630339621293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -108,9 +108,9 @@\n                             var rowDom = $(\"<tr>\");\n                             rowDom.append($(\"<td>\").html(data.name));\n                             rowDom.append($(\"<td>\").html(data.command));\n                             rowDom.append($(\"<td>\").html(data.cron_exp));\n-                            var toolBar = $(\"td\");\n+                            var toolBar = $(\"<div class='toolbar'>\");\n                             toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-delete delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n                             rowDom.append(toolBar);\n"
+                },
+                {
+                    "date": 1630339627341,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -108,9 +108,9 @@\n                             var rowDom = $(\"<tr>\");\n                             rowDom.append($(\"<td>\").html(data.name));\n                             rowDom.append($(\"<td>\").html(data.command));\n                             rowDom.append($(\"<td>\").html(data.cron_exp));\n-                            var toolBar = $(\"<div class='toolbar'>\");\n+                            var toolBar = $(\"<div class='tool-bar'>\");\n                             toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-delete delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n                             rowDom.append(toolBar);\n"
+                },
+                {
+                    "date": 1630339651342,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -114,8 +114,9 @@\n                             toolBar.append(\"<button class=\\\"btn btn-delete delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n                             rowDom.append(toolBar);\n \n+                            // 添加一行数据\n                             $(\"#jobTable tbody\").append($rowDom)\n                         }\n \n \n"
+                },
+                {
+                    "date": 1630339774741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -122,12 +122,12 @@\n \n                     }\n                 });\n \n-                // 初始化列表\n-                freshList();\n             }\n \n+            // 初始化列表\n+            freshList();\n         })\n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630339797392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -102,8 +102,9 @@\n                         }\n \n                         // 结果渲染\n                         var list = resposne.data\n+                        console.log(list)\n                         for (var index = 0; index < list.length; index++) {\n                             data = list[index]\n                             var rowDom = $(\"<tr>\");\n                             rowDom.append($(\"<td>\").html(data.name));\n"
+                },
+                {
+                    "date": 1630339810802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,9 +101,9 @@\n                             return\n                         }\n \n                         // 结果渲染\n-                        var list = resposne.data\n+                        var list = response.data\n                         console.log(list)\n                         for (var index = 0; index < list.length; index++) {\n                             data = list[index]\n                             var rowDom = $(\"<tr>\");\n"
+                },
+                {
+                    "date": 1630339827097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,9 +116,9 @@\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n                             rowDom.append(toolBar);\n \n                             // 添加一行数据\n-                            $(\"#jobTable tbody\").append($rowDom)\n+                            $(\"#jobTable tbody\").append(rowDom)\n                         }\n \n \n                     }\n"
+                },
+                {
+                    "date": 1630339843249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -111,9 +111,9 @@\n                             rowDom.append($(\"<td>\").html(data.command));\n                             rowDom.append($(\"<td>\").html(data.cron_exp));\n                             var toolBar = $(\"<div class='tool-bar'>\");\n                             toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n-                            toolBar.append(\"<button class=\\\"btn btn-delete delete-job\\\">删除</button>\");\n+                            toolBar.append(\"<button class=\\\"btn btn-danger delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n                             rowDom.append(toolBar);\n \n                             // 添加一行数据\n"
+                },
+                {
+                    "date": 1630339889659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n                                     <th>操作</th>\n                                 </tr>\n                             </thead>\n                             <tbody>\n-                                <!-- <tr>\n+                                <tr>\n                                     <td>job1</td>\n                                     <td>echo hello</td>\n                                     <td>* * * * * *</td>\n                                     <td>\n@@ -55,9 +55,9 @@\n                                             <button class=\"btn btn-danger delete-job\">删除</button>\n                                             <button class=\"btn btn-warning kill-job\">强杀</button>\n                                         </div>\n                                     </td>\n-                                </tr> -->\n+                                </tr>\n                             </tbody>\n                         </table>\n                     </div>\n                 </div>\n"
+                },
+                {
+                    "date": 1630339894889,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n \n             }\n \n             // 初始化列表\n-            freshList();\n+            // freshList();\n         })\n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630339923822,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -126,9 +126,9 @@\n \n             }\n \n             // 初始化列表\n-            // freshList();\n+            freshList();\n         })\n     </script>\n </body>\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630340194168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,9 +116,9 @@\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n                             rowDom.append(toolBar);\n \n                             // 添加一行数据\n-                            $(\"#jobTable tbody\").append(rowDom)\n+                            $(\"#jobTable tbody\").append($(\"<td>\").append(toolBar))\n                         }\n \n \n                     }\n"
+                },
+                {
+                    "date": 1630340239314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -113,12 +113,12 @@\n                             var toolBar = $(\"<div class='tool-bar'>\");\n                             toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-danger delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n-                            rowDom.append(toolBar);\n+                            rowDom.append($(\"<td>\").append(toolBar));\n \n                             // 添加一行数据\n-                            $(\"#jobTable tbody\").append($(\"<td>\").append(toolBar))\n+                            $(\"#jobTable tbody\").append(rowDom)\n                         }\n \n \n                     }\n"
+                },
+                {
+                    "date": 1630340813597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -109,9 +109,9 @@\n                             var rowDom = $(\"<tr>\");\n                             rowDom.append($(\"<td>\").html(data.name));\n                             rowDom.append($(\"<td>\").html(data.command));\n                             rowDom.append($(\"<td>\").html(data.cron_exp));\n-                            var toolBar = $(\"<div class='tool-bar'>\");\n+                            var toolBar = $(\"<div class='btn-toolbar'>\");\n                             toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-danger delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n                             rowDom.append($(\"<td>\").append(toolBar));\n"
+                },
+                {
+                    "date": 1630340819929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,9 @@\n                                     <td>job1</td>\n                                     <td>echo hello</td>\n                                     <td>* * * * * *</td>\n                                     <td>\n-                                        <div class=\"tool-bar\">\n+                                        <div class=\"btn-toolbar\">\n                                             <button class=\"btn btn-info edit-job\">编辑</button>\n                                             <button class=\"btn btn-danger delete-job\">删除</button>\n                                             <button class=\"btn btn-warning kill-job\">强杀</button>\n                                         </div>\n"
+                },
+                {
+                    "date": 1630340838370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n                                     <th>操作</th>\n                                 </tr>\n                             </thead>\n                             <tbody>\n-                                <tr>\n+                                <!-- <tr>\n                                     <td>job1</td>\n                                     <td>echo hello</td>\n                                     <td>* * * * * *</td>\n                                     <td>\n@@ -55,9 +55,9 @@\n                                             <button class=\"btn btn-danger delete-job\">删除</button>\n                                             <button class=\"btn btn-warning kill-job\">强杀</button>\n                                         </div>\n                                     </td>\n-                                </tr>\n+                                </tr> -->\n                             </tbody>\n                         </table>\n                     </div>\n                 </div>\n"
+                },
+                {
+                    "date": 1630340850117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,9 +87,9 @@\n \n             // 列表刷新 \n             function freshList() {\n                 // 清空列表\n-                $(\"#jobTable tobody\").empty();\n+                $(\"#jobTable tbody\").empty();\n \n                 // 发送请求\n                 $.ajax({\n                     type: \"get\",\n"
+                },
+                {
+                    "date": 1630340867745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -118,10 +118,8 @@\n \n                             // 添加一行数据\n                             $(\"#jobTable tbody\").append(rowDom)\n                         }\n-\n-\n                     }\n                 });\n \n             }\n"
+                },
+                {
+                    "date": 1630340943617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -120,9 +120,22 @@\n                             $(\"#jobTable tbody\").append(rowDom)\n                         }\n                     }\n                 });\n+            }\n \n+            // 强杀任务\n+            function killJob(name) {\n+                $.ajax({\n+                    type: \"POST\",\n+                    url: \"/job/kill\",\n+                    data: {name: name},\n+                    dataType: \"dataType\",\n+                    success: function (response) {\n+                        \n+                    }\n+                });\n+\n             }\n \n             // 初始化列表\n             freshList();\n"
+                },
+                {
+                    "date": 1630340949737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -128,9 +128,9 @@\n                 $.ajax({\n                     type: \"POST\",\n                     url: \"/job/kill\",\n                     data: {name: name},\n-                    dataType: \"dataType\",\n+                    dataType: \"json\",\n                     success: function (response) {\n                         \n                     }\n                 });\n"
+                },
+                {
+                    "date": 1630341002670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,8 +130,13 @@\n                     url: \"/job/kill\",\n                     data: {name: name},\n                     dataType: \"json\",\n                     success: function (response) {\n+                        if (response.status != -1) {\n+                            console.log(\"强杀成功\");\n+                        } else {\n+                            console.error(\"强杀失败\")\n+                        }\n                         \n                     }\n                 });\n \n"
+                },
+                {
+                    "date": 1630341012531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -135,9 +135,8 @@\n                             console.log(\"强杀成功\");\n                         } else {\n                             console.error(\"强杀失败\")\n                         }\n-                        \n                     }\n                 });\n \n             }\n"
+                },
+                {
+                    "date": 1630341018454,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -137,9 +137,8 @@\n                             console.error(\"强杀失败\")\n                         }\n                     }\n                 });\n-\n             }\n \n             // 初始化列表\n             freshList();\n"
+                },
+                {
+                    "date": 1630341029994,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -139,8 +139,25 @@\n                     }\n                 });\n             }\n \n+            // 强杀任务\n+            function killJob(name) {\n+                $.ajax({\n+                    type: \"POST\",\n+                    url: \"/job/delete\",\n+                    data: {name: name},\n+                    dataType: \"json\",\n+                    success: function (response) {\n+                        if (response.status != -1) {\n+                            console.log(\"强杀成功\");\n+                        } else {\n+                            console.error(\"强杀失败\")\n+                        }\n+                    }\n+                });\n+            }\n+\n             // 初始化列表\n             freshList();\n         })\n     </script>\n"
+                },
+                {
+                    "date": 1630341049183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -139,9 +139,9 @@\n                     }\n                 });\n             }\n \n-            // 强杀任务\n+            // 删除任务 \n             function killJob(name) {\n                 $.ajax({\n                     type: \"POST\",\n                     url: \"/job/delete\",\n"
+                },
+                {
+                    "date": 1630341062063,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -148,11 +148,11 @@\n                     data: {name: name},\n                     dataType: \"json\",\n                     success: function (response) {\n                         if (response.status != -1) {\n-                            console.log(\"强杀成功\");\n+                            console.log(\"删除成功\");\n                         } else {\n-                            console.error(\"强杀失败\")\n+                            console.error(\"删除失败\")\n                         }\n                     }\n                 });\n             }\n"
+                },
+                {
+                    "date": 1630341074796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,9 +75,8 @@\n             $(\"#jobTable\").on(\"click\", \".edit-job\",function (event) {\n                 alert(\"edit\");\n             });\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n-                alert(\"delete\");\n             });\n             $(\"#jobTable\").on(\"click\", \".kill-job\",function (event) {\n                 alert(\"kill\");\n             });\n"
+                },
+                {
+                    "date": 1630341222769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,8 +75,11 @@\n             $(\"#jobTable\").on(\"click\", \".edit-job\",function (event) {\n                 alert(\"edit\");\n             });\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n+                // 获取任务名\n+                var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n+                cnsole.log(jobName)\n             });\n             $(\"#jobTable\").on(\"click\", \".kill-job\",function (event) {\n                 alert(\"kill\");\n             });\n"
+                },
+                {
+                    "date": 1630341242805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -77,9 +77,9 @@\n             });\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n                 // 获取任务名\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n-                cnsole.log(jobName)\n+                console.log(jobName)\n             });\n             $(\"#jobTable\").on(\"click\", \".kill-job\",function (event) {\n                 alert(\"kill\");\n             });\n"
+                },
+                {
+                    "date": 1630341303850,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,11 +45,11 @@\n                                 </tr>\n                             </thead>\n                             <tbody>\n                                 <!-- <tr>\n-                                    <td>job1</td>\n-                                    <td>echo hello</td>\n-                                    <td>* * * * * *</td>\n+                                    <td class=\"job-name\">job1</td>\n+                                    <td class=\"job-command\">echo hello</td>\n+                                    <td class=\"job-cron-exp\">* * * * * *</td>\n                                     <td>\n                                         <div class=\"btn-toolbar\">\n                                             <button class=\"btn btn-info edit-job\">编辑</button>\n                                             <button class=\"btn btn-danger delete-job\">删除</button>\n"
+                },
+                {
+                    "date": 1630341367255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -108,11 +108,11 @@\n                         console.log(list)\n                         for (var index = 0; index < list.length; index++) {\n                             data = list[index]\n                             var rowDom = $(\"<tr>\");\n-                            rowDom.append($(\"<td>\").html(data.name));\n-                            rowDom.append($(\"<td>\").html(data.command));\n-                            rowDom.append($(\"<td>\").html(data.cron_exp));\n+                            rowDom.append($(\"<td class='job-name'>\").html(data.name));\n+                            rowDom.append($(\"<td class='job-command'>\").html(data.command));\n+                            rowDom.append($(\"<td> calss='job-cron-exp'\").html(data.cron_exp));\n                             var toolBar = $(\"<div class='btn-toolbar'>\");\n                             toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-danger delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n"
+                },
+                {
+                    "date": 1630341405308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -77,9 +77,10 @@\n             });\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n                 // 获取任务名\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n-                console.log(jobName)\n+            \n+                killJOb(jobName)\n             });\n             $(\"#jobTable\").on(\"click\", \".kill-job\",function (event) {\n                 alert(\"kill\");\n             });\n"
+                },
+                {
+                    "date": 1630341421330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,9 +78,10 @@\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n                 // 获取任务名\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n             \n-                killJOb(jobName)\n+                // 杀死任务\n+                killJob(jobName)\n             });\n             $(\"#jobTable\").on(\"click\", \".kill-job\",function (event) {\n                 alert(\"kill\");\n             });\n"
+                },
+                {
+                    "date": 1630341471462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -144,9 +144,9 @@\n                 });\n             }\n \n             // 删除任务 \n-            function killJob(name) {\n+            function deleteJob(name) {\n                 $.ajax({\n                     type: \"POST\",\n                     url: \"/job/delete\",\n                     data: {name: name},\n"
+                },
+                {
+                    "date": 1630341491959,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,10 +78,10 @@\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n                 // 获取任务名\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n             \n-                // 杀死任务\n-                killJob(jobName)\n+                // 删除任务 \n+                deleteJob(jobName)\n             });\n             $(\"#jobTable\").on(\"click\", \".kill-job\",function (event) {\n                 alert(\"kill\");\n             });\n"
+                },
+                {
+                    "date": 1630341561930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -153,8 +153,9 @@\n                     dataType: \"json\",\n                     success: function (response) {\n                         if (response.status != -1) {\n                             console.log(\"删除成功\");\n+                            location.reload();\n                         } else {\n                             console.error(\"删除失败\")\n                         }\n                     }\n"
+                },
+                {
+                    "date": 1630341579185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -136,8 +136,9 @@\n                     dataType: \"json\",\n                     success: function (response) {\n                         if (response.status != -1) {\n                             console.log(\"强杀成功\");\n+                            location.relaod();\n                         } else {\n                             console.error(\"强杀失败\")\n                         }\n                     }\n"
+                },
+                {
+                    "date": 1630341621144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,13 @@\n                 // 删除任务 \n                 deleteJob(jobName)\n             });\n             $(\"#jobTable\").on(\"click\", \".kill-job\",function (event) {\n-                alert(\"kill\");\n+                // 获取任务名\n+                var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n+            \n+                // 强杀任务 \n+                killJob(jobName)\n             });\n             $(\".new-job\").on(\"click\",function (event) {\n                 alert(\"new\");\n             });\n"
+                },
+                {
+                    "date": 1630341633829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -140,9 +140,9 @@\n                     dataType: \"json\",\n                     success: function (response) {\n                         if (response.status != -1) {\n                             console.log(\"强杀成功\");\n-                            location.relaod();\n+                            location.reload();\n                         } else {\n                             console.error(\"强杀失败\")\n                         }\n                     }\n"
+                },
+                {
+                    "date": 1630341714490,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,11 +70,11 @@\n \n     <!-- 代码  -->\n     <script>\n         $(document).ready(function () {\n-            // 监听事件\n+            // 监听编辑按钮 \n             $(\"#jobTable\").on(\"click\", \".edit-job\",function (event) {\n-                alert(\"edit\");\n+\n             });\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n                 // 获取任务名\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n"
+                },
+                {
+                    "date": 1630368590762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,11 +64,25 @@\n             </div>\n \n         </div>\n     </div>\n-\n-\n-\n+    <div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n+        <div class=\"modal-dialog\" role=\"document\">\n+          <div class=\"modal-content\">\n+            <div class=\"modal-header\">\n+              <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n+              <h4 class=\"modal-title\">Modal title</h4>\n+            </div>\n+            <div class=\"modal-body\">\n+              <p>One fine body&hellip;</p>\n+            </div>\n+            <div class=\"modal-footer\">\n+              <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n+              <button type=\"button\" class=\"btn btn-primary\">Save changes</button>\n+            </div>\n+          </div><!-- /.modal-content -->\n+        </div><!-- /.modal-dialog -->\n+      </div><!-- /.modal -->\n     <!-- 代码  -->\n     <script>\n         $(document).ready(function () {\n             // 监听编辑按钮 \n"
+                },
+                {
+                    "date": 1630368605008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,8 +64,9 @@\n             </div>\n \n         </div>\n     </div>\n+    <!--模态框-->\n     <div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n         <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n             <div class=\"modal-header\">\n"
+                },
+                {
+                    "date": 1630368845380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,12 +70,17 @@\n         <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n             <div class=\"modal-header\">\n               <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n-              <h4 class=\"modal-title\">Modal title</h4>\n+              <h4 class=\"modal-title\">编辑</h4>\n             </div>\n             <div class=\"modal-body\">\n-              <p>One fine body&hellip;</p>\n+                <form action=\"\">\n+                    <div class=\"form-group\">\n+                      <label for=\"jobName\">任务名称</label>\n+                      <input type=\"text\" id=\"jobName\" class=\"form-control\" placeholder=\"\" aria-describedby=\"helpId\">\n+                    </div>\n+                </form>\n             </div>\n             <div class=\"modal-footer\">\n               <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n               <button type=\"button\" class=\"btn btn-primary\">Save changes</button>\n"
+                },
+                {
+                    "date": 1630368884766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,8 +78,16 @@\n                     <div class=\"form-group\">\n                       <label for=\"jobName\">任务名称</label>\n                       <input type=\"text\" id=\"jobName\" class=\"form-control\" placeholder=\"\" aria-describedby=\"helpId\">\n                     </div>\n+                    <div class=\"form-group\">\n+                      <label for=\"jobCommand\">执行命令</label>\n+                      <input type=\"text\" id=\"jobCommand\" class=\"form-control\" placeholder=\"\" aria-describedby=\"helpId\">\n+                    </div>\n+                    <div class=\"form-group\">\n+                      <label for=\"jobCronExp\">Cron表达式</label>\n+                      <input type=\"text\" id=\"jobCronExp\" class=\"form-control\" placeholder=\"\" aria-describedby=\"helpId\">\n+                    </div>\n                 </form>\n             </div>\n             <div class=\"modal-footer\">\n               <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n"
+                },
+                {
+                    "date": 1630368911679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,9 +65,9 @@\n \n         </div>\n     </div>\n     <!--模态框-->\n-    <div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n+    <div id=\"inputModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\">\n         <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n             <div class=\"modal-header\">\n               <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n"
+                },
+                {
+                    "date": 1630368928899,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,8 +100,9 @@\n     <script>\n         $(document).ready(function () {\n             // 监听编辑按钮 \n             $(\"#jobTable\").on(\"click\", \".edit-job\",function (event) {\n+                $(\"#inputModal\").modal(\"show\");\n \n             });\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n                 // 获取任务名\n"
+                },
+                {
+                    "date": 1630369122239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,9 @@\n         <div class=\"modal-dialog\" role=\"document\">\n           <div class=\"modal-content\">\n             <div class=\"modal-header\">\n               <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n-              <h4 class=\"modal-title\">编辑</h4>\n+              <h4 id=\"inputTitle\" class=\"modal-title\">编辑</h4>\n             </div>\n             <div class=\"modal-body\">\n                 <form action=\"\">\n                     <div class=\"form-group\">\n@@ -100,10 +100,15 @@\n     <script>\n         $(document).ready(function () {\n             // 监听编辑按钮 \n             $(\"#jobTable\").on(\"click\", \".edit-job\",function (event) {\n+                // 设置标题\n+                $(\"#inputTitle\").text(\"text\")\n+\n+                // 弹出编辑框\n                 $(\"#inputModal\").modal(\"show\");\n \n+\n             });\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n                 // 获取任务名\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n"
+                },
+                {
+                    "date": 1630369148572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,14 +101,14 @@\n         $(document).ready(function () {\n             // 监听编辑按钮 \n             $(\"#jobTable\").on(\"click\", \".edit-job\",function (event) {\n                 // 设置标题\n-                $(\"#inputTitle\").text(\"text\")\n+                $(\"#inputTitle\").text(\"编辑任务\");\n \n+                // 设置内容\n+\n                 // 弹出编辑框\n                 $(\"#inputModal\").modal(\"show\");\n-\n-\n             });\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n                 // 获取任务名\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n"
+                },
+                {
+                    "date": 1630369206273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,8 +105,9 @@\n                 $(\"#inputTitle\").text(\"编辑任务\");\n \n                 // 设置内容\n \n+\n                 // 弹出编辑框\n                 $(\"#inputModal\").modal(\"show\");\n             });\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n@@ -150,9 +151,9 @@\n                             data = list[index]\n                             var rowDom = $(\"<tr>\");\n                             rowDom.append($(\"<td class='job-name'>\").html(data.name));\n                             rowDom.append($(\"<td class='job-command'>\").html(data.command));\n-                            rowDom.append($(\"<td> calss='job-cron-exp'\").html(data.cron_exp));\n+                            rowDom.append($(\"<td> class='job-cron-exp'\").html(data.cron_exp));\n                             var toolBar = $(\"<div class='btn-toolbar'>\");\n                             toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-danger delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n"
+                },
+                {
+                    "date": 1630369314543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n                             data = list[index]\n                             var rowDom = $(\"<tr>\");\n                             rowDom.append($(\"<td class='job-name'>\").html(data.name));\n                             rowDom.append($(\"<td class='job-command'>\").html(data.command));\n-                            rowDom.append($(\"<td> class='job-cron-exp'\").html(data.cron_exp));\n+                            rowDom.append($(\"<td class='job-cron-exp'\").html(data.cron_exp));\n                             var toolBar = $(\"<div class='btn-toolbar'>\");\n                             toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-danger delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n"
+                },
+                {
+                    "date": 1630369331248,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n                             data = list[index]\n                             var rowDom = $(\"<tr>\");\n                             rowDom.append($(\"<td class='job-name'>\").html(data.name));\n                             rowDom.append($(\"<td class='job-command'>\").html(data.command));\n-                            rowDom.append($(\"<td class='job-cron-exp'\").html(data.cron_exp));\n+                            rowDom.append($(\"<td class='job-cron-exp'>\").html(data.cron_exp));\n                             var toolBar = $(\"<div class='btn-toolbar'>\");\n                             toolBar.append(\"<button class=\\\"btn btn-info edit-job\\\">编辑</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-danger delete-job\\\">删除</button>\");\n                             toolBar.append(\"<button class=\\\"btn btn-warning kill-job\\\">强杀</button>\");\n"
+                },
+                {
+                    "date": 1630369391871,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,8 +104,10 @@\n                 // 设置标题\n                 $(\"#inputTitle\").text(\"编辑任务\");\n \n                 // 设置内容\n+                var jobName = $(this).closest(\"tr\").children(\".job-name\").val()\n+                console.log(jobName)\n \n \n                 // 弹出编辑框\n                 $(\"#inputModal\").modal(\"show\");\n"
+                },
+                {
+                    "date": 1630369433768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,8 +104,9 @@\n                 // 设置标题\n                 $(\"#inputTitle\").text(\"编辑任务\");\n \n                 // 设置内容\n+                debugger;\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").val()\n                 console.log(jobName)\n \n \n"
+                },
+                {
+                    "date": 1630369500093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,9 +105,9 @@\n                 $(\"#inputTitle\").text(\"编辑任务\");\n \n                 // 设置内容\n                 debugger;\n-                var jobName = $(this).closest(\"tr\").children(\".job-name\").val()\n+                var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n                 console.log(jobName)\n \n \n                 // 弹出编辑框\n"
+                },
+                {
+                    "date": 1630369524909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,11 +106,11 @@\n \n                 // 设置内容\n                 debugger;\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n-                console.log(jobName)\n+                var jobCommand = $(this).closest(\"tr\").children(\".job-command\").text()\n+                var jobCronExp = $(this).closest(\"tr\").children(\".job-cron-exp\").text()\n \n-\n                 // 弹出编辑框\n                 $(\"#inputModal\").modal(\"show\");\n             });\n             $(\"#jobTable\").on(\"click\", \".delete-job\",function (event) {\n"
+                },
+                {
+                    "date": 1630369530515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,8 @@\n                 // 设置标题\n                 $(\"#inputTitle\").text(\"编辑任务\");\n \n                 // 设置内容\n-                debugger;\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n                 var jobCommand = $(this).closest(\"tr\").children(\".job-command\").text()\n                 var jobCronExp = $(this).closest(\"tr\").children(\".job-cron-exp\").text()\n \n"
+                },
+                {
+                    "date": 1630369578157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,10 +105,13 @@\n                 $(\"#inputTitle\").text(\"编辑任务\");\n \n                 // 设置内容\n                 var jobName = $(this).closest(\"tr\").children(\".job-name\").text()\n+                $(\"#jobName\").val(jobName)\n                 var jobCommand = $(this).closest(\"tr\").children(\".job-command\").text()\n+                $(\"#jobCommand\").val(jobCommand)\n                 var jobCronExp = $(this).closest(\"tr\").children(\".job-cron-exp\").text()\n+                $(\"#jobCronExp\").val(jobCronExp)\n \n                 // 弹出编辑框\n                 $(\"#inputModal\").modal(\"show\");\n             });\n"
+                },
+                {
+                    "date": 1630369584435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n                     </div>\n                 </form>\n             </div>\n             <div class=\"modal-footer\">\n-              <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n+              <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button>\n               <button type=\"button\" class=\"btn btn-primary\">Save changes</button>\n             </div>\n           </div><!-- /.modal-content -->\n         </div><!-- /.modal-dialog -->\n"
+                },
+                {
+                    "date": 1630369591846,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n                 </form>\n             </div>\n             <div class=\"modal-footer\">\n               <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button>\n-              <button type=\"button\" class=\"btn btn-primary\">Save changes</button>\n+              <button type=\"button\" class=\"btn btn-primary\">保存</button>\n             </div>\n           </div><!-- /.modal-content -->\n         </div><!-- /.modal-dialog -->\n       </div><!-- /.modal -->\n"
+                },
+                {
+                    "date": 1630369622520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -129,9 +129,12 @@\n                 // 强杀任务 \n                 killJob(jobName)\n             });\n             $(\".new-job\").on(\"click\",function (event) {\n-                alert(\"new\");\n+                // 设置标题\n+                $(\"#inputTitle\").text(\"编辑任务\");\n+                // 弹出编辑框\n+                $(\"#inputModal\").modal(\"show\");\n             });\n \n             // 列表刷新 \n             function freshList() {\n"
+                },
+                {
+                    "date": 1630369634680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,9 +130,10 @@\n                 killJob(jobName)\n             });\n             $(\".new-job\").on(\"click\",function (event) {\n                 // 设置标题\n-                $(\"#inputTitle\").text(\"编辑任务\");\n+                $(\"#inputTitle\").text(\"新建任务\");\n+\n                 // 弹出编辑框\n                 $(\"#inputModal\").modal(\"show\");\n             });\n \n"
+                },
+                {
+                    "date": 1630369661687,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n                 </form>\n             </div>\n             <div class=\"modal-footer\">\n               <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button>\n-              <button type=\"button\" class=\"btn btn-primary\">保存</button>\n+              <button type=\"button\" id=\"inputSaveBtn\" class=\"btn btn-primary\">保存</button>\n             </div>\n           </div><!-- /.modal-content -->\n         </div><!-- /.modal-dialog -->\n       </div><!-- /.modal -->\n"
+                },
+                {
+                    "date": 1630369731806,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -136,8 +136,16 @@\n                 // 弹出编辑框\n                 $(\"#inputModal\").modal(\"show\");\n             });\n \n+            // 监听保存事件\n+            $(\"#inputSaveBtn\").on(\"click\", function () {\n+                var JobName = $(\"#jobName\").val(jobName)\n+                var jobCommand = $(\"#jobCommand\").val(jobCommand)\n+                var jobCronExp = $(\"#jobCronExp\").val(jobCronExp)\n+\n+            })\n+\n             // 列表刷新 \n             function freshList() {\n                 // 清空列表\n                 $(\"#jobTable tbody\").empty();\n"
+                },
+                {
+                    "date": 1630370050939,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -138,12 +138,28 @@\n             });\n \n             // 监听保存事件\n             $(\"#inputSaveBtn\").on(\"click\", function () {\n-                var JobName = $(\"#jobName\").val(jobName)\n-                var jobCommand = $(\"#jobCommand\").val(jobCommand)\n-                var jobCronExp = $(\"#jobCronExp\").val(jobCronExp)\n+                var JobName = $(\"#jobName\").val()\n+                var jobCommand = $(\"#jobCommand\").val()\n+                var jobCronExp = $(\"#jobCronExp\").val()\n+                var params = JSON.stringify({name: jobName, command: jobCommand, cron_exp: jobCronExp})\n \n+                // 发送请求\n+                $.ajax({\n+                    url: \"/job/save\",\n+                    data: {\n+                        job: params\n+                    },\n+                    dataType: \"json\",\n+                    method: \"POST\",\n+                    success: function(response) {\n+                        if (response.status == -1) {\n+                            alert(\"save failed\" + response.msg)\n+                        }\n+                    }\n+                })\n+\n             })\n \n             // 列表刷新 \n             function freshList() {\n"
+                },
+                {
+                    "date": 1630370092964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -154,9 +154,14 @@\n                     method: \"POST\",\n                     success: function(response) {\n                         if (response.status == -1) {\n                             alert(\"save failed\" + response.msg)\n+                            return \n                         }\n+\n+                        // 关闭模态框，刷新列表\n+                        $(\"#inputModal\").modal(\"hide\");\n+                        freshList();\n                     }\n                 })\n \n             })\n"
+                },
+                {
+                    "date": 1630370172573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -142,8 +142,9 @@\n                 var JobName = $(\"#jobName\").val()\n                 var jobCommand = $(\"#jobCommand\").val()\n                 var jobCronExp = $(\"#jobCronExp\").val()\n                 var params = JSON.stringify({name: jobName, command: jobCommand, cron_exp: jobCronExp})\n+                console.log(params);\n \n                 // 发送请求\n                 $.ajax({\n                     url: \"/job/save\",\n"
+                },
+                {
+                    "date": 1630370226858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -153,9 +153,9 @@\n                     },\n                     dataType: \"json\",\n                     method: \"POST\",\n                     success: function(response) {\n-                        if (response.status == -1) {\n+                        if (response.err_code == -1) {\n                             alert(\"save failed\" + response.msg)\n                             return \n                         }\n \n"
+                },
+                {
+                    "date": 1630370337924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -138,9 +138,10 @@\n             });\n \n             // 监听保存事件\n             $(\"#inputSaveBtn\").on(\"click\", function () {\n-                var JobName = $(\"#jobName\").val()\n+                var jobName = $(\"#jobName\").val()\n+\n                 var jobCommand = $(\"#jobCommand\").val()\n                 var jobCronExp = $(\"#jobCronExp\").val()\n                 var params = JSON.stringify({name: jobName, command: jobCommand, cron_exp: jobCronExp})\n                 console.log(params);\n@@ -177,9 +178,9 @@\n                     type: \"get\",\n                     url: \"/job/list\",\n                     dataType: \"json\",\n                     success: function (response) {\n-                        if (response.status == -1) {\n+                        if (response.err_code == -1) {\n                             // 请求失败，静默处理\n                             return\n                         }\n \n"
+                },
+                {
+                    "date": 1630370343992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -139,9 +139,8 @@\n \n             // 监听保存事件\n             $(\"#inputSaveBtn\").on(\"click\", function () {\n                 var jobName = $(\"#jobName\").val()\n-\n                 var jobCommand = $(\"#jobCommand\").val()\n                 var jobCronExp = $(\"#jobCronExp\").val()\n                 var params = JSON.stringify({name: jobName, command: jobCommand, cron_exp: jobCronExp})\n                 console.log(params);\n"
+                },
+                {
+                    "date": 1630370380950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -163,9 +163,8 @@\n                         $(\"#inputModal\").modal(\"hide\");\n                         freshList();\n                     }\n                 })\n-\n             })\n \n             // 列表刷新 \n             function freshList() {\n"
+                },
+                {
+                    "date": 1630370457737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -132,8 +132,13 @@\n             $(\".new-job\").on(\"click\",function (event) {\n                 // 设置标题\n                 $(\"#inputTitle\").text(\"新建任务\");\n \n+                // 清空form\n+                $(\"#jobName\").val(\"\")\n+                $(\"#jobCommand\").val(\"\")\n+                $(\"#jobCronExp\").val(\"\")\n+\n                 // 弹出编辑框\n                 $(\"#inputModal\").modal(\"show\");\n             });\n \n"
+                },
+                {
+                    "date": 1630370502623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -188,9 +188,8 @@\n                         }\n \n                         // 结果渲染\n                         var list = response.data\n-                        console.log(list)\n                         for (var index = 0; index < list.length; index++) {\n                             data = list[index]\n                             var rowDom = $(\"<tr>\");\n                             rowDom.append($(\"<td class='job-name'>\").html(data.name));\n"
+                },
+                {
+                    "date": 1630370517814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -147,9 +147,8 @@\n                 var jobName = $(\"#jobName\").val()\n                 var jobCommand = $(\"#jobCommand\").val()\n                 var jobCronExp = $(\"#jobCronExp\").val()\n                 var params = JSON.stringify({name: jobName, command: jobCommand, cron_exp: jobCronExp})\n-                console.log(params);\n \n                 // 发送请求\n                 $.ajax({\n                     url: \"/job/save\",\n"
+                }
+            ],
+            "date": 1630233390250,
+            "name": "Commit-0",
+            "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Golang</title>\n</head>\n<body>\n    \n</body>\n</html>"
+        }
+    ]
+}

@@ -8,5 +8,7 @@
     "etcd 集群设置": "测试使用单一节点",
     "etcd_endpoints": ["8.135.120.218:2379"],
     "etcd 连接超时时间": "时间单位为毫秒",
-    "etcd_dia_timeout": 5000
+    "etcd_dia_timeout": 5000,
+    "静态文件根目录": "存放静态文件，线上使用绝对地址",
+    "webroot": "/var/www/GoCron/src/master/main/public"
 }

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 36,
+            "activePatchIndex": 37,
             "patches": [
                 {
                     "date": 1629466173810,
@@ -152,6 +152,10 @@
                 {
                     "date": 1629682065203,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n package master\n \n import (\n \t\"encoding/json\"\n-\t\"fmt\"\n \t\"io/ioutil\"\n )\n \n type Config struct {\n@@ -27,9 +26,8 @@\n \t\terr    error\n \t)\n \n \t// 读取文件配置\n-\tfmt.Println(filepath)\n \tif data, err = ioutil.ReadFile(filepath); err != nil {\n \t\treturn err\n \t}\n \n"
+                },
+                {
+                    "date": 1630242857291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n \tApiReadTimeout  int      `json:\"api_read_timeout,omitempty\"`\n \tApiWriteTimeout int      `json:\"api_write_timeout,omitempty\"`\n \tEtcdEndpoints   []string `json:\"etcd_endpoints,omitempty\"`\n \tEtcdDiaTimeout  int      `json:\"etcd_dia_timeout,omitempty\"`\n+\tWebroot         string   `json:\"webroot,omitempty\"`\n }\n \n var (\n \t// 全局单例配置\n"
                 }
             ],
             "date": 1629466173810,

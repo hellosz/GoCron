@@ -37,7 +37,7 @@ func main() {
 		goto ERR
 	}
 
-	time.Sleep(20 * time.Minute)
+	time.Sleep(100 * time.Minute)
 
 	return
 ERR:

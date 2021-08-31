@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 12,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1629467519226,
@@ -56,6 +56,10 @@
                 {
                     "date": 1630081956729,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,6 @@\n     \"api_port\": 8090,\n     \"etcd 集群设置\": \"测试使用单一节点\",\n     \"etcd_endpoints\": [\"8.135.120.218:2379\"],\n     \"etcd 连接超时时间\": \"时间单位为毫秒\",\n-    \"etcd_dia_timeout\": 5000 \n+    \"etcd_dia_timeout\": 5000\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630233356340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,5 +8,7 @@\n     \"etcd 集群设置\": \"测试使用单一节点\",\n     \"etcd_endpoints\": [\"8.135.120.218:2379\"],\n     \"etcd 连接超时时间\": \"时间单位为毫秒\",\n     \"etcd_dia_timeout\": 5000\n+    \"静态文件根目录\": \"存放静态文件，线上使用绝对地址\",\n+    \"webroot\": \"/var/www/GoCron/src/master/main/public\"\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1629467519226,

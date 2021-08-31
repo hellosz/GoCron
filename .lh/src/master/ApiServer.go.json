@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 157,
+            "activePatchIndex": 163,
             "patches": [
                 {
                     "date": 1629164339648,
@@ -636,6 +636,30 @@
                 {
                     "date": 1630232426116,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,13 +130,15 @@\n \tif err = G_jobMgr.KillJob(jobName); err != nil {\n \t\tgoto ERR\n \t}\n \n+\t// 返回成功响应\n \tresp, _ = common.BuildReponse(0, \"success\", nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n \treturn\n ERR:\n+\t// 返回失败原因\n \tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n }\n"
+                },
+                {
+                    "date": 1630240481204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -162,8 +162,10 @@\n \tmux.HandleFunc(\"/job/delete\", deleteJob)\n \tmux.HandleFunc(\"/job/list\", listJobs)\n \tmux.HandleFunc(\"/job/kill\", killJob)\n \n+\t// 访问静态资源\n+\n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n \t}\n"
+                },
+                {
+                    "date": 1630240503918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -153,8 +153,9 @@\n \tvar (\n \t\thttpServer *http.Server\n \t\tmux        *http.ServeMux\n \t\tlistener   net.Listener\n+\t\tpublicDir  string\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n"
+                },
+                {
+                    "date": 1630242894611,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -164,8 +164,9 @@\n \tmux.HandleFunc(\"/job/list\", listJobs)\n \tmux.HandleFunc(\"/job/kill\", killJob)\n \n \t// 访问静态资源\n+\tpublicDir = http.Dir(G_config.Webroot)\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
+                },
+                {
+                    "date": 1630242909789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -153,9 +153,9 @@\n \tvar (\n \t\thttpServer *http.Server\n \t\tmux        *http.ServeMux\n \t\tlistener   net.Listener\n-\t\tpublicDir  string\n+\t\tpublicDir  http.Dir\n \t)\n \n \t// 初始化路由\n \tmux = http.NewServeMux()\n"
+                },
+                {
+                    "date": 1630242954212,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -165,8 +165,9 @@\n \tmux.HandleFunc(\"/job/kill\", killJob)\n \n \t// 访问静态资源\n \tpublicDir = http.Dir(G_config.Webroot)\n+\tmux.HandleFunc(\"/\", http.FileServer(publicDir))\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
+                },
+                {
+                    "date": 1630243026569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -165,9 +165,9 @@\n \tmux.HandleFunc(\"/job/kill\", killJob)\n \n \t// 访问静态资源\n \tpublicDir = http.Dir(G_config.Webroot)\n-\tmux.HandleFunc(\"/\", http.FileServer(publicDir))\n+\tmux.Handle(\"/\", http.FileServer(publicDir))\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
                 }
             ],
             "date": 1629164339648,
