@@ -99,10 +99,10 @@ func (jobMgr *JobMgr) WatchJobs() (err error) {
 			for _, event = range watchResp.Events {
 				fmt.Println(string(event.Kv.Value))
 				switch event.Type {
-				case mvccpb.PUT:
+				case clientv3.EventTypePut:
 					// put 事件处理
 					jobEventType = common.JOB_EVENT_PUT
-				case mvccpb.DELETE:
+				case clientv3.EventTypeDelete:
 					// delete 事件处理
 					jobEventType = common.JOB_EVENT_DELETE
 				}

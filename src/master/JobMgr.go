@@ -113,7 +113,6 @@ func (jobMgr *JobMgr) DeleteJob(name string) (job *common.Job, err error) {
 		if err = json.Unmarshal(prevKV[0].Value, &oldJob); err == nil {
 			job = &oldJob
 			return
-		} else {
 			// 抑制因为解析旧的 json 报错导致的程序异常
 			err = nil
 		}
