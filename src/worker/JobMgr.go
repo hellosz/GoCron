@@ -3,7 +3,6 @@ package worker
 import (
 	"context"
 	"fmt"
-	"strconv"
 	"time"
 
 	"github.com/GoCron/src/common"
@@ -106,24 +105,24 @@ func (jobMgr *JobMgr) WatchJobs() (err error) {
 				case clientv3.EventTypePut:
 					// put 事件处理
 					jobEventType = common.JOB_EVENT_PUT
+
+					// 解析出错，静默处理
+					if job, err = common.UnpackJob(event.Kv.Value); err != nil {
+						err = nil
+						continue
+					}
+
 				case clientv3.EventTypeDelete:
 					// delete 事件处理
 					jobEventType = common.JOB_EVENT_DELETE
-				}
 
-				// TODO 输出消息类型
-				// 因为没有 value，所以 delete 时间被静默处理
-				fmt.Println("job event type:" + strconv.Itoa(jobEventType))
-				fmt.Println("job event value:" + string(event.Kv.Value))
-
-				// 解析出错，静默处理
-				if job, err = common.UnpackJob(event.Kv.Value); err != nil {
-					err = nil
-					continue
+					// 构造 job
+					job = &common.Job{Name: string(event.Kv.Key)}
 				}
 
 				// 构造事件，给到任务调度中心
 				jobEvent = common.BuildJobEvent(jobEventType, *job)
+
 				// TODO 将事件给到任务调度中心
 				fmt.Println("jobEvent", jobEvent)
 			}
