@@ -3,6 +3,7 @@ package worker
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/GoCron/src/common"
@@ -62,15 +63,16 @@ func InitJobMgr() (err error) {
 // 监听任务
 func (jobMgr *JobMgr) WatchJobs() (err error) {
 	var (
-		jobDir       string
-		job          *common.Job
-		getResp      *clientv3.GetResponse
-		kv           *mvccpb.KeyValue
-		watchChan    clientv3.WatchChan
-		watchResp    clientv3.WatchResponse
-		event        *clientv3.Event
-		jobEventType int
-		jobEvent     common.JobEvent
+		jobDir             string
+		job                *common.Job
+		getResp            *clientv3.GetResponse
+		kv                 *mvccpb.KeyValue
+		watchChan          clientv3.WatchChan
+		watchResp          clientv3.WatchResponse
+		event              *clientv3.Event
+		jobEventType       int
+		jobEvent           common.JobEvent
+		startWatchRevision int64
 	)
 
 	// 获取当前所有任务，加入任务队列中
@@ -91,7 +93,9 @@ func (jobMgr *JobMgr) WatchJobs() (err error) {
 	go func() {
 		// 监听任务事件
 		// 指定监控目录以及版本
-		if watchChan = G_jobMgr.watcher.Watch(context.TODO(), jobDir, clientv3.WithPrefix()); err != nil {
+		startWatchRevision = getResp.Header.GetRevision() + 1
+		if watchChan = G_jobMgr.client.Watch(context.TODO(), jobDir,
+			clientv3.WithRev(startWatchRevision), clientv3.WithPrefix()); err != nil {
 			return
 		}
 
@@ -106,6 +110,11 @@ func (jobMgr *JobMgr) WatchJobs() (err error) {
 					// delete 事件处理
 					jobEventType = common.JOB_EVENT_DELETE
 				}
+
+				// TODO 输出消息类型
+				// 因为没有 value，所以 delete 时间被静默处理
+				fmt.Println("job event type:" + strconv.Itoa(jobEventType))
+				fmt.Println("job event value:" + string(event.Kv.Value))
 
 				// 解析出错，静默处理
 				if job, err = common.UnpackJob(event.Kv.Value); err != nil {
