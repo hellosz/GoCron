@@ -3,6 +3,7 @@ package worker
 import (
 	"context"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/GoCron/src/common"
@@ -70,7 +71,7 @@ func (jobMgr *JobMgr) WatchJobs() (err error) {
 		watchResp          clientv3.WatchResponse
 		event              *clientv3.Event
 		jobEventType       int
-		jobEvent           common.JobEvent
+		jobEvent           *common.JobEvent
 		startWatchRevision int64
 	)
 
@@ -83,8 +84,11 @@ func (jobMgr *JobMgr) WatchJobs() (err error) {
 	// 遍历当前的任务
 	for _, kv = range getResp.Kvs {
 		if job, err = common.UnpackJob(kv.Value); err == nil {
-			// TODO 加入到任务队列当中
-			fmt.Println("job", job)
+			// 初始化任务到任务调度表中
+			jobEvent = common.BuildJobEvent(common.JOB_EVENT_PUT, job)
+
+			// 推送任务
+			G_Scheduler.PushJobEvent(jobEvent)
 		}
 	}
 
@@ -100,7 +104,7 @@ func (jobMgr *JobMgr) WatchJobs() (err error) {
 
 		for watchResp = range watchChan {
 			for _, event = range watchResp.Events {
-				fmt.Println(string(event.Kv.Value))
+				fmt.Println(string(event.Kv.Key))
 				switch event.Type {
 				case clientv3.EventTypePut:
 					// put 事件处理
@@ -116,15 +120,15 @@ func (jobMgr *JobMgr) WatchJobs() (err error) {
 					// delete 事件处理
 					jobEventType = common.JOB_EVENT_DELETE
 
-					// 构造 job
-					job = &common.Job{Name: string(event.Kv.Key)}
+					// 构造 job（去掉前缀目录）
+					job = &common.Job{Name: strings.TrimPrefix(string(event.Kv.Key), common.CRON_JOB_DIR+"/")}
 				}
 
 				// 构造事件，给到任务调度中心
-				jobEvent = common.BuildJobEvent(jobEventType, *job)
+				jobEvent = common.BuildJobEvent(jobEventType, job)
 
-				// TODO 将事件给到任务调度中心
-				fmt.Println("jobEvent", jobEvent)
+				// 事件推送到任务调度中心
+				G_Scheduler.PushJobEvent(jobEvent)
 			}
 		}
 	}()

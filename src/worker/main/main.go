@@ -33,6 +33,11 @@ func main() {
 		goto ERR
 	}
 
+	// 初始化任务调度器
+	if err = worker.InitScheduler(); err != nil {
+		goto ERR
+	}
+
 	// 监控任务
 	if err = worker.G_jobMgr.WatchJobs(); err != nil {
 		goto ERR
