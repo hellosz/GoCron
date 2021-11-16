@@ -9,8 +9,10 @@ import (
 
 // 任务调度器
 type Scheduler struct {
-	JobEventChan chan *common.JobEvent              // job 操作事件通道
-	JobPlanTable map[string]*common.JobSchedulePlan // 任务调度计划表
+	JobEventChan    chan *common.JobEvent              // job 操作事件通道
+	JobPlanTable    map[string]*common.JobSchedulePlan // 任务调度计划表
+	JobExecuteTable map[string]*common.JobExecuteInfo  // 任务执行状态
+	JobResultChan   chan *common.JobExecuteResult      // 任务执行结果
 }
 
 var (
@@ -20,8 +22,10 @@ var (
 // 初始化调度器
 func InitScheduler() error {
 	G_Scheduler = &Scheduler{
-		JobEventChan: make(chan *common.JobEvent, 1000),
-		JobPlanTable: make(map[string]*common.JobSchedulePlan),
+		JobEventChan:    make(chan *common.JobEvent, 1000),
+		JobPlanTable:    make(map[string]*common.JobSchedulePlan),
+		JobExecuteTable: make(map[string]*common.JobExecuteInfo),
+		JobResultChan:   make(chan *common.JobExecuteResult, 1000),
 	}
 
 	// 启动任务监听工具
@@ -35,6 +39,7 @@ func scheduleLoop() {
 		jobEvent      *common.JobEvent
 		timer         *time.Timer
 		scheduleAfter time.Duration
+		executeResult *common.JobExecuteResult
 	)
 
 	// 下次执行时间
@@ -47,6 +52,8 @@ func scheduleLoop() {
 		case jobEvent = <-G_Scheduler.JobEventChan:
 			handleJobEvent(jobEvent)
 		case <-timer.C:
+		case executeResult = <-G_Scheduler.JobResultChan:
+			handleJobResult(executeResult)
 		}
 
 		// 执行任务并计算下次执行时间
@@ -86,10 +93,32 @@ func handleJobEvent(jobEvent *common.JobEvent) error {
 	return err
 }
 
+// 处理任务执行结果
+func handleJobResult(executeResult *common.JobExecuteResult) {
+	// 更新执行状态
+	delete(G_Scheduler.JobExecuteTable, executeResult.Job.Name)
+
+	// 打印结果
+	fmt.Printf("任务：%s 执行完成，执行命令：%s，返回结果：%s", executeResult.Job.Name,
+		executeResult.Job.Command, string(executeResult.Outout))
+
+	// 执行结果
+	if executeResult.Err != nil {
+		fmt.Printf("执行失败，原因：%s", executeResult.Err.Error())
+	} else {
+		fmt.Println("执行成功!")
+	}
+}
+
 // 推送任务事件
-func (Scheduler *Scheduler) PushJobEvent(jobEvent *common.JobEvent) {
+func (scheduler *Scheduler) PushJobEvent(jobEvent *common.JobEvent) {
 	// 推送时间变化到队列中
-	Scheduler.JobEventChan <- jobEvent
+	scheduler.JobEventChan <- jobEvent
+}
+
+func (scheduler *Scheduler) PushJobResult(executeResult *common.JobExecuteResult) {
+	// 推送任务执行结果到结果队列中
+	scheduler.JobResultChan <- executeResult
 }
 
 // 尝试进行任务调度
@@ -113,8 +142,8 @@ func (scheduler *Scheduler) TrySchedule() (scheduleAfter time.Duration) {
 	// 执行已经过期或者立即过期的任务
 	for _, jobScheudlePlan = range scheduler.JobPlanTable {
 		if jobScheudlePlan.NextTime.Before(now) || jobScheudlePlan.NextTime.Equal(now) {
-			// TODO: 执行当前任务
-			fmt.Println("执行任务" + jobScheudlePlan.Job.Name)
+			// 执行当前任务
+			scheduler.TryStartJob(jobScheudlePlan)
 		}
 
 		// 更新下次执行时间
@@ -129,4 +158,26 @@ func (scheduler *Scheduler) TrySchedule() (scheduleAfter time.Duration) {
 	// 计算下次过期时间
 	scheduleAfter = nearTime.Sub(now)
 	return
+}
+
+// 尝试执行任务
+func (scheduler *Scheduler) TryStartJob(jobSchedulePlan *common.JobSchedulePlan) {
+	var (
+		jobExecuting   bool
+		jobExecuteInfo *common.JobExecuteInfo
+	)
+
+	// 任务正在执行
+	if _, jobExecuting = scheduler.JobExecuteTable[jobSchedulePlan.Job.Name]; jobExecuting {
+		fmt.Println("任务正在执行，稍后再试" + jobSchedulePlan.Job.Name)
+		return
+	}
+
+	// 记录任务执行状态
+	jobExecuteInfo = common.BuildJobExecuteInfo(jobSchedulePlan)
+	scheduler.JobExecuteTable[jobExecuteInfo.Job.Name] = jobExecuteInfo
+
+	// 执行任务
+	G_Executor.ExcuteJob(jobExecuteInfo)
+
 }

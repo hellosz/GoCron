@@ -28,6 +28,22 @@ type JobSchedulePlan struct {
 	NextTime time.Time            // 下次执行时间
 }
 
+// 任务执行状态信息
+type JobExecuteInfo struct {
+	Job      *Job
+	PlanTime time.Time // 计划执行时间
+	RealTime time.Time // 实际执行时间
+}
+
+// 任务执行结果
+type JobExecuteResult struct {
+	Job       *Job
+	Outout    []byte    // 输出结果
+	Err       error     // 执行出错
+	StartTime time.Time // 开始时间
+	EndTime   time.Time // 结束时间
+}
+
 // 返回值
 type Response struct {
 	ErrCode int         `json:"err_code"`
@@ -99,4 +115,19 @@ func BuildJobSchedulePlan(jobEvent *JobEvent) (jobSchedulePlan *JobSchedulePlan,
 	}
 
 	return
+}
+
+// 构造 JobExecuteInfo 数据结构
+func BuildJobExecuteInfo(jobSchedulePlan *JobSchedulePlan) *JobExecuteInfo {
+	var (
+		jobExecuteInfo *JobExecuteInfo
+	)
+
+	jobExecuteInfo = &JobExecuteInfo{
+		Job:      jobSchedulePlan.Job,
+		PlanTime: jobSchedulePlan.NextTime,
+		RealTime: time.Now(),
+	}
+
+	return jobExecuteInfo
 }
