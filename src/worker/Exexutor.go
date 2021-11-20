@@ -31,22 +31,33 @@ func (executor *Executor) ExcuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 			err           error
 			output        []byte
 			cmd           *exec.Cmd
+			jobLock       *JobLock
 		)
 
 		// 记录执行结果
 		executeResult = &common.JobExecuteResult{
 			Job: jobExecuteInfo.Job,
 		}
-		executeResult.StartTime = time.Now()
 
-		// 执行命令
-		cmd = exec.CommandContext(context.TODO(), "/bin/bash", "-c", jobExecuteInfo.Job.Command)
-		output, err = cmd.CombinedOutput()
+		// TODO 获取锁
+		jobLock = G_jobMgr.CreateJobLock(jobExecuteInfo.Job.Name)
+		err = jobLock.TryLock()
+		defer jobLock.Unlock() // 结束后自动释放锁
 
-		// 记录执行结果
-		executeResult.EndTime = time.Now()
-		executeResult.Outout = output
-		executeResult.Err = err
+		executeResult.StartTime = time.Now() // 记录任务开始时间
+		if err != nil {                      // 没有获取到锁
+			executeResult.EndTime = time.Now()
+			executeResult.Err = err
+		} else { // 获取到锁
+			// 执行命令
+			cmd = exec.CommandContext(context.TODO(), "/bin/bash", "-c", jobExecuteInfo.Job.Command)
+			output, err = cmd.CombinedOutput()
+
+			// 记录执行结果
+			executeResult.EndTime = time.Now()
+			executeResult.Outout = output
+			executeResult.Err = err
+		}
 
 		// 返回结果
 		G_Scheduler.PushJobResult(executeResult)

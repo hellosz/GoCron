@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1630082695064,
@@ -16,6 +16,14 @@
                 {
                     "date": 1630082766249,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,7 @@\n package common\n \n+// 调度任务目录\n const CRON_JOB_DIR = \"/cron/job\"\n \n+// 调度任务待杀任务\n const CRON_KILL_JOB = \"/cron/kill\"\n"
+                },
+                {
+                    "date": 1637336114095,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,4 +4,12 @@\n const CRON_JOB_DIR = \"/cron/job\"\n \n // 调度任务待杀任务\n const CRON_KILL_JOB = \"/cron/kill\"\n+\n+const CRON_LOCK_DIR = \"/cron/lock\"\n+\n+// 任务 PUT 操作\n+const JOB_EVENT_PUT = 1\n+\n+// 任务 DELETE 操作\n+const JOB_EVENT_DELETE = 2\n"
+                },
+                {
+                    "date": 1637336130711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n \n // 调度任务待杀任务\n const CRON_KILL_JOB = \"/cron/kill\"\n \n+// 任务调度锁目录\n const CRON_LOCK_DIR = \"/cron/lock\"\n \n // 任务 PUT 操作\n const JOB_EVENT_PUT = 1\n"
                 }
             ],
             "date": 1630082695064,
