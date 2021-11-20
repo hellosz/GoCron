@@ -1,6 +1,7 @@
 package common
 
 import (
+	"context"
 	"encoding/json"
 	"strings"
 	"time"
@@ -30,9 +31,11 @@ type JobSchedulePlan struct {
 
 // 任务执行状态信息
 type JobExecuteInfo struct {
-	Job      *Job
-	PlanTime time.Time // 计划执行时间
-	RealTime time.Time // 实际执行时间
+	Job        *Job
+	PlanTime   time.Time          // 计划执行时间
+	RealTime   time.Time          // 实际执行时间
+	CancelCtx  context.Context    // 执行上下文
+	CancelFunc context.CancelFunc // 执行上下文取消方法
 }
 
 // 任务执行结果
@@ -68,7 +71,12 @@ func BuildReponse(ErrCode int, Msg string, Data interface{}) (response []byte, e
 
 // 从 jobKey 中获取任务名称
 func ParseJobName(jobKey string) string {
-	return strings.TrimPrefix(CRON_JOB_DIR, jobKey)
+	return strings.TrimPrefix(jobKey, CRON_JOB_DIR)
+}
+
+// 从 jobKey 中获取任务名称
+func ParseKillJobName(jobKey string) string {
+	return strings.TrimPrefix(jobKey, CRON_KILL_JOB)
 }
 
 // 将字节解析成 Job 对象
@@ -128,6 +136,9 @@ func BuildJobExecuteInfo(jobSchedulePlan *JobSchedulePlan) *JobExecuteInfo {
 		PlanTime: jobSchedulePlan.NextTime,
 		RealTime: time.Now(),
 	}
+
+	// 添加取消信息
+	jobExecuteInfo.CancelCtx, jobExecuteInfo.CancelFunc = context.WithCancel(context.TODO())
 
 	return jobExecuteInfo
 }

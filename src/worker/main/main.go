@@ -28,11 +28,6 @@ func main() {
 		goto ERR
 	}
 
-	// 初始化任务管理
-	if err = worker.InitJobMgr(); err != nil {
-		goto ERR
-	}
-
 	// 初始化任务执行器
 	if err = worker.InitExecutor(); err != nil {
 		goto ERR
@@ -43,8 +38,8 @@ func main() {
 		goto ERR
 	}
 
-	// 监控任务
-	if err = worker.G_jobMgr.WatchJobs(); err != nil {
+	// 初始化任务管理
+	if err = worker.InitJobMgr(); err != nil {
 		goto ERR
 	}
 

@@ -67,7 +67,7 @@ func (jobMgr *JobMgr) SaveJob(job *common.Job) (oldJob *common.Job, err error) {
 	)
 
 	// 获取 key 和 value
-	jobKey = common.CRON_JOB_DIR + "/" + job.Name
+	jobKey = common.CRON_JOB_DIR + job.Name
 	if jobValue, err = json.Marshal(job); err != nil {
 		return
 	}
@@ -102,7 +102,7 @@ func (jobMgr *JobMgr) DeleteJob(name string) (job *common.Job, err error) {
 	)
 
 	// 删除 etcd 中的结果
-	jobKey = common.CRON_JOB_DIR + "/" + name
+	jobKey = common.CRON_JOB_DIR + name
 	if delResp, err = G_jobMgr.kv.Delete(context.TODO(), jobKey, clientv3.WithPrevKV()); err != nil {
 		return
 	}
@@ -164,7 +164,7 @@ func (jobMgr *JobMgr) KillJob(name string) (err error) {
 	)
 
 	// 任务的 key 值
-	jobKey = common.CRON_KILL_JOB + "/" + name
+	jobKey = common.CRON_KILL_JOB + name
 
 	// 申请 1 秒的租约
 	if leaseResp, err = G_jobMgr.client.Grant(context.TODO(), 1); err != nil {
@@ -173,6 +173,7 @@ func (jobMgr *JobMgr) KillJob(name string) (err error) {
 
 	// 通知进行强杀
 	leaseId = leaseResp.ID
+	fmt.Println("kill job key", jobKey)
 	if _, err = G_jobMgr.client.Put(context.TODO(), jobKey, "", clientv3.WithLease(leaseId)); err != nil {
 		return
 	}

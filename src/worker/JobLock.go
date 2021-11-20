@@ -64,7 +64,7 @@ func (jobLock *JobLock) TryLock() (err error) {
 	}()
 
 	// 在事务中申请锁
-	lockName = common.CRON_LOCK_DIR + "/" + jobLock.JobName
+	lockName = common.CRON_LOCK_DIR + jobLock.JobName
 	txn = jobLock.Kv.Txn(context.TODO())
 	txn.If(clientv3.Compare(clientv3.CreateRevision(lockName), "=", 0)).
 		Then(clientv3.OpPut(lockName, "", clientv3.WithLease(leaseResp.ID))).

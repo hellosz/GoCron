@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 107,
+            "activePatchIndex": 112,
             "patches": [
                 {
                     "date": 1629641234056,
@@ -436,6 +436,26 @@
                 {
                     "date": 1630232181320,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -171,9 +171,9 @@\n \tif leaseResp, err = G_jobMgr.client.Grant(context.TODO(), 1); err != nil {\n \t\treturn\n \t}\n \n-\t// 租约 ID\n+\t// 通知进行强杀\n \tleaseId = leaseResp.ID\n \tif _, err = G_jobMgr.client.Put(context.TODO(), jobKey, \"\", clientv3.WithLease(leaseId)); err != nil {\n \t\treturn\n \t}\n"
+                },
+                {
+                    "date": 1637420369372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,8 @@\n \tif len(prevKV) > 0 {\n \t\tif err = json.Unmarshal(prevKV[0].Value, &oldJob); err == nil {\n \t\t\tjob = &oldJob\n \t\t\treturn\n-\t\t} else {\n \t\t\t// 抑制因为解析旧的 json 报错导致的程序异常\n \t\t\terr = nil\n \t\t}\n \t}\n"
+                },
+                {
+                    "date": 1637420420429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -172,8 +172,9 @@\n \t}\n \n \t// 通知进行强杀\n \tleaseId = leaseResp.ID\n+\tfmt.Println(\"kill job key\", jobKey)\n \tif _, err = G_jobMgr.client.Put(context.TODO(), jobKey, \"\", clientv3.WithLease(leaseId)); err != nil {\n \t\treturn\n \t}\n \n"
+                },
+                {
+                    "date": 1637420859690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,9 +101,9 @@\n \t\toldJob  common.Job\n \t)\n \n \t// 删除 etcd 中的结果\n-\tjobKey = common.CRON_JOB_DIR + \"/\" + name\n+\tjobKey = common.CRON_JOB_DIR + name\n \tif delResp, err = G_jobMgr.kv.Delete(context.TODO(), jobKey, clientv3.WithPrevKV()); err != nil {\n \t\treturn\n \t}\n \n"
+                },
+                {
+                    "date": 1637420877222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -163,9 +163,9 @@\n \t\tjobKey    string\n \t)\n \n \t// 任务的 key 值\n-\tjobKey = common.CRON_KILL_JOB + \"/\" + name\n+\tjobKey = common.CRON_KILL_JOB + name\n \n \t// 申请 1 秒的租约\n \tif leaseResp, err = G_jobMgr.client.Grant(context.TODO(), 1); err != nil {\n \t\treturn\n"
+                },
+                {
+                    "date": 1637421002646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n \t\toldJobObject common.Job\n \t)\n \n \t// 获取 key 和 value\n-\tjobKey = common.CRON_JOB_DIR + \"/\" + job.Name\n+\tjobKey = common.CRON_JOB_DIR + job.Name\n \tif jobValue, err = json.Marshal(job); err != nil {\n \t\treturn\n \t}\n \n"
                 }
             ],
             "date": 1629641234056,

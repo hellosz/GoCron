@@ -69,6 +69,8 @@ func handleJobEvent(jobEvent *common.JobEvent) error {
 		err             error
 		jobExisted      bool
 		jobSchedulePlan *common.JobSchedulePlan
+		jobExecuting    bool
+		jobExecuteInfo  *common.JobExecuteInfo
 	)
 	println("handle jobEvent" + jobEvent.Job.Name)
 	switch jobEvent.Type {
@@ -85,7 +87,16 @@ func handleJobEvent(jobEvent *common.JobEvent) error {
 			delete(G_Scheduler.JobPlanTable, jobEvent.Job.Name)
 			println("删除任务计划表中的任务" + jobEvent.Job.Name)
 		}
+
+	case common.JOB_EVENT_KILL:
+		// 杀死正在执行的任务
+		if jobExecuteInfo, jobExecuting = G_Scheduler.JobExecuteTable[jobEvent.Job.Name]; jobExecuting {
+			// 取消正在执行的任务
+			jobExecuteInfo.CancelFunc()
+			fmt.Println("杀死任务:", jobEvent.Job.Name)
+		}
 	}
+
 	// 当前的任务调度表
 	fmt.Printf("当前任务调度表：%v\n", G_Scheduler.JobPlanTable)
 

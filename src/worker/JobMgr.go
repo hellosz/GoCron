@@ -57,6 +57,14 @@ func InitJobMgr() (err error) {
 		watcher: watcher,
 	}
 
+	// 监控任务
+	if err = G_jobMgr.WatchJobs(); err != nil {
+		return
+	}
+
+	// 监控杀死任务
+	G_jobMgr.watchKill()
+
 	return
 }
 
@@ -121,7 +129,7 @@ func (jobMgr *JobMgr) WatchJobs() (err error) {
 					jobEventType = common.JOB_EVENT_DELETE
 
 					// 构造 job（去掉前缀目录）
-					job = &common.Job{Name: strings.TrimPrefix(string(event.Kv.Key), common.CRON_JOB_DIR+"/")}
+					job = &common.Job{Name: strings.TrimPrefix(string(event.Kv.Key), common.CRON_JOB_DIR)}
 				}
 
 				// 构造事件，给到任务调度中心
@@ -134,6 +142,51 @@ func (jobMgr *JobMgr) WatchJobs() (err error) {
 	}()
 
 	return nil
+}
+
+// 监听杀死任务命令
+func (jobMgr *JobMgr) watchKill() (err error) {
+	var (
+		job       *common.Job
+		jobName   string
+		watchChan clientv3.WatchChan
+		watchResp clientv3.WatchResponse
+		event     *clientv3.Event
+		jobEvent  *common.JobEvent
+	)
+
+	// 开启协程，监听任务
+	go func() {
+		// 监听任务事件
+		// 指定监控目录以及版本
+		if watchChan = G_jobMgr.client.Watch(context.TODO(), common.CRON_KILL_JOB,
+			clientv3.WithPrefix()); err != nil {
+			return
+		}
+
+		for watchResp = range watchChan {
+			for _, event = range watchResp.Events {
+				switch event.Type {
+				case clientv3.EventTypePut:
+					jobName = common.ParseKillJobName(string(event.Kv.Key))
+					job = &common.Job{Name: jobName}
+
+					// 构造事件，给到任务调度中心
+					jobEvent = common.BuildJobEvent(common.JOB_EVENT_KILL, job)
+
+					// 事件推送到任务调度中心
+					G_Scheduler.PushJobEvent(jobEvent)
+
+				case clientv3.EventTypeDelete:
+					// 跳过命令过期事件
+				}
+
+			}
+		}
+	}()
+
+	return nil
+
 }
 
 // 创建任务锁

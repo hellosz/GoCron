@@ -1,7 +1,7 @@
 package worker
 
 import (
-	"context"
+	"math/rand"
 	"os/exec"
 	"time"
 
@@ -39,7 +39,10 @@ func (executor *Executor) ExcuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 			Job: jobExecuteInfo.Job,
 		}
 
-		// TODO 获取锁
+		// 开始执行之前，随机睡眠(最多一秒钟)
+		time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
+
+		// 获取锁
 		jobLock = G_jobMgr.CreateJobLock(jobExecuteInfo.Job.Name)
 		err = jobLock.TryLock()
 		defer jobLock.Unlock() // 结束后自动释放锁
@@ -50,7 +53,7 @@ func (executor *Executor) ExcuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 			executeResult.Err = err
 		} else { // 获取到锁
 			// 执行命令
-			cmd = exec.CommandContext(context.TODO(), "/bin/bash", "-c", jobExecuteInfo.Job.Command)
+			cmd = exec.CommandContext(jobExecuteInfo.CancelCtx, "/bin/bash", "-c", jobExecuteInfo.Job.Command)
 			output, err = cmd.CombinedOutput()
 
 			// 记录执行结果
