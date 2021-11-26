@@ -2,5 +2,13 @@
     "etcd 集群设置": "测试使用单一节点",
     "etcd_endpoints": ["8.135.120.218:2379"],
     "etcd 连接超时时间": "时间单位为毫秒",
-    "etcd_dia_timeout": 5000
+    "etcd_dia_timeout": 5000,
+    "mongo 客户端链接":"单一节点",
+    "mongo_connection_uri": "mongodb://admin:tn87941597@8.135.120.218:27017",
+    "mongo 连接超时时间": "默认超时时间 5 秒",
+    "mongo_connect_timeout": 5,
+    "mongo database": "默认 Database",
+    "mongo_default_database": "cron",
+    "mongo 日志批量大小": "默认 100",
+    "mongo_log_batch_size": 1 
 }

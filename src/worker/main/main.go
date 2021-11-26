@@ -28,6 +28,11 @@ func main() {
 		goto ERR
 	}
 
+	// 初始化日志保存
+	if err = worker.InitLogSink(); err != nil {
+		goto ERR
+	}
+
 	// 初始化任务执行器
 	if err = worker.InitExecutor(); err != nil {
 		goto ERR

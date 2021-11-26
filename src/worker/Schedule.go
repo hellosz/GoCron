@@ -106,6 +106,9 @@ func handleJobEvent(jobEvent *common.JobEvent) error {
 
 // 处理任务执行结果
 func handleJobResult(executeResult *common.JobExecuteResult) {
+	var (
+		jobLog *common.JobLog
+	)
 	// 更新执行状态
 	delete(G_Scheduler.JobExecuteTable, executeResult.Job.Name)
 
@@ -119,6 +122,30 @@ func handleJobResult(executeResult *common.JobExecuteResult) {
 	} else {
 		fmt.Println("执行成功!")
 	}
+
+	// 正常执行，保存日志
+	if executeResult.Err != common.ERR_LOCK_ALREADDY_REQUIRED {
+		// 构造,记录执行日志
+		jobLog = &common.JobLog{
+			JobName:      executeResult.Job.Name,
+			Command:      executeResult.Job.Command,
+			Output:       string(executeResult.Outout),
+			PlanTime:     common.NanoToMillSecs(executeResult.JobExecuteInfo.PlanTime.UnixNano()),
+			ScheduleTime: common.NanoToMillSecs(executeResult.JobExecuteInfo.RealTime.UnixNano()),
+			StartTime:    common.NanoToMillSecs(executeResult.StartTime.UnixNano()),
+			EndTime:      common.NanoToMillSecs(executeResult.EndTime.UnixNano()),
+		}
+
+		// 记录错误日志信息
+		if executeResult.Err != nil {
+			jobLog.Err = executeResult.Err.Error()
+		}
+
+		// 通知保存日志
+		// fmt.Printf("保存执行日志, %v", jobLog)
+		G_LogSink.Append(jobLog)
+	}
+
 }
 
 // 推送任务事件

@@ -40,11 +40,28 @@ type JobExecuteInfo struct {
 
 // 任务执行结果
 type JobExecuteResult struct {
-	Job       *Job
-	Outout    []byte    // 输出结果
-	Err       error     // 执行出错
-	StartTime time.Time // 开始时间
-	EndTime   time.Time // 结束时间
+	Job            *Job
+	JobExecuteInfo *JobExecuteInfo // 任务执行信息
+	Outout         []byte          // 输出结果
+	Err            error           // 执行出错
+	StartTime      time.Time       // 开始时间
+	EndTime        time.Time       // 结束时间
+}
+
+type JobLog struct {
+	JobName      string `bson:"job_name,omitempty"`      // 任务名称
+	Command      string `bson:"command,omitempty"`       // 执行命令
+	Output       string `bson:"output,omitempty"`        // 执行结果输出
+	Err          string `bson:"err,omitempty"`           // 错误日志
+	PlanTime     int64  `bson:"plan_time,omitempty"`     // 任务计划开始时间
+	ScheduleTime int64  `bson:"schedule_time,omitempty"` // 任务调度开始时间
+	StartTime    int64  `bson:"start_time,omitempty"`    // 任务执行开始时间
+	EndTime      int64  `bson:"end_time,omitempty"`      // 任务执行结束时间
+}
+
+// 批量日志
+type LogBatch struct {
+	Logs []interface{}
 }
 
 // 返回值
@@ -141,4 +158,9 @@ func BuildJobExecuteInfo(jobSchedulePlan *JobSchedulePlan) *JobExecuteInfo {
 	jobExecuteInfo.CancelCtx, jobExecuteInfo.CancelFunc = context.WithCancel(context.TODO())
 
 	return jobExecuteInfo
+}
+
+// 纳秒转毫秒
+func NanoToMillSecs(nano int64) int64 {
+	return nano / 1000 / 1000
 }

@@ -2,7 +2,6 @@ package worker
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/GoCron/src/common"
 	"go.etcd.io/etcd/clientv3"
@@ -55,11 +54,10 @@ func (jobLock *JobLock) TryLock() (err error) {
 
 	// 响应自动续租
 	go func() {
-		var (
-			keepAliveResp *clientv3.LeaseKeepAliveResponse
-		)
-		for keepAliveResp = range keepRespChan {
-			fmt.Printf("自动续租：%d\n", keepAliveResp.GetRevision())
+		// var (
+		// 	keepAliveResp *clientv3.LeaseKeepAliveResponse
+		// )
+		for _ = range keepRespChan {
 		}
 	}()
 

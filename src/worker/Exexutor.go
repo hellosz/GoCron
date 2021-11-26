@@ -36,7 +36,8 @@ func (executor *Executor) ExcuteJob(jobExecuteInfo *common.JobExecuteInfo) {
 
 		// 记录执行结果
 		executeResult = &common.JobExecuteResult{
-			Job: jobExecuteInfo.Job,
+			Job:            jobExecuteInfo.Job,
+			JobExecuteInfo: jobExecuteInfo,
 		}
 
 		// 开始执行之前，随机睡眠(最多一秒钟)
