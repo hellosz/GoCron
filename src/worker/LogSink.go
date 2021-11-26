@@ -32,7 +32,7 @@ func InitLogSink() (err error) {
 	// 初始化 mongo 连接
 	if client, err = mongo.Connect(context.TODO(),
 		options.Client().ApplyURI(G_config.MongoConnectionUri),
-		options.Client().SetConnectTimeout(5*time.Second),
+		options.Client().SetConnectTimeout(time.Duration(G_config.MongoConnectionTimeout)*time.Millisecond),
 	); err != nil {
 		return
 	}
