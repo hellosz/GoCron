@@ -48,15 +48,21 @@ type JobExecuteResult struct {
 	EndTime        time.Time       // 结束时间
 }
 
+// 任务执行日志
 type JobLog struct {
-	JobName      string `bson:"job_name,omitempty"`      // 任务名称
-	Command      string `bson:"command,omitempty"`       // 执行命令
-	Output       string `bson:"output,omitempty"`        // 执行结果输出
-	Err          string `bson:"err,omitempty"`           // 错误日志
-	PlanTime     int64  `bson:"plan_time,omitempty"`     // 任务计划开始时间
-	ScheduleTime int64  `bson:"schedule_time,omitempty"` // 任务调度开始时间
-	StartTime    int64  `bson:"start_time,omitempty"`    // 任务执行开始时间
-	EndTime      int64  `bson:"end_time,omitempty"`      // 任务执行结束时间
+	JobName      string `json:"job_name,omitempty" bson:"job_name,omitempty"`           // 任务名称
+	Command      string `json:"command,omitempty" bson:"command,omitempty"`             // 执行命令
+	Output       string `json:"output,omitempty bson:"output,omitempty"`                // 执行结果输出
+	Err          string `json:"err,omitempty" bson:"err,omitempty"`                     // 错误日志
+	PlanTime     int64  `json:"plan_time,omitempty" bson:"plan_time,omitempty"`         // 任务计划开始时间
+	ScheduleTime int64  `json:"schedule_time,omitempty" bson:"schedule_time,omitempty"` // 任务调度开始时间
+	StartTime    int64  `json:"start_time,omitempty" bson:"start_time,omitempty"`       // 任务执行开始时间
+	EndTime      int64  `json:"end_time,omitempty" bson:"end_time,omitempty"`           // 任务执行结束时间
+}
+
+// 任务名称查询
+type JobLogFilter struct {
+	JobName string `bson:"job_name"` // 任务名称
 }
 
 // 批量日志

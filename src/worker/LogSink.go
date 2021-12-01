@@ -129,7 +129,6 @@ func (logSink *LogSink) batchSaveLog(logs []interface{}) (err error) {
 
 	for _, insertId = range result.InsertedIDs {
 		fmt.Printf("插入数据的ID为:%#v", insertId)
-
 	}
 
 	fmt.Println("保存数据插入ID", result.InsertedIDs)

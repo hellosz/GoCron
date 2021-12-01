@@ -10,5 +10,10 @@
     "etcd 连接超时时间": "时间单位为毫秒",
     "etcd_dia_timeout": 5000,
     "静态文件根目录": "存放静态文件，线上使用绝对地址",
-    "webroot": "/var/www/GoCron/src/master/main/public"
+    "webroot": "/var/www/GoCron/src/master/main/public",
+    "mongo_connection_uri": "mongodb://admin:tn87941597@8.135.120.218:27017",
+    "mongo 连接超时时间": "默认超时时间 5000 毫秒",
+    "mongo_connect_timeout": 5000,
+    "mongo database": "默认 Database",
+    "mongo_default_database": "cron"
 }

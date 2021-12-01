@@ -6,12 +6,15 @@ import (
 )
 
 type Config struct {
-	ApiPort         int      `json:"api_port,omitempty"`
-	ApiReadTimeout  int      `json:"api_read_timeout,omitempty"`
-	ApiWriteTimeout int      `json:"api_write_timeout,omitempty"`
-	EtcdEndpoints   []string `json:"etcd_endpoints,omitempty"`
-	EtcdDiaTimeout  int      `json:"etcd_dia_timeout,omitempty"`
-	Webroot         string   `json:"webroot,omitempty"`
+	ApiPort                int      `json:"api_port,omitempty"`
+	ApiReadTimeout         int      `json:"api_read_timeout,omitempty"`
+	ApiWriteTimeout        int      `json:"api_write_timeout,omitempty"`
+	EtcdEndpoints          []string `json:"etcd_endpoints,omitempty"`
+	EtcdDiaTimeout         int      `json:"etcd_dia_timeout,omitempty"`
+	Webroot                string   `json:"webroot,omitempty"`
+	MongoConnectionUri     string   `json:"mongo_connection_uri"`
+	MongoConnectionTimeout int64    `json:"mongo_connect_timeout"`
+	MongoDefaultDatabase   string   `json:"mongo_default_database,omitempty"` // mongo 默认的 collection
 }
 
 var (

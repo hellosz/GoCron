@@ -54,6 +54,7 @@
                                             <button class="btn btn-info edit-job">编辑</button>
                                             <button class="btn btn-danger delete-job">删除</button>
                                             <button class="btn btn-warning kill-job">强杀</button>
+                                            <button class="btn btn-success job-log">日志</button>
                                         </div>
                                     </td>
                                 </tr> -->
@@ -96,9 +97,64 @@
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
+
+    <!--模态框-->
+    <div id="logModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 id="inputTitle" class="modal-title">编辑</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>任务</th>
+                            <th>命令</th>
+                            <th>输出</th>
+                            <th>错误信息</th>
+                            <th>计划调度时间</th>
+                            <th>实际调度时间</th>
+                            <th>执行开始时间</th>
+                            <th>执行结束时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
     <!-- 代码  -->
     <script>
         $(document).ready(function () {
+            // 格式化时间
+            function formatDataTime (unixtime) {
+                // 增加自定义对齐 
+                function customPadding(str, len) {
+                    str = "" + str
+                    while(len > str.length) {
+                        str = "0" + str
+                    }
+
+                    return str
+                }
+
+                var datetime = new Date(unixtime) 
+                var res = datetime.getFullYear() + "-" + customPadding(datetime.getMonth() + 1, 2) + "-" + customPadding(datetime.getDate(), 2) +
+                "-" + customPadding(datetime.getHours(), 2) + ":" + customPadding(datetime.getMinutes(), 2) + ":" + customPadding(datetime.getSeconds(), 2) +
+                "." + datetime.getMilliseconds()
+                
+                return res
+            }
+
             // 监听编辑按钮 
             $("#jobTable").on("click", ".edit-job",function (event) {
                 // 设置标题
@@ -140,6 +196,45 @@
 
                 // 弹出编辑框
                 $("#inputModal").modal("show");
+            });
+
+            // 监听编辑按钮 
+            $("#jobTable").on("click", ".job-log",function (event) {
+                // 清空内容
+                $('#logModal tbody').empty();
+
+                // 弹出日志框
+                $("#logModal").modal("show");
+
+                // 查询任务日志
+                jobName = $(this).closest('tr').children('.job-name').text()
+                $.ajax({
+                        url: "/job/log",
+                        dataType: "json",
+                        data: {
+                            name: jobName 
+                        },
+                        success: function (response) {
+                            data = response.data
+                            for (let index = 0; index < data.length; index++) {
+                                row = data[index]
+
+                                // 动态拼接参数
+                                var tr = $("<tr>");
+                                tr.append($("<td>").html(row.job_name));
+                                tr.append($("<td>").html(row.command));
+                                tr.append($("<td>").html(row.output));
+                                tr.append($("<td>").html(row.err));
+                                tr.append($("<td>").html(formatDataTime(row.plan_time)));
+                                tr.append($("<td>").html(formatDataTime(row.schedule_time)));
+                                tr.append($("<td>").html(formatDataTime(row.start_time)));
+                                tr.append($("<td>").html(formatDataTime(row.end_time)));
+
+                                $('#logModal tbody').append(tr)
+                            }
+
+                        }
+                    })
             });
 
             // 监听保存事件
@@ -198,6 +293,7 @@
                             toolBar.append("<button class=\"btn btn-info edit-job\">编辑</button>");
                             toolBar.append("<button class=\"btn btn-danger delete-job\">删除</button>");
                             toolBar.append("<button class=\"btn btn-warning kill-job\">强杀</button>");
+                            toolBar.append("<button class=\"btn btn-success job-log\">日志</button>");
                             rowDom.append($("<td>").append(toolBar));
 
                             // 添加一行数据

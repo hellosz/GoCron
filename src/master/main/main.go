@@ -28,12 +28,18 @@ func main() {
 		goto ERR
 	}
 
+	// 初始化任务管理
 	if err = master.InitJobMgr(); err != nil {
 		goto ERR
 	}
 
 	// 初始化服务器
 	if err = master.InitServer(); err != nil {
+		goto ERR
+	}
+
+	// 初始化日志
+	if err = master.InitLogMgr(); err != nil {
 		goto ERR
 	}
 
