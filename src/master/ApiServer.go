@@ -219,6 +219,7 @@ func InitServer() (err error) {
 	mux.HandleFunc("/job/list", listJobs)
 	mux.HandleFunc("/job/kill", killJob)
 	mux.HandleFunc("/job/log", listLog)
+	mux.HandleFunc("/worker/list", workerList)
 
 	// 访问静态资源
 	publicDir = http.Dir(G_config.Webroot)
@@ -243,4 +244,30 @@ func InitServer() (err error) {
 	go httpServer.Serve(listener)
 
 	return nil
+}
+
+// 列出所有的任务
+func workerList(w http.ResponseWriter, r *http.Request) {
+	var (
+		err        error
+		workerList []string
+		resp       []byte
+	)
+
+	// 获取工作者的节点
+	if workerList, err = G_workerMgr.ListWorkers(); err != nil {
+		goto ERR
+	}
+
+	// 返回结果
+	resp, _ = common.BuildReponse(0, "success", workerList)
+	w.Header().Add("content-type", "application/json")
+	w.Write(resp)
+	return
+
+ERR:
+	resp, _ = common.BuildReponse(-1, err.Error(), nil)
+	w.Header().Add("content-type", "application/json")
+	w.Write(resp)
+
 }

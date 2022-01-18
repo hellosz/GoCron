@@ -27,6 +27,9 @@
                 <button type="button" class="btn btn-primary new-job">
                     新建任务
                 </button>
+                <button type="button" class="btn btn-success list-worker">
+                    健康节点 
+                </button>
             </div>
         </div>
 
@@ -45,19 +48,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr>
-                                    <td class="job-name">job1</td>
-                                    <td class="job-command">echo hello</td>
-                                    <td class="job-cron-exp">* * * * * *</td>
-                                    <td>
-                                        <div class="btn-toolbar">
-                                            <button class="btn btn-info edit-job">编辑</button>
-                                            <button class="btn btn-danger delete-job">删除</button>
-                                            <button class="btn btn-warning kill-job">强杀</button>
-                                            <button class="btn btn-success job-log">日志</button>
-                                        </div>
-                                    </td>
-                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -124,6 +114,34 @@
 
                     </tbody>
 
+                </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+    <!--模态框-->
+    <div id="workerModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 id="inputTitle" class="modal-title">健康节点</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped" id="ipTable">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>节点IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 待填充 -->
+                    </tbody>
                 </table>
             </div>
             <div class="modal-footer">
@@ -236,6 +254,35 @@
                         }
                     })
             });
+
+            // 监听健康节点按钮
+            $(".list-worker").on('click', function (event) {
+                // 历史数据
+                $('#ipTable tbody').empty();
+
+                // 请求最新数据
+                $.ajax({
+                    url: "worker/list",
+                    dataType: "json",
+                    success: function (resp) {
+                        if (resp.err_code == -1) {
+                            return 
+                        }
+
+                        // 组装数据
+                        for (var key in resp.data) {
+                            row = resp.data[key]
+
+                            var tr = $("<tr>");
+                            tr.append($("<td>").html(key+1));
+                            tr.append($("<td>").html(row));
+                            $("#ipTable tbody").append(tr);
+                        }
+
+                        $('#workerModal').modal("show");
+                    }
+                });
+            })
 
             // 监听保存事件
             $("#inputSaveBtn").on("click", function () {

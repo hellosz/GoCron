@@ -3,6 +3,7 @@ package common
 import (
 	"context"
 	"encoding/json"
+	"net"
 	"strings"
 	"time"
 
@@ -102,6 +103,11 @@ func ParseKillJobName(jobKey string) string {
 	return strings.TrimPrefix(jobKey, CRON_KILL_JOB)
 }
 
+// 从 workerKey 中获取任务名称
+func ParseWorkerIP(workerKey string) string {
+	return strings.TrimPrefix(workerKey, CRON_WORKER_DIR)
+}
+
 // 将字节解析成 Job 对象
 func UnpackJob(data []byte) (job *Job, err error) {
 	var (
@@ -169,4 +175,31 @@ func BuildJobExecuteInfo(jobSchedulePlan *JobSchedulePlan) *JobExecuteInfo {
 // 纳秒转毫秒
 func NanoToMillSecs(nano int64) int64 {
 	return nano / 1000 / 1000
+}
+
+// 获取 IPV4 地址
+func GetLocalIP() (ip string, err error) {
+	var (
+		addrs []net.Addr
+		addr  net.Addr
+		ipNet *net.IPNet
+		ok    bool
+	)
+
+	// 获取所有 IP 地址(获取所有的网卡)
+	if addrs, err = net.InterfaceAddrs(); err != nil {
+		return
+	}
+
+	// 获取 IPV4，且非环回口
+	for _, addr = range addrs {
+		// ipNet 可以是 IPV4 或者 IPV6
+		if ipNet, ok = addr.(*net.IPNet); ok && !ipNet.IP.IsLoopback() {
+			if ipNet.IP.To4() != nil {
+				return ipNet.IP.String(), nil
+			}
+		}
+	}
+
+	return
 }

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 41,
+            "activePatchIndex": 42,
             "patches": [
                 {
                     "date": 1629163768907,
@@ -172,6 +172,10 @@
                 {
                     "date": 1630250255248,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n \t}\n \n-\ttime.Sleep(20 * time.Minute)\n+\ttime.Sleep(100 * time.Minute)\n \n \treturn\n ERR:\n \tfmt.Println(err)\n"
+                },
+                {
+                    "date": 1640342201371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,14 @@\n \tif err = master.InitConf(configPath); err != nil {\n \t\tgoto ERR\n \t}\n \n+\t// 初始化工作者信息\n+\tif err = master.InitWokerMgr(); err != nil {\n+\t\tgoto ERR\n+\t}\n+\n+\t// 初始化任务管理\n \tif err = master.InitJobMgr(); err != nil {\n \t\tgoto ERR\n \t}\n \n@@ -36,8 +42,13 @@\n \tif err = master.InitServer(); err != nil {\n \t\tgoto ERR\n \t}\n \n+\t// 初始化日志\n+\tif err = master.InitLogMgr(); err != nil {\n+\t\tgoto ERR\n+\t}\n+\n \ttime.Sleep(100 * time.Minute)\n \n \treturn\n ERR:\n"
                 }
             ],
             "date": 1629163768907,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 163,
+            "activePatchIndex": 168,
             "patches": [
                 {
                     "date": 1629164339648,
@@ -660,6 +660,26 @@
                 {
                     "date": 1630243026569,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -165,9 +165,9 @@\n \tmux.HandleFunc(\"/job/kill\", killJob)\n \n \t// 访问静态资源\n \tpublicDir = http.Dir(G_config.Webroot)\n-\tmux.HandleFunc(\"/\", http.FileServer(publicDir))\n+\tmux.Handle(\"/\", http.FileServer(publicDir))\n \n \t// 注册监听器\n \tif listener, err = net.Listen(\"tcp\", \":\"+strconv.Itoa(G_config.ApiPort)); err != nil {\n \t\treturn err\n"
+                },
+                {
+                    "date": 1640341895948,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n package master\n \n import (\n \t\"encoding/json\"\n+\t\"fmt\"\n \t\"net\"\n \t\"net/http\"\n \t\"strconv\"\n \t\"time\"\n@@ -142,8 +143,62 @@\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n }\n \n+// 日志列表\n+func listLog(w http.ResponseWriter, r *http.Request) {\n+\tvar (\n+\t\terr        error\n+\t\tlogList    []*common.JobLog\n+\t\tjobName    string\n+\t\tskipParam  string\n+\t\tskip       int\n+\t\tlimitParam string\n+\t\tlimit      int\n+\t\tresp       []byte\n+\t)\n+\n+\t// 解析请求参数\n+\tif err = r.ParseForm(); err != nil {\n+\t\tgoto ERR\n+\t}\n+\tjobName = r.Form.Get(\"name\")\n+\tfmt.Println(\"job_name\", jobName)\n+\tskipParam = r.Form.Get(\"skip\")\n+\tif skipParam == \"\" {\n+\t\tskipParam = \"0\" // 设置默认值为 \"0\"\n+\t}\n+\tif skip, err = strconv.Atoi(skipParam); err != nil {\n+\t\tgoto ERR\n+\t}\n+\tlimitParam = r.Form.Get(\"limit\")\n+\tif limitParam == \"\" {\n+\t\tlimitParam = \"20\" // 设置默认为 \"20\"\n+\t}\n+\tif limit, err = strconv.Atoi(limitParam); err != nil {\n+\t\tgoto ERR\n+\t}\n+\n+\tfmt.Printf(\"请求参数:%s, %d, %d\", jobName, skip, limit)\n+\n+\t// 获取列表任务\n+\tif logList, err = G_logMgr.ListLog(jobName, skip, limit); err != nil {\n+\t\tgoto ERR\n+\t}\n+\n+\t// 返回结果\n+\tresp, _ = common.BuildReponse(0, \"success\", logList)\n+\tw.Header().Add(\"content-type\", \"application/json\")\n+\tw.Write(resp)\n+\treturn\n+\n+ERR:\n+\tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n+\tw.Header().Add(\"content-type\", \"application/json\")\n+\tw.Write(resp)\n+\n+}\n+\n // http 服务器\n type ApiServer struct {\n \thttpServer *http.Server\n }\n@@ -162,8 +217,10 @@\n \tmux.HandleFunc(\"/job/save\", saveJob)\n \tmux.HandleFunc(\"/job/delete\", deleteJob)\n \tmux.HandleFunc(\"/job/list\", listJobs)\n \tmux.HandleFunc(\"/job/kill\", killJob)\n+\tmux.HandleFunc(\"/job/log\", listLog)\n+\tmux.HandleFunc(\"/worker/list\", workerList)\n \n \t// 访问静态资源\n \tpublicDir = http.Dir(G_config.Webroot)\n \tmux.Handle(\"/\", http.FileServer(publicDir))\n@@ -187,4 +244,30 @@\n \tgo httpServer.Serve(listener)\n \n \treturn nil\n }\n+\n+// 列出所有的任务\n+func workerList(w http.ResponseWriter, r *http.Request) {\n+\tvar (\n+\t\terr     error\n+\t\tjobList []*common.Job\n+\t\tresp    []byte\n+\t)\n+\n+\t// 获取列表任务\n+\tif jobList, err = G_workerMgr.ListWorkers(); err != nil {\n+\t\tgoto ERR\n+\t}\n+\n+\t// 返回结果\n+\tresp, _ = common.BuildReponse(0, \"success\", jobList)\n+\tw.Header().Add(\"content-type\", \"application/json\")\n+\tw.Write(resp)\n+\treturn\n+\n+ERR:\n+\tresp, _ = common.BuildReponse(-1, err.Error(), nil)\n+\tw.Header().Add(\"content-type\", \"application/json\")\n+\tw.Write(resp)\n+\n+}\n"
+                },
+                {
+                    "date": 1640341904115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -249,9 +249,9 @@\n // 列出所有的任务\n func workerList(w http.ResponseWriter, r *http.Request) {\n \tvar (\n \t\terr     error\n-\t\tjobList []*common.Job\n+\t\tjobList []string\n \t\tresp    []byte\n \t)\n \n \t// 获取列表任务\n"
+                },
+                {
+                    "date": 1640341922996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -248,20 +248,20 @@\n \n // 列出所有的任务\n func workerList(w http.ResponseWriter, r *http.Request) {\n \tvar (\n-\t\terr     error\n-\t\tjobList []string\n-\t\tresp    []byte\n+\t\terr        error\n+\t\tworkerList []string\n+\t\tresp       []byte\n \t)\n \n \t// 获取列表任务\n-\tif jobList, err = G_workerMgr.ListWorkers(); err != nil {\n+\tif workerList, err = G_workerMgr.ListWorkers(); err != nil {\n \t\tgoto ERR\n \t}\n \n \t// 返回结果\n-\tresp, _ = common.BuildReponse(0, \"success\", jobList)\n+\tresp, _ = common.BuildReponse(0, \"success\", workerList)\n \tw.Header().Add(\"content-type\", \"application/json\")\n \tw.Write(resp)\n \treturn\n \n"
+                },
+                {
+                    "date": 1640341955645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -253,9 +253,9 @@\n \t\tworkerList []string\n \t\tresp       []byte\n \t)\n \n-\t// 获取列表任务\n+\t// 获取工作者的节点\n \tif workerList, err = G_workerMgr.ListWorkers(); err != nil {\n \t\tgoto ERR\n \t}\n \n"
+                },
+                {
+                    "date": 1641431358700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -257,8 +257,9 @@\n \t// 获取工作者的节点\n \tif workerList, err = G_workerMgr.ListWorkers(); err != nil {\n \t\tgoto ERR\n \t}\n+\tfmt.Println(\"workerList\", workerList)\n \n \t// 返回结果\n \tresp, _ = common.BuildReponse(0, \"success\", workerList)\n \tw.Header().Add(\"content-type\", \"application/json\")\n"
                 }
             ],
             "date": 1629164339648,

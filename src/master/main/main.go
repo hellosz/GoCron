@@ -28,6 +28,11 @@ func main() {
 		goto ERR
 	}
 
+	// 初始化工作者信息
+	if err = master.InitWokerMgr(); err != nil {
+		goto ERR
+	}
+
 	// 初始化任务管理
 	if err = master.InitJobMgr(); err != nil {
 		goto ERR
